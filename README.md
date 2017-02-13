@@ -4,7 +4,7 @@ Classic snake game for NES on a Raspberry Pi Model B barebones no OS. Control th
 # Compilation & Running
 Connect remote debugging device and launch GDB server. Make sure the HDMI cable is connected before powering on Raspberry Pi.
 
-$ target remote localhost:2331  
-$ make  
-$ load  
-$ j _start  
+    $ target remote localhost:2331  
+    $ make  
+    $ load  
+    $ j _start  
