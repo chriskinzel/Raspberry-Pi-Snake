@@ -1,0 +1,5089 @@
+
+build/output.elf:     file format elf32-littlearm
+
+
+Disassembly of section .init:
+
+00008000 <_start>:
+    8000:	ea0e4cf2 	b	39b3d0 <main>
+
+Disassembly of section .text:
+
+0039956c <Install_Interrupt_Table>:
+  39956c:	e59f00c8 	ldr	r0, [pc, #200]	; 39963c <empty+0x4>
+  399570:	e3a01000 	mov	r1, #0
+  399574:	e8b003fc 	ldm	r0!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  399578:	e8a103fc 	stmia	r1!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  39957c:	e8b003fc 	ldm	r0!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  399580:	e8a103fc 	stmia	r1!, {r2, r3, r4, r5, r6, r7, r8, r9}
+  399584:	e3a000d2 	mov	r0, #210	; 0xd2
+  399588:	e121f000 	msr	CPSR_c, r0
+  39958c:	e3a0d902 	mov	sp, #32768	; 0x8000
+  399590:	e3a000d3 	mov	r0, #211	; 0xd3
+  399594:	e121f000 	msr	CPSR_c, r0
+  399598:	e3a0d302 	mov	sp, #134217728	; 0x8000000
+  39959c:	e12fff1e 	bx	lr
+
+003995a0 <Enable_Interrupts>:
+  3995a0:	e10f0000 	mrs	r0, CPSR
+  3995a4:	e3c00080 	bic	r0, r0, #128	; 0x80
+  3995a8:	e121f000 	msr	CPSR_c, r0
+  3995ac:	e12fff1e 	bx	lr
+
+003995b0 <Enable_Timer_IRQ>:
+  3995b0:	e59f0088 	ldr	r0, [pc, #136]	; 399640 <empty+0x8>
+  3995b4:	e3a01002 	mov	r1, #2
+  3995b8:	e5801000 	str	r1, [r0]
+  3995bc:	e12fff1e 	bx	lr
+
+003995c0 <Disable_Timer_IRQ>:
+  3995c0:	e59f007c 	ldr	r0, [pc, #124]	; 399644 <empty+0xc>
+  3995c4:	e3a01002 	mov	r1, #2
+  3995c8:	e5801000 	str	r1, [r0]
+  3995cc:	e59f0074 	ldr	r0, [pc, #116]	; 399648 <empty+0x10>
+  3995d0:	e59f1074 	ldr	r1, [pc, #116]	; 39964c <empty+0x14>
+  3995d4:	e5801000 	str	r1, [r0]
+  3995d8:	e59f0070 	ldr	r0, [pc, #112]	; 399650 <empty+0x18>
+  3995dc:	e5900000 	ldr	r0, [r0]
+  3995e0:	e2400001 	sub	r0, r0, #1
+  3995e4:	e59f1068 	ldr	r1, [pc, #104]	; 399654 <empty+0x1c>
+  3995e8:	e5810000 	str	r0, [r1]
+  3995ec:	e12fff1e 	bx	lr
+
+003995f0 <Service_IRQ>:
+  3995f0:	e92d400f 	push	{r0, r1, r2, r3, lr}
+  3995f4:	e59f005c 	ldr	r0, [pc, #92]	; 399658 <empty+0x20>
+  3995f8:	e3a01002 	mov	r1, #2
+  3995fc:	e5801000 	str	r1, [r0]
+  399600:	e59f0040 	ldr	r0, [pc, #64]	; 399648 <empty+0x10>
+  399604:	e5900000 	ldr	r0, [r0]
+  399608:	e12fff30 	blx	r0
+  39960c:	e8bd400f 	pop	{r0, r1, r2, r3, lr}
+  399610:	e25ef004 	subs	pc, lr, #4
+
+00399614 <Wait_Async>:
+  399614:	e59f202c 	ldr	r2, [pc, #44]	; 399648 <empty+0x10>
+  399618:	e5821000 	str	r1, [r2]
+  39961c:	e59f102c 	ldr	r1, [pc, #44]	; 399650 <empty+0x18>
+  399620:	e5911000 	ldr	r1, [r1]
+  399624:	e0811000 	add	r1, r1, r0
+  399628:	e59f0024 	ldr	r0, [pc, #36]	; 399654 <empty+0x1c>
+  39962c:	e5801000 	str	r1, [r0]
+  399630:	e12fff1e 	bx	lr
+
+00399634 <hang>:
+  399634:	eafffffe 	b	399634 <hang>
+
+00399638 <empty>:
+  399638:	e12fff1e 	bx	lr
+  39963c:	0000a888 	.word	0x0000a888
+  399640:	2000b210 	.word	0x2000b210
+  399644:	2000b21c 	.word	0x2000b21c
+  399648:	0000a8c8 	.word	0x0000a8c8
+  39964c:	00399638 	.word	0x00399638
+  399650:	20003004 	.word	0x20003004
+  399654:	20003010 	.word	0x20003010
+  399658:	20003000 	.word	0x20003000
+
+0039965c <headImage>:
+  39965c:	00000020 	.word	0x00000020
+  399660:	00000020 	.word	0x00000020
+  399664:	fe8ffecf 	.word	0xfe8ffecf
+  399668:	feb0ff11 	.word	0xfeb0ff11
+  39966c:	fed2f60e 	.word	0xfed2f60e
+  399670:	fed2fe71 	.word	0xfed2fe71
+  399674:	c5ceff34 	.word	0xc5ceff34
+  399678:	a5aefff7 	.word	0xa5aefff7
+  39967c:	01a02a62 	.word	0x01a02a62
+  399680:	12a401e0 	.word	0x12a401e0
+  399684:	0a220a44 	.word	0x0a220a44
+  399688:	11a01220 	.word	0x11a01220
+  39968c:	8c8c1980 	.word	0x8c8c1980
+  399690:	f736ce53 	.word	0xf736ce53
+  399694:	ff11f6f2 	.word	0xff11f6f2
+  399698:	feb1ee6f 	.word	0xfeb1ee6f
+  39969c:	feb3ed8f 	.word	0xfeb3ed8f
+  3996a0:	fdaafe6f 	.word	0xfdaafe6f
+  3996a4:	fef0fe8e 	.word	0xfef0fe8e
+  3996a8:	fe6fe5ed 	.word	0xfe6fe5ed
+  3996ac:	f650ff95 	.word	0xf650ff95
+  3996b0:	f6b1ff33 	.word	0xf6b1ff33
+  3996b4:	4a20f6f2 	.word	0x4a20f6f2
+  3996b8:	32602160 	.word	0x32602160
+  3996bc:	1220a670 	.word	0x1220a670
+  3996c0:	01a01aa2 	.word	0x01a01aa2
+  3996c4:	2b050160 	.word	0x2b050160
+  3996c8:	9e2d01a0 	.word	0x9e2d01a0
+  3996cc:	19203260 	.word	0x19203260
+  3996d0:	de925283 	.word	0xde925283
+  3996d4:	ffd4eef1 	.word	0xffd4eef1
+  3996d8:	feb2ee70 	.word	0xfeb2ee70
+  3996dc:	e50cfe52 	.word	0xe50cfe52
+  3996e0:	e4c6c3e5 	.word	0xe4c6c3e5
+  3996e4:	fe8ffef0 	.word	0xfe8ffef0
+  3996e8:	ff34ff94 	.word	0xff34ff94
+  3996ec:	d54dcd0c 	.word	0xd54dcd0c
+  3996f0:	c58cddee 	.word	0xc58cddee
+  3996f4:	b5a95260 	.word	0xb5a95260
+  3996f8:	b68cceed 	.word	0xb68cceed
+  3996fc:	1a60a64c 	.word	0x1a60a64c
+  399700:	0a410a20 	.word	0x0a410a20
+  399704:	0a000a21 	.word	0x0a000a21
+  399708:	bf2e1a80 	.word	0xbf2e1a80
+  39970c:	be6eb6ad 	.word	0xbe6eb6ad
+  399710:	5280be2e 	.word	0x5280be2e
+  399714:	a487c60c 	.word	0xa487c60c
+  399718:	e5cfee70 	.word	0xe5cfee70
+  39971c:	e50df5d0 	.word	0xe50df5d0
+  399720:	dc65dca7 	.word	0xdc65dca7
+  399724:	feaffecf 	.word	0xfeaffecf
+  399728:	e5efcd4b 	.word	0xe5efcd4b
+  39972c:	ee51e610 	.word	0xee51e610
+  399730:	5a805200 	.word	0x5a805200
+  399734:	ceabb588 	.word	0xceabb588
+  399738:	bf0bb668 	.word	0xbf0bb668
+  39973c:	bf90bf4d 	.word	0xbf90bf4d
+  399740:	01a01260 	.word	0x01a01260
+  399744:	0a201260 	.word	0x0a201260
+  399748:	bf6caf0d 	.word	0xbf6caf0d
+  39974c:	a608b6ca 	.word	0xa608b6ca
+  399750:	a568d70e 	.word	0xa568d70e
+  399754:	5ac04a60 	.word	0x5ac04a60
+  399758:	d56ebd2b 	.word	0xd56ebd2b
+  39975c:	c408fe32 	.word	0xc408fe32
+  399760:	dc85cc26 	.word	0xdc85cc26
+  399764:	ff11fecf 	.word	0xff11fecf
+  399768:	cd4dd58d 	.word	0xcd4dd58d
+  39976c:	6aa2ac8b 	.word	0x6aa2ac8b
+  399770:	ce8d9447 	.word	0xce8d9447
+  399774:	b667df4d 	.word	0xb667df4d
+  399778:	aec7d7cb 	.word	0xaec7d7cb
+  39977c:	8e089e67 	.word	0x8e089e67
+  399780:	1a6022a0 	.word	0x1a6022a0
+  399784:	336001c0 	.word	0x336001c0
+  399788:	9e669648 	.word	0x9e669648
+  39978c:	cfabbf49 	.word	0xcfabbf49
+  399790:	eff0a607 	.word	0xeff0a607
+  399794:	a549b60a 	.word	0xa549b60a
+  399798:	ff156ae3 	.word	0xff156ae3
+  39979c:	ed4ee56f 	.word	0xed4ee56f
+  3997a0:	dc65fd8b 	.word	0xdc65fd8b
+  3997a4:	ee90f6b0 	.word	0xee90f6b0
+  3997a8:	ff14d5ad 	.word	0xff14d5ad
+  3997ac:	bdae5a41 	.word	0xbdae5a41
+  3997b0:	c6acd6d0 	.word	0xc6acd6d0
+  3997b4:	9e04b688 	.word	0x9e04b688
+  3997b8:	a6a5b6e6 	.word	0xa6a5b6e6
+  3997bc:	bf8dbf6a 	.word	0xbf8dbf6a
+  3997c0:	1a809e6a 	.word	0x1a809e6a
+  3997c4:	9eab1a80 	.word	0x9eab1a80
+  3997c8:	b728b76b 	.word	0xb728b76b
+  3997cc:	cfcbbf68 	.word	0xcfcbbf68
+  3997d0:	9de79e06 	.word	0x9de79e06
+  3997d4:	d6efd78f 	.word	0xd6efd78f
+  3997d8:	5a419488 	.word	0x5a419488
+  3997dc:	fe10dd6f 	.word	0xfe10dd6f
+  3997e0:	dc86d467 	.word	0xdc86d467
+  3997e4:	e670ff12 	.word	0xe670ff12
+  3997e8:	3120de4f 	.word	0x3120de4f
+  3997ec:	c62ea4ea 	.word	0xc62ea4ea
+  3997f0:	ae29cece 	.word	0xae29cece
+  3997f4:	c76ac74c 	.word	0xc76ac74c
+  3997f8:	c7aba6a6 	.word	0xc7aba6a6
+  3997fc:	a688aec8 	.word	0xa688aec8
+  399800:	32e0aeab 	.word	0x32e0aeab
+  399804:	9e692ae0 	.word	0x9e692ae0
+  399808:	b729b72a 	.word	0xb729b72a
+  39980c:	9625aec7 	.word	0x9625aec7
+  399810:	bf2ccfac 	.word	0xbf2ccfac
+  399814:	c6ee95c7 	.word	0xc6ee95c7
+  399818:	cdeedf10 	.word	0xcdeedf10
+  39981c:	edef5180 	.word	0xedef5180
+  399820:	ed2ab3c5 	.word	0xed2ab3c5
+  399824:	ef12f6f3 	.word	0xef12f6f3
+  399828:	39c08c06 	.word	0x39c08c06
+  39982c:	be6dce8f 	.word	0xbe6dce8f
+  399830:	b6abbeed 	.word	0xb6abbeed
+  399834:	b72ca669 	.word	0xb72ca669
+  399838:	aecaaeea 	.word	0xaecaaeea
+  39983c:	bf4caeea 	.word	0xbf4caeea
+  399840:	2a80c74d 	.word	0x2a80c74d
+  399844:	bf4c22a0 	.word	0xbf4c22a0
+  399848:	a6a9b72b 	.word	0xa6a9b72b
+  39984c:	b72bb6ea 	.word	0xb72bb6ea
+  399850:	a68ab70b 	.word	0xa68ab70b
+  399854:	b6ccc74d 	.word	0xb6ccc74d
+  399858:	ce4dbe6c 	.word	0xce4dbe6c
+  39985c:	49204180 	.word	0x49204180
+  399860:	cc89dd0b 	.word	0xcc89dd0b
+  399864:	83e7ef14 	.word	0x83e7ef14
+  399868:	c66d3180 	.word	0xc66d3180
+  39986c:	b66bb66b 	.word	0xb66bb66b
+  399870:	9e4adff0 	.word	0x9e4adff0
+  399874:	01a0a68c 	.word	0x01a0a68c
+  399878:	9e2bc771 	.word	0x9e2bc771
+  39987c:	beeda66c 	.word	0xbeeda66c
+  399880:	bf0ba669 	.word	0xbf0ba669
+  399884:	a688bf2a 	.word	0xa688bf2a
+  399888:	a68cb70c 	.word	0xa68cb70c
+  39988c:	c7919e2c 	.word	0xc7919e2c
+  399890:	a68c09a0 	.word	0xa68c09a0
+  399894:	ae8bb6ed 	.word	0xae8bb6ed
+  399898:	ceedbeec 	.word	0xceedbeec
+  39989c:	4160c5eb 	.word	0x4160c5eb
+  3998a0:	dd2db449 	.word	0xdd2db449
+  3998a4:	39e0a50d 	.word	0x39e0a50d
+  3998a8:	ceeebe2d 	.word	0xceeebe2d
+  3998ac:	a648c72d 	.word	0xa648c72d
+  3998b0:	bf70aeab 	.word	0xbf70aeab
+  3998b4:	09a00100 	.word	0x09a00100
+  3998b8:	bef200a0 	.word	0xbef200a0
+  3998bc:	b6cdc731 	.word	0xb6cdc731
+  3998c0:	b6c9c72c 	.word	0xb6c9c72c
+  3998c4:	b70aaea8 	.word	0xb70aaea8
+  3998c8:	c731aead 	.word	0xc731aead
+  3998cc:	00a0bef3 	.word	0x00a0bef3
+  3998d0:	014011c0 	.word	0x014011c0
+  3998d4:	a68baecd 	.word	0xa68baecd
+  3998d8:	beaab6eb 	.word	0xbeaab6eb
+  3998dc:	62a0ceab 	.word	0x62a0ceab
+  3998e0:	a409a428 	.word	0xa409a428
+  3998e4:	2180846a 	.word	0x2180846a
+  3998e8:	c70d9d8a 	.word	0xc70d9d8a
+  3998ec:	9607bf0c 	.word	0x9607bf0c
+  3998f0:	0120bf6e 	.word	0x0120bf6e
+  3998f4:	74cd00e0 	.word	0x74cd00e0
+  3998f8:	118000a0 	.word	0x118000a0
+  3998fc:	ae6d9dee 	.word	0xae6d9dee
+  399900:	b6c8b6aa 	.word	0xb6c8b6aa
+  399904:	aec9aec7 	.word	0xaec9aec7
+  399908:	9dcfae6d 	.word	0x9dcfae6d
+  39990c:	00a01160 	.word	0x00a01160
+  399910:	00e074cc 	.word	0x00e074cc
+  399914:	c7900120 	.word	0xc7900120
+  399918:	b6c9c78d 	.word	0xb6c9c78d
+  39991c:	c62bbe8a 	.word	0xc62bbe8a
+  399920:	30e03960 	.word	0x30e03960
+  399924:	326042c3 	.word	0x326042c3
+  399928:	9e2ad791 	.word	0x9e2ad791
+  39992c:	dff1b6cb 	.word	0xdff1b6cb
+  399930:	01200160 	.word	0x01200160
+  399934:	19c4e7fa 	.word	0x19c4e7fa
+  399938:	0080f7ff 	.word	0x0080f7ff
+  39993c:	beef0100 	.word	0xbeef0100
+  399940:	b6a7beca 	.word	0xb6a7beca
+  399944:	b70ab6e7 	.word	0xb70ab6e7
+  399948:	00e0bf11 	.word	0x00e0bf11
+  39994c:	effe0060 	.word	0xeffe0060
+  399950:	dff911a2 	.word	0xdff911a2
+  399954:	016000e0 	.word	0x016000e0
+  399958:	b70b9e6a 	.word	0xb70b9e6a
+  39995c:	ade9bf0b 	.word	0xade9bf0b
+  399960:	10a04260 	.word	0x10a04260
+  399964:	95cc0960 	.word	0x95cc0960
+  399968:	b6edb6ce 	.word	0xb6edb6ce
+  39996c:	ae8cb6ec 	.word	0xae8cb6ec
+  399970:	dff809a0 	.word	0xdff809a0
+  399974:	4b2a6c0c 	.word	0x4b2a6c0c
+  399978:	e7bb63ad 	.word	0xe7bb63ad
+  39997c:	ae2c21e0 	.word	0xae2c21e0
+  399980:	bf08ae89 	.word	0xbf08ae89
+  399984:	a688b727 	.word	0xa688b727
+  399988:	21e1ae2e 	.word	0x21e1ae2e
+  39998c:	63cde7bb 	.word	0x63cde7bb
+  399990:	6c4c534a 	.word	0x6c4c534a
+  399994:	09c0dff9 	.word	0x09c0dff9
+  399998:	a6cbbf70 	.word	0xa6cbbf70
+  39999c:	cf8faeeb 	.word	0xcf8faeeb
+  3999a0:	2a00a5ed 	.word	0x2a00a5ed
+  3999a4:	b71032e0 	.word	0xb71032e0
+  3999a8:	aeedb6ef 	.word	0xaeedb6ef
+  3999ac:	95eba66c 	.word	0x95eba66c
+  3999b0:	cf572220 	.word	0xcf572220
+  3999b4:	2a066c0d 	.word	0x2a066c0d
+  3999b8:	f7fb7c4f 	.word	0xf7fb7c4f
+  3999bc:	c72f0080 	.word	0xc72f0080
+  3999c0:	b6e7ae68 	.word	0xb6e7ae68
+  3999c4:	aea8b727 	.word	0xaea8b727
+  3999c8:	0060c711 	.word	0x0060c711
+  3999cc:	7c6ff7fd 	.word	0x7c6ff7fd
+  3999d0:	6c2c3225 	.word	0x6c2c3225
+  3999d4:	11e0d7db 	.word	0x11e0d7db
+  3999d8:	af0e8e0d 	.word	0xaf0e8e0d
+  3999dc:	bf6eaf2c 	.word	0xbf6eaf2c
+  3999e0:	32c18d8a 	.word	0x32c18d8a
+  3999e4:	a6ee1240 	.word	0xa6ee1240
+  3999e8:	a6aea6ce 	.word	0xa6aea6ce
+  3999ec:	a62fc772 	.word	0xa62fc772
+  3999f0:	116000e0 	.word	0x116000e0
+  3999f4:	3a67e7dc 	.word	0x3a67e7dc
+  3999f8:	08e0effc 	.word	0x08e0effc
+  3999fc:	b6ac1160 	.word	0xb6ac1160
+  399a00:	b707bf2a 	.word	0xb707bf2a
+  399a04:	bf6abf47 	.word	0xbf6abf47
+  399a08:	1160b6ae 	.word	0x1160b6ae
+  399a0c:	efdb08c0 	.word	0xefdb08c0
+  399a10:	dfbb3245 	.word	0xdfbb3245
+  399a14:	01610121 	.word	0x01610121
+  399a18:	a6cfb714 	.word	0xa6cfb714
+  399a1c:	968aa6ec 	.word	0x968aa6ec
+  399a20:	1a60bf91 	.word	0x1a60bf91
+  399a24:	1aa00200 	.word	0x1aa00200
+  399a28:	a6ae1aa0 	.word	0xa6ae1aa0
+  399a2c:	d794aeb0 	.word	0xd794aeb0
+  399a30:	08e0ae10 	.word	0x08e0ae10
+  399a34:	7c6d08e0 	.word	0x7c6d08e0
+  399a38:	09200080 	.word	0x09200080
+  399a3c:	c74db68e 	.word	0xc74db68e
+  399a40:	b7279e25 	.word	0xb7279e25
+  399a44:	9624af26 	.word	0x9624af26
+  399a48:	b66fbf2e 	.word	0xb66fbf2e
+  399a4c:	00800900 	.word	0x00800900
+  399a50:	09007c6c 	.word	0x09007c6c
+  399a54:	a6530100 	.word	0xa6530100
+  399a58:	b7529e51 	.word	0xb7529e51
+  399a5c:	2b208e2a 	.word	0x2b208e2a
+  399a60:	0a200a20 	.word	0x0a200a20
+  399a64:	0a600220 	.word	0x0a600220
+  399a68:	22c00180 	.word	0x22c00180
+  399a6c:	b68e2a80 	.word	0xb68e2a80
+  399a70:	be70c6f1 	.word	0xbe70c6f1
+  399a74:	00a01120 	.word	0x00a01120
+  399a78:	becf1160 	.word	0xbecf1160
+  399a7c:	bf0aa64a 	.word	0xbf0aa64a
+  399a80:	b705bf27 	.word	0xb705bf27
+  399a84:	b767af04 	.word	0xb767af04
+  399a88:	a66abf4a 	.word	0xa66abf4a
+  399a8c:	1140becf 	.word	0x1140becf
+  399a90:	114000a0 	.word	0x114000a0
+  399a94:	cf33a5ef 	.word	0xcf33a5ef
+  399a98:	3300a62e 	.word	0x3300a62e
+  399a9c:	0a001220 	.word	0x0a001220
+  399aa0:	12211240 	.word	0x12211240
+  399aa4:	1b030220 	.word	0x1b030220
+  399aa8:	b72f22e1 	.word	0xb72f22e1
+  399aac:	a609b6ac 	.word	0xa609b6ac
+  399ab0:	be8dbead 	.word	0xbe8dbead
+  399ab4:	1960be8f 	.word	0x1960be8f
+  399ab8:	b6aea60e 	.word	0xb6aea60e
+  399abc:	95e5cf6f 	.word	0x95e5cf6f
+  399ac0:	b726bf27 	.word	0xb726bf27
+  399ac4:	b747b725 	.word	0xb747b725
+  399ac8:	c78e9605 	.word	0xc78e9605
+  399acc:	a62db6ad 	.word	0xa62db6ad
+  399ad0:	beaf1980 	.word	0xbeaf1980
+  399ad4:	a62bc70f 	.word	0xa62bc70f
+  399ad8:	9e4bb6cd 	.word	0x9e4bb6cd
+  399adc:	2ac0aeae 	.word	0x2ac0aeae
+  399ae0:	01c009e0 	.word	0x01c009e0
+  399ae4:	966e1260 	.word	0x966e1260
+  399ae8:	b6eb9e8c 	.word	0xb6eb9e8c
+  399aec:	cf6aa646 	.word	0xcf6aa646
+  399af0:	b6abc72b 	.word	0xb6abc72b
+  399af4:	958cb68e 	.word	0x958cb68e
+  399af8:	b690bef3 	.word	0xb690bef3
+  399afc:	cf8eae8d 	.word	0xcf8eae8d
+  399b00:	b6a5bf28 	.word	0xb6a5bf28
+  399b04:	bf29b6e6 	.word	0xbf29b6e6
+  399b08:	ae6ccf6d 	.word	0xae6ccf6d
+  399b0c:	c712b6af 	.word	0xc712b6af
+  399b10:	b68d95ab 	.word	0xb68d95ab
+  399b14:	b6eaaeab 	.word	0xb6eaaeab
+  399b18:	9e47bf4b 	.word	0x9e47bf4b
+  399b1c:	962bcfae 	.word	0x962bcfae
+  399b20:	32e1b6f0 	.word	0x32e1b6f0
+  399b24:	ae8f2a60 	.word	0xae8f2a60
+  399b28:	bf0ac74e 	.word	0xbf0ac74e
+  399b2c:	c748b6a6 	.word	0xc748b6a6
+  399b30:	b6aaa646 	.word	0xb6aaa646
+  399b34:	b6b2bf10 	.word	0xb6b2bf10
+  399b38:	95b0c756 	.word	0x95b0c756
+  399b3c:	b68ebed2 	.word	0xb68ebed2
+  399b40:	b668b66a 	.word	0xb668b66a
+  399b44:	be8bbea9 	.word	0xbe8bbea9
+  399b48:	c6b1be8e 	.word	0xc6b1be8e
+  399b4c:	cf559daf 	.word	0xcf559daf
+  399b50:	b6efb6b1 	.word	0xb6efb6b1
+  399b54:	aee8a6aa 	.word	0xaee8a6aa
+  399b58:	aee79e64 	.word	0xaee79e64
+  399b5c:	a629bf2a 	.word	0xa629bf2a
+  399b60:	1180b6ae 	.word	0x1180b6ae
+  399b64:	29e02160 	.word	0x29e02160
+  399b68:	bea98d27 	.word	0xbea98d27
+  399b6c:	9e03c707 	.word	0x9e03c707
+  399b70:	bf2dbf4a 	.word	0xbf2dbf4a
+  399b74:	01600120 	.word	0x01600120
+  399b78:	a5f5cf7b 	.word	0xa5f5cf7b
+  399b7c:	be32b655 	.word	0xbe32b655
+  399b80:	d6afce90 	.word	0xd6afce90
+  399b84:	ce91d6b0 	.word	0xce91d6b0
+  399b88:	be35c633 	.word	0xbe35c633
+  399b8c:	d759add4 	.word	0xd759add4
+  399b90:	01400940 	.word	0x01400940
+  399b94:	b76ab72c 	.word	0xb76ab72c
+  399b98:	b7279e64 	.word	0xb7279e64
+  399b9c:	ae09bee9 	.word	0xae09bee9
+  399ba0:	21603a40 	.word	0x21603a40
+  399ba4:	31a0d694 	.word	0x31a0d694
+  399ba8:	c6abefb2 	.word	0xc6abefb2
+  399bac:	b6c7b686 	.word	0xb6c7b686
+  399bb0:	9e8bc78b 	.word	0x9e8bc78b
+  399bb4:	01001200 	.word	0x01001200
+  399bb8:	09040040 	.word	0x09040040
+  399bbc:	18c00020 	.word	0x18c00020
+  399bc0:	28c02080 	.word	0x28c02080
+  399bc4:	20602060 	.word	0x20602060
+  399bc8:	000020a1 	.word	0x000020a1
+  399bcc:	004010e4 	.word	0x004010e4
+  399bd0:	1a600120 	.word	0x1a600120
+  399bd4:	bfcc9e8b 	.word	0xbfcc9e8b
+  399bd8:	9604b748 	.word	0x9604b748
+  399bdc:	e770c6ea 	.word	0xe770c6ea
+  399be0:	a4ab2920 	.word	0xa4ab2920
+  399be4:	41c0eef7 	.word	0x41c0eef7
+  399be8:	ceaca52a 	.word	0xceaca52a
+  399bec:	c74bbea9 	.word	0xc74bbea9
+  399bf0:	af0d9e48 	.word	0xaf0d9e48
+  399bf4:	00e00140 	.word	0x00e00140
+  399bf8:	f7ff0922 	.word	0xf7ff0922
+  399bfc:	1000ffde 	.word	0x1000ffde
+  399c00:	72462840 	.word	0x72462840
+  399c04:	28206a26 	.word	0x28206a26
+  399c08:	ffbf1000 	.word	0xffbf1000
+  399c0c:	0922ffff 	.word	0x0922ffff
+  399c10:	01600100 	.word	0x01600100
+  399c14:	96889e8b 	.word	0x96889e8b
+  399c18:	bec9b72a 	.word	0xbec9b72a
+  399c1c:	ad28df4e 	.word	0xad28df4e
+  399c20:	cd6f51e0 	.word	0xcd6f51e0
+  399c24:	ff56eeb5 	.word	0xff56eeb5
+  399c28:	ce8d39c0 	.word	0xce8d39c0
+  399c2c:	b6aac6ab 	.word	0xb6aac6ab
+  399c30:	aeeda6aa 	.word	0xaeeda6aa
+  399c34:	0160b731 	.word	0x0160b731
+  399c38:	fffc00e0 	.word	0xfffc00e0
+  399c3c:	2000ffbc 	.word	0x2000ffbc
+  399c40:	826748a0 	.word	0x826748a0
+  399c44:	40c28aa9 	.word	0x40c28aa9
+  399c48:	ffbc2000 	.word	0xffbc2000
+  399c4c:	0100fffc 	.word	0x0100fffc
+  399c50:	af0f0140 	.word	0xaf0f0140
+  399c54:	9e89b76e 	.word	0x9e89b76e
+  399c58:	cf0cb6ca 	.word	0xcf0cb6ca
+  399c5c:	5a20c5ea 	.word	0x5a20c5ea
+  399c60:	bc6ac4eb 	.word	0xbc6ac4eb
+  399c64:	f713eed3 	.word	0xf713eed3
+  399c68:	3a00bdac 	.word	0x3a00bdac
+  399c6c:	b66adf6f 	.word	0xb66adf6f
+  399c70:	a6aab6ca 	.word	0xa6aab6ca
+  399c74:	a66baeeb 	.word	0xa66baeeb
+  399c78:	fff5cf10 	.word	0xfff5cf10
+  399c7c:	302028a0 	.word	0x302028a0
+  399c80:	8a445060 	.word	0x8a445060
+  399c84:	49008a65 	.word	0x49008a65
+  399c88:	29001800 	.word	0x29001800
+  399c8c:	becdfff5 	.word	0xbecdfff5
+  399c90:	af0bb6ec 	.word	0xaf0bb6ec
+  399c94:	aea9bf8d 	.word	0xaea9bf8d
+  399c98:	d6acb669 	.word	0xd6acb669
+  399c9c:	ee4d3940 	.word	0xee4d3940
+  399ca0:	cca8ccc8 	.word	0xcca8ccc8
+  399ca4:	eeb1f6f2 	.word	0xeeb1f6f2
+  399ca8:	3180ff53 	.word	0x3180ff53
+  399cac:	c6adadaa 	.word	0xc6adadaa
+  399cb0:	b6aacf4d 	.word	0xb6aacf4d
+  399cb4:	bf0ac76c 	.word	0xbf0ac76c
+  399cb8:	e72ebe89 	.word	0xe72ebe89
+  399cbc:	dd6ce64d 	.word	0xdd6ce64d
+  399cc0:	79a16900 	.word	0x79a16900
+  399cc4:	40a08a84 	.word	0x40a08a84
+  399cc8:	ef10ee90 	.word	0xef10ee90
+  399ccc:	b647e74d 	.word	0xb647e74d
+  399cd0:	bf4ab6c8 	.word	0xbf4ab6c8
+  399cd4:	c6ec95c6 	.word	0xc6ec95c6
+  399cd8:	d62cdf0e 	.word	0xd62cdf0e
+  399cdc:	edec4140 	.word	0xedec4140
+  399ce0:	dce8c425 	.word	0xdce8c425
+  399ce4:	fef2ff33 	.word	0xfef2ff33
+  399ce8:	de50d5ce 	.word	0xde50d5ce
+  399cec:	ad2a5a81 	.word	0xad2a5a81
+  399cf0:	ceeddf30 	.word	0xceeddf30
+  399cf4:	ade6c6aa 	.word	0xade6c6aa
+  399cf8:	ef0ccec9 	.word	0xef0ccec9
+  399cfc:	e5acddca 	.word	0xe5acddca
+  399d00:	a2e58a21 	.word	0xa2e58a21
+  399d04:	8b058264 	.word	0x8b058264
+  399d08:	c5c9cd8b 	.word	0xc5c9cd8b
+  399d0c:	c687ce68 	.word	0xc687ce68
+  399d10:	ae26d78a 	.word	0xae26d78a
+  399d14:	e770cf0c 	.word	0xe770cf0c
+  399d18:	51c0a4c8 	.word	0x51c0a4c8
+  399d1c:	fe90bc68 	.word	0xfe90bc68
+  399d20:	e4a7d447 	.word	0xe4a7d447
+  399d24:	fed2ee2f 	.word	0xfed2ee2f
+  399d28:	d56ee5f0 	.word	0xd56ee5f0
+  399d2c:	6261e631 	.word	0x6261e631
+  399d30:	c60bace9 	.word	0xc60bace9
+  399d34:	deebce6a 	.word	0xdeebce6a
+  399d38:	d66ac607 	.word	0xd66ac607
+  399d3c:	edcdee8d 	.word	0xedcdee8d
+  399d40:	d4ad8a42 	.word	0xd4ad8a42
+  399d44:	7aa3dd4f 	.word	0x7aa3dd4f
+  399d48:	ff4fc56b 	.word	0xff4fc56b
+  399d4c:	ce88deaa 	.word	0xce88deaa
+  399d50:	ce89c667 	.word	0xce89c667
+  399d54:	ad09d66c 	.word	0xad09d66c
+  399d58:	feb36a61 	.word	0xfeb36a61
+  399d5c:	ed0bf5af 	.word	0xed0bf5af
+  399d60:	dc46e4a9 	.word	0xdc46e4a9
+  399d64:	ff14ff34 	.word	0xff14ff34
+  399d68:	e54fd4ed 	.word	0xe54fd4ed
+  399d6c:	d54ef612 	.word	0xd54ef612
+  399d70:	624059e0 	.word	0x624059e0
+  399d74:	d64cbd69 	.word	0xd64cbd69
+  399d78:	de4dde6c 	.word	0xde4dde6c
+  399d7c:	82e3cd8b 	.word	0x82e3cd8b
+  399d80:	e5919305 	.word	0xe5919305
+  399d84:	72a4ddb1 	.word	0x72a4ddb1
+  399d88:	de2d8344 	.word	0xde2d8344
+  399d8c:	c5a8c5a9 	.word	0xc5a8c5a9
+  399d90:	de6cde8c 	.word	0xde6cde8c
+  399d94:	494049a0 	.word	0x494049a0
+  399d98:	ed6fedaf 	.word	0xed6fedaf
+  399d9c:	fe72b366 	.word	0xfe72b366
+  399da0:	ec88d3e6 	.word	0xec88d3e6
+  399da4:	fe30fe2f 	.word	0xfe30fe2f
+  399da8:	ff56fe30 	.word	0xff56fe30
+  399dac:	f5cfdccc 	.word	0xf5cfdccc
+  399db0:	fe91f610 	.word	0xfe91f610
+  399db4:	51e06200 	.word	0x51e06200
+  399db8:	de6fbd4a 	.word	0xde6fbd4a
+  399dbc:	72c3cdad 	.word	0x72c3cdad
+  399dc0:	cd6fd5af 	.word	0xcd6fd5af
+  399dc4:	cdb0ee54 	.word	0xcdb0ee54
+  399dc8:	cdcd72e3 	.word	0xcdcd72e3
+  399dcc:	e66deecf 	.word	0xe66deecf
+  399dd0:	59a0e62c 	.word	0x59a0e62c
+  399dd4:	cccacd0a 	.word	0xcccacd0a
+  399dd8:	cc28fdef 	.word	0xcc28fdef
+  399ddc:	d407fe71 	.word	0xd407fe71
+  399de0:	f4c8d3c5 	.word	0xf4c8d3c5
+  399de4:	fe0dfe6e 	.word	0xfe0dfe6e
+  399de8:	d426c3a3 	.word	0xd426c3a3
+  399dec:	d426ece9 	.word	0xd426ece9
+  399df0:	dd2ad487 	.word	0xdd2ad487
+  399df4:	72a0bc67 	.word	0x72a0bc67
+  399df8:	522049a0 	.word	0x522049a0
+  399dfc:	c5adbd6c 	.word	0xc5adbd6c
+  399e00:	e692e6b2 	.word	0xe692e6b2
+  399e04:	bd4dcdf0 	.word	0xbd4dcdf0
+  399e08:	e64ff6f3 	.word	0xe64ff6f3
+  399e0c:	412059e0 	.word	0x412059e0
+  399e10:	a3c37280 	.word	0xa3c37280
+  399e14:	c446c446 	.word	0xc446c446
+  399e18:	e4c7d487 	.word	0xe4c7d487
+  399e1c:	eca6dc65 	.word	0xeca6dc65
+  399e20:	e464fd07 	.word	0xe464fd07
+  399e24:	d403fda9 	.word	0xd403fda9
+  399e28:	d3e3fd28 	.word	0xd3e3fd28
+  399e2c:	ecc7f4e7 	.word	0xecc7f4e7
+  399e30:	d4c7cc04 	.word	0xd4c7cc04
+  399e34:	c4e9d52a 	.word	0xc4e9d52a
+  399e38:	a4c9b50a 	.word	0xa4c9b50a
+  399e3c:	4a2041e0 	.word	0x4a2041e0
+  399e40:	39a03160 	.word	0x39a03160
+  399e44:	6ae23980 	.word	0x6ae23980
+  399e48:	392028e0 	.word	0x392028e0
+  399e4c:	cd4aac87 	.word	0xcd4aac87
+  399e50:	dd29bc66 	.word	0xdd29bc66
+  399e54:	dce7dce7 	.word	0xdce7dce7
+  399e58:	dc64dca6 	.word	0xdc64dca6
+  399e5c:	e463e484 	.word	0xe463e484
+  399e60:	eca3e483 	.word	0xeca3e483
+
+00399e64 <InitFrameBuffer>:
+  399e64:	e59f1074 	ldr	r1, [pc, #116]	; 399ee0 <DrawPixel+0x18>
+  399e68:	e59f2074 	ldr	r2, [pc, #116]	; 399ee4 <DrawPixel+0x1c>
+
+00399e6c <mailFullLoop>:
+  399e6c:	e5910018 	ldr	r0, [r1, #24]
+  399e70:	e3100102 	tst	r0, #-2147483648	; 0x80000000
+  399e74:	1afffffc 	bne	399e6c <mailFullLoop>
+  399e78:	e2820101 	add	r0, r2, #1073741824	; 0x40000000
+  399e7c:	e3800001 	orr	r0, r0, #1
+  399e80:	e5810020 	str	r0, [r1, #32]
+
+00399e84 <mailEmptyLoop>:
+  399e84:	e5910018 	ldr	r0, [r1, #24]
+  399e88:	e3100101 	tst	r0, #1073741824	; 0x40000000
+  399e8c:	1afffffc 	bne	399e84 <mailEmptyLoop>
+  399e90:	e5910000 	ldr	r0, [r1]
+  399e94:	e200300f 	and	r3, r0, #15
+  399e98:	e3330001 	teq	r3, #1
+  399e9c:	1afffff8 	bne	399e84 <mailEmptyLoop>
+  399ea0:	e3c0300f 	bic	r3, r0, #15
+  399ea4:	e3330000 	teq	r3, #0
+  399ea8:	13a00000 	movne	r0, #0
+  399eac:	112fff1e 	bxne	lr
+
+00399eb0 <pointerLoop>:
+  399eb0:	e5920020 	ldr	r0, [r2, #32]
+  399eb4:	e3300000 	teq	r0, #0
+  399eb8:	0afffffc 	beq	399eb0 <pointerLoop>
+  399ebc:	e59f3024 	ldr	r3, [pc, #36]	; 399ee8 <DrawPixel+0x20>
+  399ec0:	e5830000 	str	r0, [r3]
+  399ec4:	e12fff1e 	bx	lr
+
+00399ec8 <DrawPixel>:
+  399ec8:	e0803501 	add	r3, r0, r1, lsl #10
+  399ecc:	e1a03083 	lsl	r3, r3, #1
+  399ed0:	e59f0010 	ldr	r0, [pc, #16]	; 399ee8 <DrawPixel+0x20>
+  399ed4:	e5900000 	ldr	r0, [r0]
+  399ed8:	e18020b3 	strh	r2, [r0, r3]
+  399edc:	e12fff1e 	bx	lr
+  399ee0:	2000b880 	.word	0x2000b880
+  399ee4:	000b7b60 	.word	0x000b7b60
+  399ee8:	000b7b90 	.word	0x000b7b90
+
+00399eec <floorImage>:
+  399eec:	00000020 	.word	0x00000020
+  399ef0:	00000020 	.word	0x00000020
+  399ef4:	feb1feb1 	.word	0xfeb1feb1
+  399ef8:	feb1feb1 	.word	0xfeb1feb1
+  399efc:	feb1feb1 	.word	0xfeb1feb1
+  399f00:	feb1feb1 	.word	0xfeb1feb1
+  399f04:	feb1feb1 	.word	0xfeb1feb1
+  399f08:	feb1feb1 	.word	0xfeb1feb1
+  399f0c:	feb1feb1 	.word	0xfeb1feb1
+  399f10:	feb1feb1 	.word	0xfeb1feb1
+  399f14:	feb1feb1 	.word	0xfeb1feb1
+  399f18:	feb1feb1 	.word	0xfeb1feb1
+  399f1c:	feb1feb1 	.word	0xfeb1feb1
+  399f20:	feb1feb1 	.word	0xfeb1feb1
+  399f24:	feb1feb1 	.word	0xfeb1feb1
+  399f28:	feb1feb1 	.word	0xfeb1feb1
+  399f2c:	fed2feb1 	.word	0xfed2feb1
+  399f30:	fd6eff33 	.word	0xfd6eff33
+  399f34:	feb1feb1 	.word	0xfeb1feb1
+  399f38:	feb1feb1 	.word	0xfeb1feb1
+  399f3c:	fed2fed2 	.word	0xfed2fed2
+  399f40:	fed2fed2 	.word	0xfed2fed2
+  399f44:	fed2fed2 	.word	0xfed2fed2
+  399f48:	fed2fed2 	.word	0xfed2fed2
+  399f4c:	fed2fed2 	.word	0xfed2fed2
+  399f50:	fed2fed2 	.word	0xfed2fed2
+  399f54:	feb1fed2 	.word	0xfeb1fed2
+  399f58:	fed2fed2 	.word	0xfed2fed2
+  399f5c:	fed2fed2 	.word	0xfed2fed2
+  399f60:	fed2fed2 	.word	0xfed2fed2
+  399f64:	fed2fed2 	.word	0xfed2fed2
+  399f68:	fed2fed2 	.word	0xfed2fed2
+  399f6c:	fd4eff12 	.word	0xfd4eff12
+  399f70:	e465dc23 	.word	0xe465dc23
+  399f74:	feb1feb1 	.word	0xfeb1feb1
+  399f78:	ff12fed2 	.word	0xff12fed2
+  399f7c:	f54df52d 	.word	0xf54df52d
+  399f80:	f54df54d 	.word	0xf54df54d
+  399f84:	f54df54d 	.word	0xf54df54d
+  399f88:	f54df54d 	.word	0xf54df54d
+  399f8c:	f54df52d 	.word	0xf54df52d
+  399f90:	f54df54d 	.word	0xf54df54d
+  399f94:	ff33f52d 	.word	0xff33f52d
+  399f98:	f54df52d 	.word	0xf54df52d
+  399f9c:	f54df54d 	.word	0xf54df54d
+  399fa0:	f54df54d 	.word	0xf54df54d
+  399fa4:	f54df54d 	.word	0xf54df54d
+  399fa8:	f54df54d 	.word	0xf54df54d
+  399fac:	fd8ff54d 	.word	0xfd8ff54d
+  399fb0:	e486e465 	.word	0xe486e465
+  399fb4:	fed2feb1 	.word	0xfed2feb1
+  399fb8:	f54df52d 	.word	0xf54df52d
+  399fbc:	f58efd8f 	.word	0xf58efd8f
+  399fc0:	f58ef58e 	.word	0xf58ef58e
+  399fc4:	f58ef58e 	.word	0xf58ef58e
+  399fc8:	f52df58e 	.word	0xf52df58e
+  399fcc:	f54dff53 	.word	0xf54dff53
+  399fd0:	f58ef58e 	.word	0xf58ef58e
+  399fd4:	f54df58e 	.word	0xf54df58e
+  399fd8:	f58ef58e 	.word	0xf58ef58e
+  399fdc:	f54df54d 	.word	0xf54df54d
+  399fe0:	f58ef58e 	.word	0xf58ef58e
+  399fe4:	f58ef58e 	.word	0xf58ef58e
+  399fe8:	f54df58e 	.word	0xf54df58e
+  399fec:	fd8ff58e 	.word	0xfd8ff58e
+  399ff0:	e486e465 	.word	0xe486e465
+  399ff4:	fed2feb1 	.word	0xfed2feb1
+  399ff8:	fd8ff54d 	.word	0xfd8ff54d
+  399ffc:	fd8fdc02 	.word	0xfd8fdc02
+  39a000:	f58ef58e 	.word	0xf58ef58e
+  39a004:	f58ef58e 	.word	0xf58ef58e
+  39a008:	ff53f54d 	.word	0xff53f54d
+  39a00c:	f58ef52d 	.word	0xf58ef52d
+  39a010:	f58ef58e 	.word	0xf58ef58e
+  39a014:	f58ef58e 	.word	0xf58ef58e
+  39a018:	f52df54d 	.word	0xf52df54d
+  39a01c:	ff33ff54 	.word	0xff33ff54
+  39a020:	f54df54d 	.word	0xf54df54d
+  39a024:	f58efd8f 	.word	0xf58efd8f
+  39a028:	ff53f54d 	.word	0xff53f54d
+  39a02c:	fd8ff54d 	.word	0xfd8ff54d
+  39a030:	e486e465 	.word	0xe486e465
+  39a034:	fed2feb1 	.word	0xfed2feb1
+  39a038:	f58ef54d 	.word	0xf58ef54d
+  39a03c:	f58efd8f 	.word	0xf58efd8f
+  39a040:	fd8ff58e 	.word	0xfd8ff58e
+  39a044:	f58ef58e 	.word	0xf58ef58e
+  39a048:	f54df58e 	.word	0xf54df58e
+  39a04c:	f58ef58e 	.word	0xf58ef58e
+  39a050:	f58ef58e 	.word	0xf58ef58e
+  39a054:	f54df58e 	.word	0xf54df58e
+  39a058:	ff54ff33 	.word	0xff54ff33
+  39a05c:	fd6edba1 	.word	0xfd6edba1
+  39a060:	ff74f54d 	.word	0xff74f54d
+  39a064:	fdb0dbe1 	.word	0xfdb0dbe1
+  39a068:	f54dfd8f 	.word	0xf54dfd8f
+  39a06c:	fd8ff58e 	.word	0xfd8ff58e
+  39a070:	e486e465 	.word	0xe486e465
+  39a074:	fed2feb1 	.word	0xfed2feb1
+  39a078:	f58ef54d 	.word	0xf58ef54d
+  39a07c:	f58efd8f 	.word	0xf58efd8f
+  39a080:	dc02fd8f 	.word	0xdc02fd8f
+  39a084:	f58efd8f 	.word	0xf58efd8f
+  39a088:	f58ef58e 	.word	0xf58ef58e
+  39a08c:	f58ef58e 	.word	0xf58ef58e
+  39a090:	f58ef58e 	.word	0xf58ef58e
+  39a094:	f58ef58e 	.word	0xf58ef58e
+  39a098:	f54df54d 	.word	0xf54df54d
+  39a09c:	f58efd8f 	.word	0xf58efd8f
+  39a0a0:	f52df54d 	.word	0xf52df54d
+  39a0a4:	dc23fdb0 	.word	0xdc23fdb0
+  39a0a8:	fdb0e444 	.word	0xfdb0e444
+  39a0ac:	fd8ff58e 	.word	0xfd8ff58e
+  39a0b0:	e486e465 	.word	0xe486e465
+  39a0b4:	fed2feb1 	.word	0xfed2feb1
+  39a0b8:	fd8ff54d 	.word	0xfd8ff54d
+  39a0bc:	fd6edc02 	.word	0xfd6edc02
+  39a0c0:	fd8ff58e 	.word	0xfd8ff58e
+  39a0c4:	f58ef58e 	.word	0xf58ef58e
+  39a0c8:	f58ef58e 	.word	0xf58ef58e
+  39a0cc:	f58ef58e 	.word	0xf58ef58e
+  39a0d0:	f58ef58e 	.word	0xf58ef58e
+  39a0d4:	f58ef58e 	.word	0xf58ef58e
+  39a0d8:	f58ef58e 	.word	0xf58ef58e
+  39a0dc:	f52df58e 	.word	0xf52df58e
+  39a0e0:	ff33ff33 	.word	0xff33ff33
+  39a0e4:	fdb0f54d 	.word	0xfdb0f54d
+  39a0e8:	dc23e444 	.word	0xdc23e444
+  39a0ec:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a0f0:	e486e465 	.word	0xe486e465
+  39a0f4:	fed2feb1 	.word	0xfed2feb1
+  39a0f8:	f58ef54d 	.word	0xf58ef54d
+  39a0fc:	ff53fd6e 	.word	0xff53fd6e
+  39a100:	f58ef54d 	.word	0xf58ef54d
+  39a104:	f58ef58e 	.word	0xf58ef58e
+  39a108:	f58ef54d 	.word	0xf58ef54d
+  39a10c:	f58ef58e 	.word	0xf58ef58e
+  39a110:	f58ef58e 	.word	0xf58ef58e
+  39a114:	f58ef58e 	.word	0xf58ef58e
+  39a118:	f58ef58e 	.word	0xf58ef58e
+  39a11c:	ff53f54d 	.word	0xff53f54d
+  39a120:	f54df52d 	.word	0xf54df52d
+  39a124:	f58ef58e 	.word	0xf58ef58e
+  39a128:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a12c:	fd8ff58e 	.word	0xfd8ff58e
+  39a130:	e486e465 	.word	0xe486e465
+  39a134:	fed2feb1 	.word	0xfed2feb1
+  39a138:	f58ef54d 	.word	0xf58ef54d
+  39a13c:	f54df58e 	.word	0xf54df58e
+  39a140:	f58ef58e 	.word	0xf58ef58e
+  39a144:	f52df58e 	.word	0xf52df58e
+  39a148:	fd6eff33 	.word	0xfd6eff33
+  39a14c:	f58efd8f 	.word	0xf58efd8f
+  39a150:	f58ef58e 	.word	0xf58ef58e
+  39a154:	f58ef58e 	.word	0xf58ef58e
+  39a158:	f58ef58e 	.word	0xf58ef58e
+  39a15c:	f54df58e 	.word	0xf54df58e
+  39a160:	f58ef58e 	.word	0xf58ef58e
+  39a164:	f58ef58e 	.word	0xf58ef58e
+  39a168:	fd8ff58e 	.word	0xfd8ff58e
+  39a16c:	fd8ff58e 	.word	0xfd8ff58e
+  39a170:	e486e465 	.word	0xe486e465
+  39a174:	fed2feb1 	.word	0xfed2feb1
+  39a178:	f58ef54d 	.word	0xf58ef54d
+  39a17c:	f58ef58e 	.word	0xf58ef58e
+  39a180:	f58ef58e 	.word	0xf58ef58e
+  39a184:	ff12f52d 	.word	0xff12f52d
+  39a188:	dc02ff33 	.word	0xdc02ff33
+  39a18c:	fdb0e444 	.word	0xfdb0e444
+  39a190:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a194:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a198:	f58ef58e 	.word	0xf58ef58e
+  39a19c:	f58ef58e 	.word	0xf58ef58e
+  39a1a0:	f58ef58e 	.word	0xf58ef58e
+  39a1a4:	f58ef58e 	.word	0xf58ef58e
+  39a1a8:	dc02fd8f 	.word	0xdc02fd8f
+  39a1ac:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a1b0:	e486e465 	.word	0xe486e465
+  39a1b4:	fed2feb1 	.word	0xfed2feb1
+  39a1b8:	f58ef54d 	.word	0xf58ef54d
+  39a1bc:	f58ef58e 	.word	0xf58ef58e
+  39a1c0:	f52df58e 	.word	0xf52df58e
+  39a1c4:	ff12ff33 	.word	0xff12ff33
+  39a1c8:	fdb0f50c 	.word	0xfdb0f50c
+  39a1cc:	e444e444 	.word	0xe444e444
+  39a1d0:	e465e465 	.word	0xe465e465
+  39a1d4:	dc23e444 	.word	0xdc23e444
+  39a1d8:	f58efd8f 	.word	0xf58efd8f
+  39a1dc:	f58ef58e 	.word	0xf58ef58e
+  39a1e0:	f58ef58e 	.word	0xf58ef58e
+  39a1e4:	f58ef58e 	.word	0xf58ef58e
+  39a1e8:	fd8ff58e 	.word	0xfd8ff58e
+  39a1ec:	fd8ff58e 	.word	0xfd8ff58e
+  39a1f0:	e486e465 	.word	0xe486e465
+  39a1f4:	fed2feb1 	.word	0xfed2feb1
+  39a1f8:	f58ef54d 	.word	0xf58ef54d
+  39a1fc:	f58ef58e 	.word	0xf58ef58e
+  39a200:	ff53f54d 	.word	0xff53f54d
+  39a204:	f52df52d 	.word	0xf52df52d
+  39a208:	f54dff53 	.word	0xf54dff53
+  39a20c:	fdb0fd8f 	.word	0xfdb0fd8f
+  39a210:	e444e444 	.word	0xe444e444
+  39a214:	fd8ffdb0 	.word	0xfd8ffdb0
+  39a218:	f58ef58e 	.word	0xf58ef58e
+  39a21c:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a220:	f58ef58e 	.word	0xf58ef58e
+  39a224:	f58ef58e 	.word	0xf58ef58e
+  39a228:	f58ef58e 	.word	0xf58ef58e
+  39a22c:	fd8ff58e 	.word	0xfd8ff58e
+  39a230:	e486e465 	.word	0xe486e465
+  39a234:	fed2feb1 	.word	0xfed2feb1
+  39a238:	f58ef54d 	.word	0xf58ef54d
+  39a23c:	f58ef58e 	.word	0xf58ef58e
+  39a240:	f54df58e 	.word	0xf54df58e
+  39a244:	f58ef58e 	.word	0xf58ef58e
+  39a248:	f58ef54d 	.word	0xf58ef54d
+  39a24c:	f58ef58e 	.word	0xf58ef58e
+  39a250:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a254:	f58ef58e 	.word	0xf58ef58e
+  39a258:	fd6ef58e 	.word	0xfd6ef58e
+  39a25c:	dc23dc23 	.word	0xdc23dc23
+  39a260:	f58efd8f 	.word	0xf58efd8f
+  39a264:	f58ef58e 	.word	0xf58ef58e
+  39a268:	f58ef58e 	.word	0xf58ef58e
+  39a26c:	fd8ff58e 	.word	0xfd8ff58e
+  39a270:	e486e465 	.word	0xe486e465
+  39a274:	fed2feb1 	.word	0xfed2feb1
+  39a278:	f58ef54d 	.word	0xf58ef54d
+  39a27c:	f54df58e 	.word	0xf54df58e
+  39a280:	f54df58e 	.word	0xf54df58e
+  39a284:	f58efd8f 	.word	0xf58efd8f
+  39a288:	f58ef58e 	.word	0xf58ef58e
+  39a28c:	f58ef58e 	.word	0xf58ef58e
+  39a290:	f58ef58e 	.word	0xf58ef58e
+  39a294:	f58ef58e 	.word	0xf58ef58e
+  39a298:	ff53f54d 	.word	0xff53f54d
+  39a29c:	fd8ffd6e 	.word	0xfd8ffd6e
+  39a2a0:	f58ef58e 	.word	0xf58ef58e
+  39a2a4:	f58ef58e 	.word	0xf58ef58e
+  39a2a8:	f58ef58e 	.word	0xf58ef58e
+  39a2ac:	fd8ff58e 	.word	0xfd8ff58e
+  39a2b0:	e486e465 	.word	0xe486e465
+  39a2b4:	fed2feb1 	.word	0xfed2feb1
+  39a2b8:	f54df54d 	.word	0xf54df54d
+  39a2bc:	ff53f52d 	.word	0xff53f52d
+  39a2c0:	ff74f52d 	.word	0xff74f52d
+  39a2c4:	fdb0dbe1 	.word	0xfdb0dbe1
+  39a2c8:	f58ef58e 	.word	0xf58ef58e
+  39a2cc:	f58ef58e 	.word	0xf58ef58e
+  39a2d0:	f58ef54d 	.word	0xf58ef54d
+  39a2d4:	f58ef58e 	.word	0xf58ef58e
+  39a2d8:	f54df58e 	.word	0xf54df58e
+  39a2dc:	f58ef58e 	.word	0xf58ef58e
+  39a2e0:	fd8ff58e 	.word	0xfd8ff58e
+  39a2e4:	f58ef58e 	.word	0xf58ef58e
+  39a2e8:	f58ef58e 	.word	0xf58ef58e
+  39a2ec:	fd8ff58e 	.word	0xfd8ff58e
+  39a2f0:	e486e465 	.word	0xe486e465
+  39a2f4:	fed2feb1 	.word	0xfed2feb1
+  39a2f8:	ff33f52d 	.word	0xff33f52d
+  39a2fc:	f52dff33 	.word	0xf52dff33
+  39a300:	f54df58e 	.word	0xf54df58e
+  39a304:	dc02fdb0 	.word	0xdc02fdb0
+  39a308:	f58efd8f 	.word	0xf58efd8f
+  39a30c:	f54df58e 	.word	0xf54df58e
+  39a310:	f54dff53 	.word	0xf54dff53
+  39a314:	f58ef58e 	.word	0xf58ef58e
+  39a318:	f58ef58e 	.word	0xf58ef58e
+  39a31c:	f58ef58e 	.word	0xf58ef58e
+  39a320:	dc02fd8f 	.word	0xdc02fd8f
+  39a324:	f58efd8f 	.word	0xf58efd8f
+  39a328:	f58ef58e 	.word	0xf58ef58e
+  39a32c:	fd8ff58e 	.word	0xfd8ff58e
+  39a330:	e486e465 	.word	0xe486e465
+  39a334:	fed2feb1 	.word	0xfed2feb1
+  39a338:	f54df54d 	.word	0xf54df54d
+  39a33c:	f58ef54d 	.word	0xf58ef54d
+  39a340:	f58ef58e 	.word	0xf58ef58e
+  39a344:	fd8ff58e 	.word	0xfd8ff58e
+  39a348:	f58ef58e 	.word	0xf58ef58e
+  39a34c:	f58ef58e 	.word	0xf58ef58e
+  39a350:	f58ef54d 	.word	0xf58ef54d
+  39a354:	f58ef58e 	.word	0xf58ef58e
+  39a358:	f58ef58e 	.word	0xf58ef58e
+  39a35c:	f58ef58e 	.word	0xf58ef58e
+  39a360:	fd8ff58e 	.word	0xfd8ff58e
+  39a364:	f58ef58e 	.word	0xf58ef58e
+  39a368:	f58ef58e 	.word	0xf58ef58e
+  39a36c:	fd8ff58e 	.word	0xfd8ff58e
+  39a370:	e486e465 	.word	0xe486e465
+  39a374:	fed2feb1 	.word	0xfed2feb1
+  39a378:	f58ef54d 	.word	0xf58ef54d
+  39a37c:	f58ef58e 	.word	0xf58ef58e
+  39a380:	f54df58e 	.word	0xf54df58e
+  39a384:	f58ef54d 	.word	0xf58ef54d
+  39a388:	f58ef58e 	.word	0xf58ef58e
+  39a38c:	f58ef58e 	.word	0xf58ef58e
+  39a390:	f58ef58e 	.word	0xf58ef58e
+  39a394:	f58ef58e 	.word	0xf58ef58e
+  39a398:	f58ef58e 	.word	0xf58ef58e
+  39a39c:	f58ef58e 	.word	0xf58ef58e
+  39a3a0:	f58ef58e 	.word	0xf58ef58e
+  39a3a4:	f58ef58e 	.word	0xf58ef58e
+  39a3a8:	f58ef58e 	.word	0xf58ef58e
+  39a3ac:	fd8ff58e 	.word	0xfd8ff58e
+  39a3b0:	e486e465 	.word	0xe486e465
+  39a3b4:	fed2feb1 	.word	0xfed2feb1
+  39a3b8:	f58ef54d 	.word	0xf58ef54d
+  39a3bc:	f58ef58e 	.word	0xf58ef58e
+  39a3c0:	ff33f54d 	.word	0xff33f54d
+  39a3c4:	f54dff33 	.word	0xf54dff33
+  39a3c8:	f58ef58e 	.word	0xf58ef58e
+  39a3cc:	f58ef58e 	.word	0xf58ef58e
+  39a3d0:	f58ef58e 	.word	0xf58ef58e
+  39a3d4:	f58ef58e 	.word	0xf58ef58e
+  39a3d8:	f58ef58e 	.word	0xf58ef58e
+  39a3dc:	f58ef58e 	.word	0xf58ef58e
+  39a3e0:	f54df54d 	.word	0xf54df54d
+  39a3e4:	f58ef58e 	.word	0xf58ef58e
+  39a3e8:	f58ef58e 	.word	0xf58ef58e
+  39a3ec:	fdb0f58e 	.word	0xfdb0f58e
+  39a3f0:	e486e465 	.word	0xe486e465
+  39a3f4:	fed2feb1 	.word	0xfed2feb1
+  39a3f8:	f58ef54d 	.word	0xf58ef54d
+  39a3fc:	f58ef54d 	.word	0xf58ef54d
+  39a400:	f54df58e 	.word	0xf54df58e
+  39a404:	f54df54d 	.word	0xf54df54d
+  39a408:	f58ef58e 	.word	0xf58ef58e
+  39a40c:	f58ef58e 	.word	0xf58ef58e
+  39a410:	f58ef58e 	.word	0xf58ef58e
+  39a414:	f54df54d 	.word	0xf54df54d
+  39a418:	f58ef58e 	.word	0xf58ef58e
+  39a41c:	f54df58e 	.word	0xf54df58e
+  39a420:	ff33ff33 	.word	0xff33ff33
+  39a424:	f54df54d 	.word	0xf54df54d
+  39a428:	f58ef58e 	.word	0xf58ef58e
+  39a42c:	e444fd8f 	.word	0xe444fd8f
+  39a430:	e486e486 	.word	0xe486e486
+  39a434:	fed2feb1 	.word	0xfed2feb1
+  39a438:	f54df54d 	.word	0xf54df54d
+  39a43c:	f54dff53 	.word	0xf54dff53
+  39a440:	f58ef58e 	.word	0xf58ef58e
+  39a444:	ff53f54d 	.word	0xff53f54d
+  39a448:	f58ef54d 	.word	0xf58ef54d
+  39a44c:	f58ef58e 	.word	0xf58ef58e
+  39a450:	f54df58e 	.word	0xf54df58e
+  39a454:	ff33ff33 	.word	0xff33ff33
+  39a458:	f58ef54d 	.word	0xf58ef54d
+  39a45c:	f58ef58e 	.word	0xf58ef58e
+  39a460:	f54df54d 	.word	0xf54df54d
+  39a464:	ff53f54d 	.word	0xff53f54d
+  39a468:	f58ef54d 	.word	0xf58ef54d
+  39a46c:	e444fd8f 	.word	0xe444fd8f
+  39a470:	e486e486 	.word	0xe486e486
+  39a474:	fed2feb1 	.word	0xfed2feb1
+  39a478:	f58ef54d 	.word	0xf58ef54d
+  39a47c:	f58ef54d 	.word	0xf58ef54d
+  39a480:	f54df54d 	.word	0xf54df54d
+  39a484:	f54df58e 	.word	0xf54df58e
+  39a488:	f58ef58e 	.word	0xf58ef58e
+  39a48c:	f58ef58e 	.word	0xf58ef58e
+  39a490:	f58ef58e 	.word	0xf58ef58e
+  39a494:	f54df54d 	.word	0xf54df54d
+  39a498:	f58ef58e 	.word	0xf58ef58e
+  39a49c:	f58ef58e 	.word	0xf58ef58e
+  39a4a0:	f58ef58e 	.word	0xf58ef58e
+  39a4a4:	f54df58e 	.word	0xf54df58e
+  39a4a8:	f58ef58e 	.word	0xf58ef58e
+  39a4ac:	fdb0f58e 	.word	0xfdb0f58e
+  39a4b0:	e486e465 	.word	0xe486e465
+  39a4b4:	fed2feb1 	.word	0xfed2feb1
+  39a4b8:	f58ef54d 	.word	0xf58ef54d
+  39a4bc:	f52df54d 	.word	0xf52df54d
+  39a4c0:	ff12ff12 	.word	0xff12ff12
+  39a4c4:	f58efd6e 	.word	0xf58efd6e
+  39a4c8:	f58ef58e 	.word	0xf58ef58e
+  39a4cc:	f58ef58e 	.word	0xf58ef58e
+  39a4d0:	f54df58e 	.word	0xf54df58e
+  39a4d4:	f58ef54d 	.word	0xf58ef54d
+  39a4d8:	f58ef58e 	.word	0xf58ef58e
+  39a4dc:	f58ef58e 	.word	0xf58ef58e
+  39a4e0:	f58efd8f 	.word	0xf58efd8f
+  39a4e4:	f58ef58e 	.word	0xf58ef58e
+  39a4e8:	f58ef58e 	.word	0xf58ef58e
+  39a4ec:	fd8ff58e 	.word	0xfd8ff58e
+  39a4f0:	e486e465 	.word	0xe486e465
+  39a4f4:	fed2feb1 	.word	0xfed2feb1
+  39a4f8:	f54df52d 	.word	0xf54df52d
+  39a4fc:	fed2ff33 	.word	0xfed2ff33
+  39a500:	ff33feb1 	.word	0xff33feb1
+  39a504:	fdb0dbe1 	.word	0xfdb0dbe1
+  39a508:	f58ef58e 	.word	0xf58ef58e
+  39a50c:	f58ef58e 	.word	0xf58ef58e
+  39a510:	ff12f52d 	.word	0xff12f52d
+  39a514:	fd6eff33 	.word	0xfd6eff33
+  39a518:	f58ef58e 	.word	0xf58ef58e
+  39a51c:	fd8ff58e 	.word	0xfd8ff58e
+  39a520:	fd8fdc02 	.word	0xfd8fdc02
+  39a524:	f58ef58e 	.word	0xf58ef58e
+  39a528:	f58ef58e 	.word	0xf58ef58e
+  39a52c:	fd8ff58e 	.word	0xfd8ff58e
+  39a530:	e486e465 	.word	0xe486e465
+  39a534:	feb1feb1 	.word	0xfeb1feb1
+  39a538:	f54dff33 	.word	0xf54dff33
+  39a53c:	ff12f52d 	.word	0xff12f52d
+  39a540:	f52dff12 	.word	0xf52dff12
+  39a544:	dc02fdb0 	.word	0xdc02fdb0
+  39a548:	f58efd8f 	.word	0xf58efd8f
+  39a54c:	f54df58e 	.word	0xf54df58e
+  39a550:	ff12ff33 	.word	0xff12ff33
+  39a554:	dc02fd4e 	.word	0xdc02fd4e
+  39a558:	f58efd8f 	.word	0xf58efd8f
+  39a55c:	f58ef58e 	.word	0xf58ef58e
+  39a560:	f58efd8f 	.word	0xf58efd8f
+  39a564:	f58ef58e 	.word	0xf58ef58e
+  39a568:	fd8ff58e 	.word	0xfd8ff58e
+  39a56c:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a570:	e486e465 	.word	0xe486e465
+  39a574:	fed2feb1 	.word	0xfed2feb1
+  39a578:	f58ef52d 	.word	0xf58ef52d
+  39a57c:	f54df58e 	.word	0xf54df58e
+  39a580:	f58ef54d 	.word	0xf58ef54d
+  39a584:	fd8ff58e 	.word	0xfd8ff58e
+  39a588:	f58ef58e 	.word	0xf58ef58e
+  39a58c:	f58ef58e 	.word	0xf58ef58e
+  39a590:	f54df54d 	.word	0xf54df54d
+  39a594:	fd8ff58e 	.word	0xfd8ff58e
+  39a598:	f58ef58e 	.word	0xf58ef58e
+  39a59c:	f58ef58e 	.word	0xf58ef58e
+  39a5a0:	f58ef58e 	.word	0xf58ef58e
+  39a5a4:	f58ef58e 	.word	0xf58ef58e
+  39a5a8:	dc23fd8f 	.word	0xdc23fd8f
+  39a5ac:	fdb0dc23 	.word	0xfdb0dc23
+  39a5b0:	e486e465 	.word	0xe486e465
+  39a5b4:	fed2feb1 	.word	0xfed2feb1
+  39a5b8:	f58ef54d 	.word	0xf58ef54d
+  39a5bc:	f58ef58e 	.word	0xf58ef58e
+  39a5c0:	f58ef58e 	.word	0xf58ef58e
+  39a5c4:	f58ef58e 	.word	0xf58ef58e
+  39a5c8:	f54df54d 	.word	0xf54df54d
+  39a5cc:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a5d0:	f58efd8f 	.word	0xf58efd8f
+  39a5d4:	f58ef58e 	.word	0xf58ef58e
+  39a5d8:	f58ef58e 	.word	0xf58ef58e
+  39a5dc:	f58ef58e 	.word	0xf58ef58e
+  39a5e0:	f58ef58e 	.word	0xf58ef58e
+  39a5e4:	f58ef58e 	.word	0xf58ef58e
+  39a5e8:	fd8ff58e 	.word	0xfd8ff58e
+  39a5ec:	fd8ffdb0 	.word	0xfd8ffdb0
+  39a5f0:	e486e465 	.word	0xe486e465
+  39a5f4:	fed2feb1 	.word	0xfed2feb1
+  39a5f8:	f54df54d 	.word	0xf54df54d
+  39a5fc:	f58ef58e 	.word	0xf58ef58e
+  39a600:	f54df58e 	.word	0xf54df58e
+  39a604:	f52df58e 	.word	0xf52df58e
+  39a608:	ff54ff33 	.word	0xff54ff33
+  39a60c:	e444dc02 	.word	0xe444dc02
+  39a610:	fd8fdc23 	.word	0xfd8fdc23
+  39a614:	f58ef58e 	.word	0xf58ef58e
+  39a618:	f58ef58e 	.word	0xf58ef58e
+  39a61c:	f58ef58e 	.word	0xf58ef58e
+  39a620:	f58ef58e 	.word	0xf58ef58e
+  39a624:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a628:	fdb0f58e 	.word	0xfdb0f58e
+  39a62c:	fdd1dc02 	.word	0xfdd1dc02
+  39a630:	e486e465 	.word	0xe486e465
+  39a634:	ff12feb1 	.word	0xff12feb1
+  39a638:	ff74fd4e 	.word	0xff74fd4e
+  39a63c:	fd8ffd6e 	.word	0xfd8ffd6e
+  39a640:	ff74fd6e 	.word	0xff74fd6e
+  39a644:	ff74fd4e 	.word	0xff74fd4e
+  39a648:	fd6efd4e 	.word	0xfd6efd4e
+  39a64c:	fdb0fdb0 	.word	0xfdb0fdb0
+  39a650:	fd8ffdb0 	.word	0xfd8ffdb0
+  39a654:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a658:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a65c:	fd8ffd8f 	.word	0xfd8ffd8f
+  39a660:	fdb0fd8f 	.word	0xfdb0fd8f
+  39a664:	e444e444 	.word	0xe444e444
+  39a668:	dc23fdd1 	.word	0xdc23fdd1
+  39a66c:	e444fdf2 	.word	0xe444fdf2
+  39a670:	e486e486 	.word	0xe486e486
+  39a674:	fd6fff12 	.word	0xfd6fff12
+  39a678:	e444e444 	.word	0xe444e444
+  39a67c:	e465e465 	.word	0xe465e465
+  39a680:	e444e465 	.word	0xe444e465
+  39a684:	e444e465 	.word	0xe444e465
+  39a688:	e465e465 	.word	0xe465e465
+  39a68c:	e465e465 	.word	0xe465e465
+  39a690:	e465e465 	.word	0xe465e465
+  39a694:	e465e465 	.word	0xe465e465
+  39a698:	e465e465 	.word	0xe465e465
+  39a69c:	e465e465 	.word	0xe465e465
+  39a6a0:	e465e465 	.word	0xe465e465
+  39a6a4:	e486e486 	.word	0xe486e486
+  39a6a8:	e486e465 	.word	0xe486e465
+  39a6ac:	e486e465 	.word	0xe486e465
+  39a6b0:	e486e486 	.word	0xe486e486
+  39a6b4:	e444fd6e 	.word	0xe444fd6e
+  39a6b8:	e486e486 	.word	0xe486e486
+  39a6bc:	e486e486 	.word	0xe486e486
+  39a6c0:	e486e486 	.word	0xe486e486
+  39a6c4:	e486e486 	.word	0xe486e486
+  39a6c8:	e486e486 	.word	0xe486e486
+  39a6cc:	e486e486 	.word	0xe486e486
+  39a6d0:	e486e486 	.word	0xe486e486
+  39a6d4:	e486e486 	.word	0xe486e486
+  39a6d8:	e486e486 	.word	0xe486e486
+  39a6dc:	e486e486 	.word	0xe486e486
+  39a6e0:	e486e486 	.word	0xe486e486
+  39a6e4:	e486e486 	.word	0xe486e486
+  39a6e8:	e486e486 	.word	0xe486e486
+  39a6ec:	e486e486 	.word	0xe486e486
+  39a6f0:	e486e486 	.word	0xe486e486
+
+0039a6f4 <Init_GPIO>:
+  39a6f4:	e92d4070 	push	{r4, r5, r6, lr}
+  39a6f8:	e1a04000 	mov	r4, r0
+  39a6fc:	e1a05001 	mov	r5, r1
+  39a700:	e59f614c 	ldr	r6, [pc, #332]	; 39a854 <Init_SNES+0x2c>
+  39a704:	e3a0100a 	mov	r1, #10
+  39a708:	eb0007a1 	bl	39c594 <sdiv>
+  39a70c:	e0866100 	add	r6, r6, r0, lsl #2
+  39a710:	e0811081 	add	r1, r1, r1, lsl #1
+  39a714:	e5960000 	ldr	r0, [r6]
+  39a718:	e3a02007 	mov	r2, #7
+  39a71c:	e1a02112 	lsl	r2, r2, r1
+  39a720:	e1c00002 	bic	r0, r0, r2
+  39a724:	e1a05115 	lsl	r5, r5, r1
+  39a728:	e1800005 	orr	r0, r0, r5
+  39a72c:	e5860000 	str	r0, [r6]
+  39a730:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+0039a734 <Write_GPIO>:
+  39a734:	e3510001 	cmp	r1, #1
+  39a738:	059f2118 	ldreq	r2, [pc, #280]	; 39a858 <Init_SNES+0x30>
+  39a73c:	159f2118 	ldrne	r2, [pc, #280]	; 39a85c <Init_SNES+0x34>
+  39a740:	e3a03001 	mov	r3, #1
+  39a744:	e1a03013 	lsl	r3, r3, r0
+  39a748:	e5823000 	str	r3, [r2]
+  39a74c:	e12fff1e 	bx	lr
+
+0039a750 <Read_GPIO>:
+  39a750:	e59f1108 	ldr	r1, [pc, #264]	; 39a860 <Init_SNES+0x38>
+  39a754:	e5911000 	ldr	r1, [r1]
+  39a758:	e3a03001 	mov	r3, #1
+  39a75c:	e1a03013 	lsl	r3, r3, r0
+  39a760:	e0011003 	and	r1, r1, r3
+  39a764:	e3310000 	teq	r1, #0
+  39a768:	03a00000 	moveq	r0, #0
+  39a76c:	13a00001 	movne	r0, #1
+  39a770:	e12fff1e 	bx	lr
+
+0039a774 <Wait>:
+  39a774:	e59f10e8 	ldr	r1, [pc, #232]	; 39a864 <Init_SNES+0x3c>
+  39a778:	e5912000 	ldr	r2, [r1]
+  39a77c:	e0822000 	add	r2, r2, r0
+
+0039a780 <waitLoop>:
+  39a780:	e5913000 	ldr	r3, [r1]
+  39a784:	e1520003 	cmp	r2, r3
+  39a788:	8afffffc 	bhi	39a780 <waitLoop>
+  39a78c:	e12fff1e 	bx	lr
+
+0039a790 <Write_Latch>:
+  39a790:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  39a794:	e1a01000 	mov	r1, r0
+  39a798:	e3a00009 	mov	r0, #9
+  39a79c:	ebffffe4 	bl	39a734 <Write_GPIO>
+  39a7a0:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+0039a7a4 <Write_Clock>:
+  39a7a4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  39a7a8:	e1a01000 	mov	r1, r0
+  39a7ac:	e3a0000b 	mov	r0, #11
+  39a7b0:	ebffffdf 	bl	39a734 <Write_GPIO>
+  39a7b4:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+0039a7b8 <Read_SNES>:
+  39a7b8:	e92d4030 	push	{r4, r5, lr}
+  39a7bc:	e3a00001 	mov	r0, #1
+  39a7c0:	ebfffff7 	bl	39a7a4 <Write_Clock>
+  39a7c4:	e3a00001 	mov	r0, #1
+  39a7c8:	ebfffff0 	bl	39a790 <Write_Latch>
+  39a7cc:	e3a0000c 	mov	r0, #12
+  39a7d0:	ebffffe7 	bl	39a774 <Wait>
+  39a7d4:	e3a00000 	mov	r0, #0
+  39a7d8:	ebffffec 	bl	39a790 <Write_Latch>
+  39a7dc:	e3a04000 	mov	r4, #0
+  39a7e0:	e3a05000 	mov	r5, #0
+
+0039a7e4 <read_SNES_loop>:
+  39a7e4:	e3a00006 	mov	r0, #6
+  39a7e8:	ebffffe1 	bl	39a774 <Wait>
+  39a7ec:	e3a00000 	mov	r0, #0
+  39a7f0:	ebffffeb 	bl	39a7a4 <Write_Clock>
+  39a7f4:	e3a00006 	mov	r0, #6
+  39a7f8:	ebffffdd 	bl	39a774 <Wait>
+  39a7fc:	e3a0000a 	mov	r0, #10
+  39a800:	ebffffd2 	bl	39a750 <Read_GPIO>
+  39a804:	e2200001 	eor	r0, r0, #1
+  39a808:	e1855410 	orr	r5, r5, r0, lsl r4
+  39a80c:	e3a00001 	mov	r0, #1
+  39a810:	ebffffe3 	bl	39a7a4 <Write_Clock>
+  39a814:	e2844001 	add	r4, r4, #1
+  39a818:	e3540010 	cmp	r4, #16
+  39a81c:	bafffff0 	blt	39a7e4 <read_SNES_loop>
+  39a820:	e1a00005 	mov	r0, r5
+  39a824:	e8bd8030 	pop	{r4, r5, pc}
+
+0039a828 <Init_SNES>:
+  39a828:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  39a82c:	e3a00009 	mov	r0, #9
+  39a830:	e3a01001 	mov	r1, #1
+  39a834:	ebffffae 	bl	39a6f4 <Init_GPIO>
+  39a838:	e3a0000a 	mov	r0, #10
+  39a83c:	e3a01000 	mov	r1, #0
+  39a840:	ebffffab 	bl	39a6f4 <Init_GPIO>
+  39a844:	e3a0000b 	mov	r0, #11
+  39a848:	e3a01001 	mov	r1, #1
+  39a84c:	ebffffa8 	bl	39a6f4 <Init_GPIO>
+  39a850:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+  39a854:	20200000 	.word	0x20200000
+  39a858:	2020001c 	.word	0x2020001c
+  39a85c:	20200028 	.word	0x20200028
+  39a860:	20200034 	.word	0x20200034
+  39a864:	20003004 	.word	0x20003004
+
+0039a868 <Draw_Image>:
+  39a868:	e92d5ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
+  39a86c:	e4903004 	ldr	r3, [r0], #4
+  39a870:	e4904004 	ldr	r4, [r0], #4
+  39a874:	e59f5c34 	ldr	r5, [pc, #3124]	; 39b4b0 <haltLoop+0x4>
+  39a878:	e5955000 	ldr	r5, [r5]
+  39a87c:	e0816502 	add	r6, r1, r2, lsl #10
+  39a880:	e0855086 	add	r5, r5, r6, lsl #1
+  39a884:	e1a01003 	mov	r1, r3
+
+0039a888 <pixelBlockCopyLoop>:
+  39a888:	e2511010 	subs	r1, r1, #16
+  39a88c:	ba000003 	blt	39a8a0 <pixelSingleCopyLoop>
+  39a890:	e8b05fc0 	ldm	r0!, {r6, r7, r8, r9, sl, fp, ip, lr}
+  39a894:	e8a55fc0 	stmia	r5!, {r6, r7, r8, r9, sl, fp, ip, lr}
+  39a898:	0a000005 	beq	39a8b4 <nextRow>
+  39a89c:	eafffff9 	b	39a888 <pixelBlockCopyLoop>
+
+0039a8a0 <pixelSingleCopyLoop>:
+  39a8a0:	e0d020b2 	ldrh	r2, [r0], #2
+  39a8a4:	e0c520b2 	strh	r2, [r5], #2
+  39a8a8:	e2411001 	sub	r1, r1, #1
+  39a8ac:	e3710010 	cmn	r1, #16
+  39a8b0:	cafffffa 	bgt	39a8a0 <pixelSingleCopyLoop>
+
+0039a8b4 <nextRow>:
+  39a8b4:	e1a01003 	mov	r1, r3
+  39a8b8:	e2855b02 	add	r5, r5, #2048	; 0x800
+  39a8bc:	e0455083 	sub	r5, r5, r3, lsl #1
+  39a8c0:	e2544001 	subs	r4, r4, #1
+  39a8c4:	caffffef 	bgt	39a888 <pixelBlockCopyLoop>
+  39a8c8:	e8bd9ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, ip, pc}
+
+0039a8cc <Draw_Rect>:
+  39a8cc:	e92d5ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, ip, lr}
+  39a8d0:	e59d4028 	ldr	r4, [sp, #40]	; 0x28
+  39a8d4:	e59f5bd4 	ldr	r5, [pc, #3028]	; 39b4b0 <haltLoop+0x4>
+  39a8d8:	e5955000 	ldr	r5, [r5]
+  39a8dc:	e0816502 	add	r6, r1, r2, lsl #10
+  39a8e0:	e0855086 	add	r5, r5, r6, lsl #1
+  39a8e4:	e1a01003 	mov	r1, r3
+  39a8e8:	e1800800 	orr	r0, r0, r0, lsl #16
+  39a8ec:	e1a06000 	mov	r6, r0
+  39a8f0:	e1a07000 	mov	r7, r0
+  39a8f4:	e1a08000 	mov	r8, r0
+  39a8f8:	e1a09000 	mov	r9, r0
+  39a8fc:	e1a0a000 	mov	sl, r0
+  39a900:	e1a0b000 	mov	fp, r0
+  39a904:	e1a0c000 	mov	ip, r0
+  39a908:	e1a0e000 	mov	lr, r0
+
+0039a90c <rectBlockCopyLoop>:
+  39a90c:	e2511010 	subs	r1, r1, #16
+  39a910:	ba000002 	blt	39a920 <rectSingleCopyLoop>
+  39a914:	e8a55fc0 	stmia	r5!, {r6, r7, r8, r9, sl, fp, ip, lr}
+  39a918:	0a000004 	beq	39a930 <rectNextRow>
+  39a91c:	eafffffa 	b	39a90c <rectBlockCopyLoop>
+
+0039a920 <rectSingleCopyLoop>:
+  39a920:	e0c500b2 	strh	r0, [r5], #2
+  39a924:	e2411001 	sub	r1, r1, #1
+  39a928:	e3710010 	cmn	r1, #16
+  39a92c:	cafffffb 	bgt	39a920 <rectSingleCopyLoop>
+
+0039a930 <rectNextRow>:
+  39a930:	e1a01003 	mov	r1, r3
+  39a934:	e2855b02 	add	r5, r5, #2048	; 0x800
+  39a938:	e0455083 	sub	r5, r5, r3, lsl #1
+  39a93c:	e2544001 	subs	r4, r4, #1
+  39a940:	cafffff1 	bgt	39a90c <rectBlockCopyLoop>
+  39a944:	e8bd9ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, ip, pc}
+
+0039a948 <updateStats>:
+  39a948:	e92d4030 	push	{r4, r5, lr}
+  39a94c:	e59f0b60 	ldr	r0, [pc, #2912]	; 39b4b4 <haltLoop+0x8>
+  39a950:	e5900000 	ldr	r0, [r0]
+  39a954:	e3a0100a 	mov	r1, #10
+  39a958:	eb00070d 	bl	39c594 <sdiv>
+  39a95c:	e1a05000 	mov	r5, r0
+  39a960:	e1a04001 	mov	r4, r1
+  39a964:	e1a00005 	mov	r0, r5
+  39a968:	e3a01f63 	mov	r1, #396	; 0x18c
+  39a96c:	eb00000f 	bl	39a9b0 <printNumber>
+  39a970:	e1a00004 	mov	r0, r4
+  39a974:	e3a01f67 	mov	r1, #412	; 0x19c
+  39a978:	eb00000c 	bl	39a9b0 <printNumber>
+  39a97c:	e59f0b34 	ldr	r0, [pc, #2868]	; 39b4b8 <haltLoop+0xc>
+  39a980:	e5900000 	ldr	r0, [r0]
+  39a984:	e3a0100a 	mov	r1, #10
+  39a988:	eb000701 	bl	39c594 <sdiv>
+  39a98c:	e1a05000 	mov	r5, r0
+  39a990:	e1a04001 	mov	r4, r1
+  39a994:	e1a00005 	mov	r0, r5
+  39a998:	e3a01e2d 	mov	r1, #720	; 0x2d0
+  39a99c:	eb000003 	bl	39a9b0 <printNumber>
+  39a9a0:	e1a00004 	mov	r0, r4
+  39a9a4:	e3a01e2e 	mov	r1, #736	; 0x2e0
+  39a9a8:	eb000000 	bl	39a9b0 <printNumber>
+  39a9ac:	e8bd8030 	pop	{r4, r5, pc}
+
+0039a9b0 <printNumber>:
+  39a9b0:	e92d4070 	push	{r4, r5, r6, lr}
+  39a9b4:	e1a04000 	mov	r4, r0
+  39a9b8:	e1a05001 	mov	r5, r1
+  39a9bc:	e3e06000 	mvn	r6, #0
+
+0039a9c0 <printNumberLoop>:
+  39a9c0:	e2866001 	add	r6, r6, #1
+  39a9c4:	e1560004 	cmp	r6, r4
+  39a9c8:	1afffffc 	bne	39a9c0 <printNumberLoop>
+  39a9cc:	e59f0ae8 	ldr	r0, [pc, #2792]	; 39b4bc <haltLoop+0x10>
+  39a9d0:	e7900106 	ldr	r0, [r0, r6, lsl #2]
+  39a9d4:	e1a01005 	mov	r1, r5
+  39a9d8:	e3a02fb9 	mov	r2, #740	; 0x2e4
+  39a9dc:	ebffffa1 	bl	39a868 <Draw_Image>
+  39a9e0:	eaffffff 	b	39a9e4 <returnScore>
+
+0039a9e4 <returnScore>:
+  39a9e4:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+0039a9e8 <Draw_Map>:
+  39a9e8:	e92d4070 	push	{r4, r5, r6, lr}
+
+0039a9ec <topBoundry>:
+  39a9ec:	e3a04000 	mov	r4, #0
+  39a9f0:	e3a05000 	mov	r5, #0
+
+0039a9f4 <topBoundryLoop>:
+  39a9f4:	e354001f 	cmp	r4, #31
+  39a9f8:	ca000005 	bgt	39aa14 <bottomBoundry>
+  39a9fc:	e59f0abc 	ldr	r0, [pc, #2748]	; 39b4c0 <haltLoop+0x14>
+  39aa00:	e1a01284 	lsl	r1, r4, #5
+  39aa04:	e1a02285 	lsl	r2, r5, #5
+  39aa08:	ebffff96 	bl	39a868 <Draw_Image>
+  39aa0c:	e2844001 	add	r4, r4, #1
+  39aa10:	eafffff7 	b	39a9f4 <topBoundryLoop>
+
+0039aa14 <bottomBoundry>:
+  39aa14:	e3a04000 	mov	r4, #0
+  39aa18:	e3a05016 	mov	r5, #22
+
+0039aa1c <bottomBoundryLoop>:
+  39aa1c:	e354001f 	cmp	r4, #31
+  39aa20:	ca000005 	bgt	39aa3c <leftBoundry>
+  39aa24:	e59f0a94 	ldr	r0, [pc, #2708]	; 39b4c0 <haltLoop+0x14>
+  39aa28:	e1a01284 	lsl	r1, r4, #5
+  39aa2c:	e1a02285 	lsl	r2, r5, #5
+  39aa30:	ebffff8c 	bl	39a868 <Draw_Image>
+  39aa34:	e2844001 	add	r4, r4, #1
+  39aa38:	eafffff7 	b	39aa1c <bottomBoundryLoop>
+
+0039aa3c <leftBoundry>:
+  39aa3c:	e3a04000 	mov	r4, #0
+  39aa40:	e3a05000 	mov	r5, #0
+
+0039aa44 <leftBoundryLoop>:
+  39aa44:	e3550015 	cmp	r5, #21
+  39aa48:	ca000005 	bgt	39aa64 <rightBoundry>
+  39aa4c:	e59f0a6c 	ldr	r0, [pc, #2668]	; 39b4c0 <haltLoop+0x14>
+  39aa50:	e1a01284 	lsl	r1, r4, #5
+  39aa54:	e1a02285 	lsl	r2, r5, #5
+  39aa58:	ebffff82 	bl	39a868 <Draw_Image>
+  39aa5c:	e2855001 	add	r5, r5, #1
+  39aa60:	eafffff7 	b	39aa44 <leftBoundryLoop>
+
+0039aa64 <rightBoundry>:
+  39aa64:	e3a0401f 	mov	r4, #31
+  39aa68:	e3a05000 	mov	r5, #0
+
+0039aa6c <rightBoundryLoop>:
+  39aa6c:	e3550015 	cmp	r5, #21
+  39aa70:	ca000005 	bgt	39aa8c <drawFloor>
+  39aa74:	e59f0a44 	ldr	r0, [pc, #2628]	; 39b4c0 <haltLoop+0x14>
+  39aa78:	e1a01284 	lsl	r1, r4, #5
+  39aa7c:	e1a02285 	lsl	r2, r5, #5
+  39aa80:	ebffff78 	bl	39a868 <Draw_Image>
+  39aa84:	e2855001 	add	r5, r5, #1
+  39aa88:	eafffff7 	b	39aa6c <rightBoundryLoop>
+
+0039aa8c <drawFloor>:
+  39aa8c:	e3a04001 	mov	r4, #1
+  39aa90:	e3a05001 	mov	r5, #1
+
+0039aa94 <drawFloorLoop>:
+  39aa94:	e3550015 	cmp	r5, #21
+  39aa98:	ca000008 	bgt	39aac0 <drawWalls>
+  39aa9c:	e59f0a20 	ldr	r0, [pc, #2592]	; 39b4c4 <haltLoop+0x18>
+  39aaa0:	e1a01284 	lsl	r1, r4, #5
+  39aaa4:	e1a02285 	lsl	r2, r5, #5
+  39aaa8:	ebffff6e 	bl	39a868 <Draw_Image>
+  39aaac:	e354001e 	cmp	r4, #30
+  39aab0:	a3a04001 	movge	r4, #1
+  39aab4:	a2855001 	addge	r5, r5, #1
+  39aab8:	b2844001 	addlt	r4, r4, #1
+  39aabc:	eafffff4 	b	39aa94 <drawFloorLoop>
+
+0039aac0 <drawWalls>:
+  39aac0:	e59f4a00 	ldr	r4, [pc, #2560]	; 39b4c8 <haltLoop+0x1c>
+
+0039aac4 <drawWallsLoop>:
+  39aac4:	e4941004 	ldr	r1, [r4], #4
+  39aac8:	e3710001 	cmn	r1, #1
+  39aacc:	0a00000b 	beq	39ab00 <endDrawMap>
+  39aad0:	e3710002 	cmn	r1, #2
+  39aad4:	0afffffa 	beq	39aac4 <drawWallsLoop>
+  39aad8:	e1a01281 	lsl	r1, r1, #5
+  39aadc:	e4942004 	ldr	r2, [r4], #4
+  39aae0:	e3720001 	cmn	r2, #1
+  39aae4:	0a000005 	beq	39ab00 <endDrawMap>
+  39aae8:	e3720002 	cmn	r2, #2
+  39aaec:	0afffff4 	beq	39aac4 <drawWallsLoop>
+  39aaf0:	e1a02282 	lsl	r2, r2, #5
+  39aaf4:	e59f09d0 	ldr	r0, [pc, #2512]	; 39b4cc <haltLoop+0x20>
+  39aaf8:	ebffff5a 	bl	39a868 <Draw_Image>
+  39aafc:	eafffff0 	b	39aac4 <drawWallsLoop>
+
+0039ab00 <endDrawMap>:
+  39ab00:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+0039ab04 <Spawn_Apple>:
+  39ab04:	e92d4070 	push	{r4, r5, r6, lr}
+
+0039ab08 <appleDrawLoop>:
+  39ab08:	eb000690 	bl	39c550 <rand>
+  39ab0c:	e1a000a0 	lsr	r0, r0, #1
+  39ab10:	e3a0101d 	mov	r1, #29
+  39ab14:	eb00069e 	bl	39c594 <sdiv>
+  39ab18:	e2811001 	add	r1, r1, #1
+  39ab1c:	e1a04001 	mov	r4, r1
+  39ab20:	eb00068a 	bl	39c550 <rand>
+  39ab24:	e1a000a0 	lsr	r0, r0, #1
+  39ab28:	e3a01015 	mov	r1, #21
+  39ab2c:	eb000698 	bl	39c594 <sdiv>
+  39ab30:	e2811001 	add	r1, r1, #1
+  39ab34:	e1a05001 	mov	r5, r1
+
+0039ab38 <appleWallCompare>:
+  39ab38:	e59f6988 	ldr	r6, [pc, #2440]	; 39b4c8 <haltLoop+0x1c>
+
+0039ab3c <appleWallCompareLoop>:
+  39ab3c:	e5960000 	ldr	r0, [r6]
+  39ab40:	e3700001 	cmn	r0, #1
+  39ab44:	0a000008 	beq	39ab6c <appleSnakeCompare>
+  39ab48:	e1500004 	cmp	r0, r4
+  39ab4c:	12866008 	addne	r6, r6, #8
+  39ab50:	1afffff9 	bne	39ab3c <appleWallCompareLoop>
+  39ab54:	e2866004 	add	r6, r6, #4
+  39ab58:	e5960000 	ldr	r0, [r6]
+  39ab5c:	e1500005 	cmp	r0, r5
+  39ab60:	12866004 	addne	r6, r6, #4
+  39ab64:	1afffff4 	bne	39ab3c <appleWallCompareLoop>
+  39ab68:	eaffffe6 	b	39ab08 <appleDrawLoop>
+
+0039ab6c <appleSnakeCompare>:
+  39ab6c:	e1a04284 	lsl	r4, r4, #5
+  39ab70:	e1a05285 	lsl	r5, r5, #5
+  39ab74:	e59f0954 	ldr	r0, [pc, #2388]	; 39b4d0 <haltLoop+0x24>
+  39ab78:	e5901000 	ldr	r1, [r0]
+  39ab7c:	e59f0950 	ldr	r0, [pc, #2384]	; 39b4d4 <haltLoop+0x28>
+  39ab80:	e5902000 	ldr	r2, [r0]
+  39ab84:	e59f394c 	ldr	r3, [pc, #2380]	; 39b4d8 <haltLoop+0x2c>
+  39ab88:	e28330bc 	add	r3, r3, #188	; 0xbc
+  39ab8c:	e5120004 	ldr	r0, [r2, #-4]
+  39ab90:	e5926000 	ldr	r6, [r2]
+  39ab94:	e1540000 	cmp	r4, r0
+  39ab98:	1a000001 	bne	39aba4 <appleSnakeCompareLoop>
+  39ab9c:	e1550006 	cmp	r5, r6
+  39aba0:	0affffd8 	beq	39ab08 <appleDrawLoop>
+
+0039aba4 <appleSnakeCompareLoop>:
+  39aba4:	e4910004 	ldr	r0, [r1], #4
+  39aba8:	e4916004 	ldr	r6, [r1], #4
+  39abac:	e1510003 	cmp	r1, r3
+  39abb0:	a59f1920 	ldrge	r1, [pc, #2336]	; 39b4d8 <haltLoop+0x2c>
+  39abb4:	e2422004 	sub	r2, r2, #4
+  39abb8:	e1510002 	cmp	r1, r2
+  39abbc:	e2822004 	add	r2, r2, #4
+  39abc0:	0a000004 	beq	39abd8 <appleValuePackCompare>
+  39abc4:	e1540000 	cmp	r4, r0
+  39abc8:	1afffff5 	bne	39aba4 <appleSnakeCompareLoop>
+  39abcc:	e1550006 	cmp	r5, r6
+  39abd0:	0affffcc 	beq	39ab08 <appleDrawLoop>
+  39abd4:	eafffff2 	b	39aba4 <appleSnakeCompareLoop>
+
+0039abd8 <appleValuePackCompare>:
+  39abd8:	e59f08fc 	ldr	r0, [pc, #2300]	; 39b4dc <haltLoop+0x30>
+  39abdc:	e5901000 	ldr	r1, [r0]
+  39abe0:	e5902004 	ldr	r2, [r0, #4]
+  39abe4:	e1540001 	cmp	r4, r1
+  39abe8:	1a000002 	bne	39abf8 <drawAppleImage>
+  39abec:	e1550002 	cmp	r5, r2
+  39abf0:	1a000000 	bne	39abf8 <drawAppleImage>
+  39abf4:	eaffffc3 	b	39ab08 <appleDrawLoop>
+
+0039abf8 <drawAppleImage>:
+  39abf8:	e59f08e0 	ldr	r0, [pc, #2272]	; 39b4e0 <haltLoop+0x34>
+  39abfc:	e5804000 	str	r4, [r0]
+  39ac00:	e5805004 	str	r5, [r0, #4]
+  39ac04:	e59f08d8 	ldr	r0, [pc, #2264]	; 39b4e4 <haltLoop+0x38>
+  39ac08:	e5900000 	ldr	r0, [r0]
+  39ac0c:	e3500014 	cmp	r0, #20
+  39ac10:	aa000004 	bge	39ac28 <drawDoorImage>
+  39ac14:	e59f08cc 	ldr	r0, [pc, #2252]	; 39b4e8 <haltLoop+0x3c>
+  39ac18:	e1a01004 	mov	r1, r4
+  39ac1c:	e1a02005 	mov	r2, r5
+  39ac20:	ebffff10 	bl	39a868 <Draw_Image>
+  39ac24:	ea000004 	b	39ac3c <drawAppleEnd>
+
+0039ac28 <drawDoorImage>:
+  39ac28:	e59f08bc 	ldr	r0, [pc, #2236]	; 39b4ec <haltLoop+0x40>
+  39ac2c:	e1a01004 	mov	r1, r4
+  39ac30:	e1a02005 	mov	r2, r5
+  39ac34:	ebffff0b 	bl	39a868 <Draw_Image>
+  39ac38:	eaffffff 	b	39ac3c <drawAppleEnd>
+
+0039ac3c <drawAppleEnd>:
+  39ac3c:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+0039ac40 <Spawn_ValuePack>:
+  39ac40:	e92d4070 	push	{r4, r5, r6, lr}
+
+0039ac44 <valuePackRandLoop>:
+  39ac44:	eb000641 	bl	39c550 <rand>
+  39ac48:	e1a000a0 	lsr	r0, r0, #1
+  39ac4c:	e3a0101d 	mov	r1, #29
+  39ac50:	eb00064f 	bl	39c594 <sdiv>
+  39ac54:	e2811001 	add	r1, r1, #1
+  39ac58:	e1a04001 	mov	r4, r1
+  39ac5c:	eb00063b 	bl	39c550 <rand>
+  39ac60:	e1a000a0 	lsr	r0, r0, #1
+  39ac64:	e3a01015 	mov	r1, #21
+  39ac68:	eb000649 	bl	39c594 <sdiv>
+  39ac6c:	e2811001 	add	r1, r1, #1
+  39ac70:	e1a05001 	mov	r5, r1
+
+0039ac74 <valuePackWallCompare>:
+  39ac74:	e59f684c 	ldr	r6, [pc, #2124]	; 39b4c8 <haltLoop+0x1c>
+
+0039ac78 <valuePackWallCompareLoop>:
+  39ac78:	e5960000 	ldr	r0, [r6]
+  39ac7c:	e3700001 	cmn	r0, #1
+  39ac80:	0a000008 	beq	39aca8 <valuePackSnakeCompare>
+  39ac84:	e1500004 	cmp	r0, r4
+  39ac88:	12866008 	addne	r6, r6, #8
+  39ac8c:	1afffff9 	bne	39ac78 <valuePackWallCompareLoop>
+  39ac90:	e2866004 	add	r6, r6, #4
+  39ac94:	e5960000 	ldr	r0, [r6]
+  39ac98:	e1500005 	cmp	r0, r5
+  39ac9c:	12866004 	addne	r6, r6, #4
+  39aca0:	1afffff4 	bne	39ac78 <valuePackWallCompareLoop>
+  39aca4:	eaffffe6 	b	39ac44 <valuePackRandLoop>
+
+0039aca8 <valuePackSnakeCompare>:
+  39aca8:	e1a04284 	lsl	r4, r4, #5
+  39acac:	e1a05285 	lsl	r5, r5, #5
+  39acb0:	e59f0818 	ldr	r0, [pc, #2072]	; 39b4d0 <haltLoop+0x24>
+  39acb4:	e5901000 	ldr	r1, [r0]
+  39acb8:	e59f0814 	ldr	r0, [pc, #2068]	; 39b4d4 <haltLoop+0x28>
+  39acbc:	e5902000 	ldr	r2, [r0]
+  39acc0:	e59f3810 	ldr	r3, [pc, #2064]	; 39b4d8 <haltLoop+0x2c>
+  39acc4:	e28330bc 	add	r3, r3, #188	; 0xbc
+  39acc8:	e5120004 	ldr	r0, [r2, #-4]
+  39accc:	e5926000 	ldr	r6, [r2]
+  39acd0:	e1540000 	cmp	r4, r0
+  39acd4:	1a000001 	bne	39ace0 <valuePackSnakeCompareLoop>
+  39acd8:	e1550006 	cmp	r5, r6
+  39acdc:	0affffd8 	beq	39ac44 <valuePackRandLoop>
+
+0039ace0 <valuePackSnakeCompareLoop>:
+  39ace0:	e4910004 	ldr	r0, [r1], #4
+  39ace4:	e4916004 	ldr	r6, [r1], #4
+  39ace8:	e1510003 	cmp	r1, r3
+  39acec:	a59f17e4 	ldrge	r1, [pc, #2020]	; 39b4d8 <haltLoop+0x2c>
+  39acf0:	e2422004 	sub	r2, r2, #4
+  39acf4:	e1510002 	cmp	r1, r2
+  39acf8:	e2822004 	add	r2, r2, #4
+  39acfc:	0a000004 	beq	39ad14 <valuePackAppleCompare>
+  39ad00:	e1540000 	cmp	r4, r0
+  39ad04:	1afffff5 	bne	39ace0 <valuePackSnakeCompareLoop>
+  39ad08:	e1550006 	cmp	r5, r6
+  39ad0c:	0affffcc 	beq	39ac44 <valuePackRandLoop>
+  39ad10:	eafffff2 	b	39ace0 <valuePackSnakeCompareLoop>
+
+0039ad14 <valuePackAppleCompare>:
+  39ad14:	e59f07c4 	ldr	r0, [pc, #1988]	; 39b4e0 <haltLoop+0x34>
+  39ad18:	e5901000 	ldr	r1, [r0]
+  39ad1c:	e5902004 	ldr	r2, [r0, #4]
+  39ad20:	e1540001 	cmp	r4, r1
+  39ad24:	1a000002 	bne	39ad34 <renderValuePack>
+  39ad28:	e1550002 	cmp	r5, r2
+  39ad2c:	1a000000 	bne	39ad34 <renderValuePack>
+  39ad30:	eaffffc3 	b	39ac44 <valuePackRandLoop>
+
+0039ad34 <renderValuePack>:
+  39ad34:	e59f07a0 	ldr	r0, [pc, #1952]	; 39b4dc <haltLoop+0x30>
+  39ad38:	e5804000 	str	r4, [r0]
+  39ad3c:	e5805004 	str	r5, [r0, #4]
+  39ad40:	e59f07a8 	ldr	r0, [pc, #1960]	; 39b4f0 <haltLoop+0x44>
+  39ad44:	e1a01004 	mov	r1, r4
+  39ad48:	e1a02005 	mov	r2, r5
+  39ad4c:	ebfffec5 	bl	39a868 <Draw_Image>
+
+0039ad50 <spawnValuePackEnd>:
+  39ad50:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+0039ad54 <pauseGame>:
+  39ad54:	e92d40f0 	push	{r4, r5, r6, r7, lr}
+  39ad58:	e59f0794 	ldr	r0, [pc, #1940]	; 39b4f4 <haltLoop+0x48>
+  39ad5c:	e3a010ac 	mov	r1, #172	; 0xac
+  39ad60:	e3a0207c 	mov	r2, #124	; 0x7c
+  39ad64:	ebfffebf 	bl	39a868 <Draw_Image>
+  39ad68:	e59f0788 	ldr	r0, [pc, #1928]	; 39b4f8 <haltLoop+0x4c>
+  39ad6c:	e3a010dc 	mov	r1, #220	; 0xdc
+  39ad70:	e3a02f46 	mov	r2, #280	; 0x118
+  39ad74:	ebfffebb 	bl	39a868 <Draw_Image>
+  39ad78:	e3a04001 	mov	r4, #1
+  39ad7c:	e3a05000 	mov	r5, #0
+  39ad80:	e59f7774 	ldr	r7, [pc, #1908]	; 39b4fc <haltLoop+0x50>
+  39ad84:	e5977000 	ldr	r7, [r7]
+  39ad88:	e59f0770 	ldr	r0, [pc, #1904]	; 39b500 <haltLoop+0x54>
+  39ad8c:	e0877000 	add	r7, r7, r0
+
+0039ad90 <pauseLoop>:
+  39ad90:	ebfffe88 	bl	39a7b8 <Read_SNES>
+  39ad94:	e1a06000 	mov	r6, r0
+  39ad98:	e1c00005 	bic	r0, r0, r5
+  39ad9c:	e1a05006 	mov	r5, r6
+  39ada0:	e3100020 	tst	r0, #32
+  39ada4:	1a00000b 	bne	39add8 <pauseFlipSelection>
+  39ada8:	e3100010 	tst	r0, #16
+  39adac:	1a000009 	bne	39add8 <pauseFlipSelection>
+  39adb0:	e3100c01 	tst	r0, #256	; 0x100
+  39adb4:	1a000013 	bne	39ae08 <selectPauseItem>
+  39adb8:	e59f173c 	ldr	r1, [pc, #1852]	; 39b4fc <haltLoop+0x50>
+  39adbc:	e5911000 	ldr	r1, [r1]
+  39adc0:	e1510007 	cmp	r1, r7
+  39adc4:	bafffff1 	blt	39ad90 <pauseLoop>
+  39adc8:	e3100008 	tst	r0, #8
+  39adcc:	13a00003 	movne	r0, #3
+  39add0:	1a00000f 	bne	39ae14 <returnPause>
+  39add4:	eaffffed 	b	39ad90 <pauseLoop>
+
+0039add8 <pauseFlipSelection>:
+  39add8:	e2244001 	eor	r4, r4, #1
+  39addc:	e59f0710 	ldr	r0, [pc, #1808]	; 39b4f4 <haltLoop+0x48>
+  39ade0:	e3a010ac 	mov	r1, #172	; 0xac
+  39ade4:	e3a0207c 	mov	r2, #124	; 0x7c
+  39ade8:	ebfffe9e 	bl	39a868 <Draw_Image>
+  39adec:	e3140001 	tst	r4, #1
+  39adf0:	e59f0700 	ldr	r0, [pc, #1792]	; 39b4f8 <haltLoop+0x4c>
+  39adf4:	e3a010dc 	mov	r1, #220	; 0xdc
+  39adf8:	13a02f46 	movne	r2, #280	; 0x118
+  39adfc:	03a02f6e 	moveq	r2, #440	; 0x1b8
+  39ae00:	ebfffe98 	bl	39a868 <Draw_Image>
+  39ae04:	eaffffe1 	b	39ad90 <pauseLoop>
+
+0039ae08 <selectPauseItem>:
+  39ae08:	e3140001 	tst	r4, #1
+  39ae0c:	13a00000 	movne	r0, #0
+  39ae10:	03a00001 	moveq	r0, #1
+
+0039ae14 <returnPause>:
+  39ae14:	e8bd80f0 	pop	{r4, r5, r6, r7, pc}
+
+0039ae18 <mainGameLogic>:
+  39ae18:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+
+0039ae1c <initGameLoop>:
+  39ae1c:	e3a00000 	mov	r0, #0
+  39ae20:	e3a01000 	mov	r1, #0
+  39ae24:	e3a02000 	mov	r2, #0
+  39ae28:	e3a03b01 	mov	r3, #1024	; 0x400
+  39ae2c:	e3a04c03 	mov	r4, #768	; 0x300
+  39ae30:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+  39ae34:	ebfffea4 	bl	39a8cc <Draw_Rect>
+  39ae38:	e28dd004 	add	sp, sp, #4
+  39ae3c:	e59f0670 	ldr	r0, [pc, #1648]	; 39b4b4 <haltLoop+0x8>
+  39ae40:	e3a01000 	mov	r1, #0
+  39ae44:	e5801000 	str	r1, [r0]
+  39ae48:	e59f0668 	ldr	r0, [pc, #1640]	; 39b4b8 <haltLoop+0xc>
+  39ae4c:	e3a01003 	mov	r1, #3
+  39ae50:	e5801000 	str	r1, [r0]
+  39ae54:	e59f0688 	ldr	r0, [pc, #1672]	; 39b4e4 <haltLoop+0x38>
+  39ae58:	e3a01000 	mov	r1, #0
+  39ae5c:	e5801000 	str	r1, [r0]
+  39ae60:	e59f0674 	ldr	r0, [pc, #1652]	; 39b4dc <haltLoop+0x30>
+  39ae64:	e3e01000 	mvn	r1, #0
+  39ae68:	e5801000 	str	r1, [r0]
+  39ae6c:	e5801004 	str	r1, [r0, #4]
+  39ae70:	e3a01000 	mov	r1, #0
+  39ae74:	e5801008 	str	r1, [r0, #8]
+  39ae78:	e59f0684 	ldr	r0, [pc, #1668]	; 39b504 <haltLoop+0x58>
+  39ae7c:	e3e01000 	mvn	r1, #0
+  39ae80:	e5801000 	str	r1, [r0]
+  39ae84:	e59f067c 	ldr	r0, [pc, #1660]	; 39b508 <haltLoop+0x5c>
+  39ae88:	e59f1638 	ldr	r1, [pc, #1592]	; 39b4c8 <haltLoop+0x1c>
+
+0039ae8c <loadMapLoop>:
+  39ae8c:	e4902004 	ldr	r2, [r0], #4
+  39ae90:	e4812004 	str	r2, [r1], #4
+  39ae94:	e3720001 	cmn	r2, #1
+  39ae98:	1afffffb 	bne	39ae8c <loadMapLoop>
+  39ae9c:	ebfffed1 	bl	39a9e8 <Draw_Map>
+  39aea0:	e59f0664 	ldr	r0, [pc, #1636]	; 39b50c <haltLoop+0x60>
+  39aea4:	e3a01f4b 	mov	r1, #300	; 0x12c
+  39aea8:	e3a02fb9 	mov	r2, #740	; 0x2e4
+  39aeac:	ebfffe6d 	bl	39a868 <Draw_Image>
+  39aeb0:	e59f0658 	ldr	r0, [pc, #1624]	; 39b510 <haltLoop+0x64>
+  39aeb4:	e3a01e27 	mov	r1, #624	; 0x270
+  39aeb8:	e3a02fb9 	mov	r2, #740	; 0x2e4
+  39aebc:	ebfffe69 	bl	39a868 <Draw_Image>
+
+0039aec0 <initSnake>:
+  39aec0:	ebfffea0 	bl	39a948 <updateStats>
+  39aec4:	ebfff9bd 	bl	3995c0 <Disable_Timer_IRQ>
+  39aec8:	e59f4608 	ldr	r4, [pc, #1544]	; 39b4d8 <haltLoop+0x2c>
+  39aecc:	e2845014 	add	r5, r4, #20
+  39aed0:	e28460bc 	add	r6, r4, #188	; 0xbc
+  39aed4:	e3a01c02 	mov	r1, #512	; 0x200
+  39aed8:	e3a02e12 	mov	r2, #288	; 0x120
+  39aedc:	e5841000 	str	r1, [r4]
+  39aee0:	e5842004 	str	r2, [r4, #4]
+  39aee4:	e3a02d05 	mov	r2, #320	; 0x140
+  39aee8:	e5841008 	str	r1, [r4, #8]
+  39aeec:	e584200c 	str	r2, [r4, #12]
+  39aef0:	e3a02e16 	mov	r2, #352	; 0x160
+  39aef4:	e5841010 	str	r1, [r4, #16]
+  39aef8:	e5842014 	str	r2, [r4, #20]
+  39aefc:	e59f05d0 	ldr	r0, [pc, #1488]	; 39b4d4 <haltLoop+0x28>
+  39af00:	e5805000 	str	r5, [r0]
+  39af04:	e59f05c4 	ldr	r0, [pc, #1476]	; 39b4d0 <haltLoop+0x24>
+  39af08:	e5804000 	str	r4, [r0]
+  39af0c:	ebfffefc 	bl	39ab04 <Spawn_Apple>
+  39af10:	e59f05fc 	ldr	r0, [pc, #1532]	; 39b514 <haltLoop+0x68>
+  39af14:	e5151004 	ldr	r1, [r5, #-4]
+  39af18:	e5952000 	ldr	r2, [r5]
+  39af1c:	ebfffe51 	bl	39a868 <Draw_Image>
+  39af20:	e59f05f0 	ldr	r0, [pc, #1520]	; 39b518 <haltLoop+0x6c>
+  39af24:	e515100c 	ldr	r1, [r5, #-12]
+  39af28:	e5152008 	ldr	r2, [r5, #-8]
+  39af2c:	ebfffe4d 	bl	39a868 <Draw_Image>
+  39af30:	e59f05e0 	ldr	r0, [pc, #1504]	; 39b518 <haltLoop+0x6c>
+  39af34:	e5151014 	ldr	r1, [r5, #-20]
+  39af38:	e5152010 	ldr	r2, [r5, #-16]
+  39af3c:	ebfffe49 	bl	39a868 <Draw_Image>
+  39af40:	e59f05b8 	ldr	r0, [pc, #1464]	; 39b500 <haltLoop+0x54>
+  39af44:	ebfffe0a 	bl	39a774 <Wait>
+
+0039af48 <waitForInput>:
+  39af48:	ebfffe1a 	bl	39a7b8 <Read_SNES>
+  39af4c:	e3500000 	cmp	r0, #0
+  39af50:	0afffffc 	beq	39af48 <waitForInput>
+  39af54:	eb00057d 	bl	39c550 <rand>
+  39af58:	e1a000a0 	lsr	r0, r0, #1
+  39af5c:	e59f15b8 	ldr	r1, [pc, #1464]	; 39b51c <haltLoop+0x70>
+  39af60:	eb00058b 	bl	39c594 <sdiv>
+  39af64:	e59f05b4 	ldr	r0, [pc, #1460]	; 39b520 <haltLoop+0x74>
+  39af68:	e0813000 	add	r3, r1, r0
+  39af6c:	ebfff98f 	bl	3995b0 <Enable_Timer_IRQ>
+  39af70:	e1a00003 	mov	r0, r3
+  39af74:	e59f15a8 	ldr	r1, [pc, #1448]	; 39b524 <haltLoop+0x78>
+  39af78:	ebfff9a5 	bl	399614 <Wait_Async>
+  39af7c:	e3a09000 	mov	r9, #0
+  39af80:	e3a07010 	mov	r7, #16
+
+0039af84 <gameLoop>:
+  39af84:	ebfffe0b 	bl	39a7b8 <Read_SNES>
+  39af88:	e1c0a009 	bic	sl, r0, r9
+  39af8c:	e1a09000 	mov	r9, r0
+  39af90:	e1c00007 	bic	r0, r0, r7
+
+0039af94 <pauseTrigger>:
+  39af94:	e31a0008 	tst	sl, #8
+  39af98:	0a000041 	beq	39b0a4 <skipPause>
+  39af9c:	e3a09008 	mov	r9, #8
+  39afa0:	e52d0004 	push	{r0}		; (str r0, [sp, #-4]!)
+  39afa4:	ebfff985 	bl	3995c0 <Disable_Timer_IRQ>
+  39afa8:	ebffff69 	bl	39ad54 <pauseGame>
+  39afac:	e3100001 	tst	r0, #1
+  39afb0:	028dd004 	addeq	sp, sp, #4
+  39afb4:	0affff98 	beq	39ae1c <initGameLoop>
+  39afb8:	e3100002 	tst	r0, #2
+  39afbc:	e49d0004 	pop	{r0}		; (ldr r0, [sp], #4)
+  39afc0:	1a000001 	bne	39afcc <clearPause>
+  39afc4:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  39afc8:	ea000107 	b	39b3ec <initializeGame>
+
+0039afcc <clearPause>:
+  39afcc:	e52d0004 	push	{r0}		; (str r0, [sp, #-4]!)
+  39afd0:	ebfffe84 	bl	39a9e8 <Draw_Map>
+
+0039afd4 <fat>:
+  39afd4:	e59f0508 	ldr	r0, [pc, #1288]	; 39b4e4 <haltLoop+0x38>
+  39afd8:	e5900000 	ldr	r0, [r0]
+  39afdc:	e3500014 	cmp	r0, #20
+  39afe0:	b59f0500 	ldrlt	r0, [pc, #1280]	; 39b4e8 <haltLoop+0x3c>
+  39afe4:	a59f0500 	ldrge	r0, [pc, #1280]	; 39b4ec <haltLoop+0x40>
+  39afe8:	e59f34f0 	ldr	r3, [pc, #1264]	; 39b4e0 <haltLoop+0x34>
+  39afec:	e5931000 	ldr	r1, [r3]
+  39aff0:	e5932004 	ldr	r2, [r3, #4]
+  39aff4:	ebfffe1b 	bl	39a868 <Draw_Image>
+  39aff8:	e59f04f0 	ldr	r0, [pc, #1264]	; 39b4f0 <haltLoop+0x44>
+  39affc:	e59f34d8 	ldr	r3, [pc, #1240]	; 39b4dc <haltLoop+0x30>
+  39b000:	e5931000 	ldr	r1, [r3]
+  39b004:	e5932004 	ldr	r2, [r3, #4]
+  39b008:	e3710001 	cmn	r1, #1
+  39b00c:	1bfffe15 	blne	39a868 <Draw_Image>
+  39b010:	e59f04fc 	ldr	r0, [pc, #1276]	; 39b514 <haltLoop+0x68>
+  39b014:	e5151004 	ldr	r1, [r5, #-4]
+  39b018:	e5952000 	ldr	r2, [r5]
+  39b01c:	ebfffe11 	bl	39a868 <Draw_Image>
+  39b020:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+  39b024:	e2455004 	sub	r5, r5, #4
+
+0039b028 <snakeRedrawLoop>:
+  39b028:	e59f04e8 	ldr	r0, [pc, #1256]	; 39b518 <haltLoop+0x6c>
+  39b02c:	e4941004 	ldr	r1, [r4], #4
+  39b030:	e4942004 	ldr	r2, [r4], #4
+  39b034:	ebfffe0b 	bl	39a868 <Draw_Image>
+  39b038:	e1540006 	cmp	r4, r6
+  39b03c:	a59f4494 	ldrge	r4, [pc, #1172]	; 39b4d8 <haltLoop+0x2c>
+  39b040:	e1540005 	cmp	r4, r5
+  39b044:	1afffff7 	bne	39b028 <snakeRedrawLoop>
+  39b048:	e2855004 	add	r5, r5, #4
+  39b04c:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
+  39b050:	ebfff956 	bl	3995b0 <Enable_Timer_IRQ>
+  39b054:	e59f04a8 	ldr	r0, [pc, #1192]	; 39b504 <haltLoop+0x58>
+  39b058:	e5900000 	ldr	r0, [r0]
+  39b05c:	e3700001 	cmn	r0, #1
+  39b060:	149d0004 	popne	{r0}		; (ldrne r0, [sp], #4)
+  39b064:	1a00000e 	bne	39b0a4 <skipPause>
+  39b068:	e59f046c 	ldr	r0, [pc, #1132]	; 39b4dc <haltLoop+0x30>
+  39b06c:	e5900000 	ldr	r0, [r0]
+  39b070:	e3700001 	cmn	r0, #1
+  39b074:	149d0004 	popne	{r0}		; (ldrne r0, [sp], #4)
+  39b078:	1a000009 	bne	39b0a4 <skipPause>
+  39b07c:	eb000533 	bl	39c550 <rand>
+  39b080:	e1a000a0 	lsr	r0, r0, #1
+  39b084:	e59f1490 	ldr	r1, [pc, #1168]	; 39b51c <haltLoop+0x70>
+  39b088:	eb000541 	bl	39c594 <sdiv>
+  39b08c:	e59f048c 	ldr	r0, [pc, #1164]	; 39b520 <haltLoop+0x74>
+  39b090:	e0813000 	add	r3, r1, r0
+  39b094:	e1a00003 	mov	r0, r3
+  39b098:	e59f1484 	ldr	r1, [pc, #1156]	; 39b524 <haltLoop+0x78>
+  39b09c:	ebfff95c 	bl	399614 <Wait_Async>
+  39b0a0:	e49d0004 	pop	{r0}		; (ldr r0, [sp], #4)
+
+0039b0a4 <skipPause>:
+  39b0a4:	e5151004 	ldr	r1, [r5, #-4]
+  39b0a8:	e5952000 	ldr	r2, [r5]
+  39b0ac:	e2855008 	add	r5, r5, #8
+  39b0b0:	e1550006 	cmp	r5, r6
+  39b0b4:	c59f541c 	ldrgt	r5, [pc, #1052]	; 39b4d8 <haltLoop+0x2c>
+  39b0b8:	c2855004 	addgt	r5, r5, #4
+  39b0bc:	e31000f0 	tst	r0, #240	; 0xf0
+  39b0c0:	1a000003 	bne	39b0d4 <snakeMove>
+  39b0c4:	e1a00007 	mov	r0, r7
+  39b0c8:	e31000a0 	tst	r0, #160	; 0xa0
+  39b0cc:	01a00080 	lsleq	r0, r0, #1
+  39b0d0:	11a000a0 	lsrne	r0, r0, #1
+
+0039b0d4 <snakeMove>:
+  39b0d4:	e3100010 	tst	r0, #16
+  39b0d8:	12422020 	subne	r2, r2, #32
+  39b0dc:	13a07020 	movne	r7, #32
+  39b0e0:	1a00000b 	bne	39b114 <checkCollisions>
+  39b0e4:	e3100020 	tst	r0, #32
+  39b0e8:	12822020 	addne	r2, r2, #32
+  39b0ec:	13a07010 	movne	r7, #16
+  39b0f0:	1a000007 	bne	39b114 <checkCollisions>
+  39b0f4:	e3100040 	tst	r0, #64	; 0x40
+  39b0f8:	12411020 	subne	r1, r1, #32
+  39b0fc:	13a07080 	movne	r7, #128	; 0x80
+  39b100:	1a000003 	bne	39b114 <checkCollisions>
+  39b104:	e3100080 	tst	r0, #128	; 0x80
+  39b108:	12811020 	addne	r1, r1, #32
+  39b10c:	13a07040 	movne	r7, #64	; 0x40
+  39b110:	1affffff 	bne	39b114 <checkCollisions>
+
+0039b114 <checkCollisions>:
+  39b114:	e3510000 	cmp	r1, #0
+  39b118:	0a00003b 	beq	39b20c <collisionDetected>
+  39b11c:	e3510e3e 	cmp	r1, #992	; 0x3e0
+  39b120:	0a000039 	beq	39b20c <collisionDetected>
+  39b124:	e3520000 	cmp	r2, #0
+  39b128:	0a000037 	beq	39b20c <collisionDetected>
+  39b12c:	e3520d0b 	cmp	r2, #704	; 0x2c0
+  39b130:	0a000035 	beq	39b20c <collisionDetected>
+  39b134:	e59f038c 	ldr	r0, [pc, #908]	; 39b4c8 <haltLoop+0x1c>
+
+0039b138 <checkWalls>:
+  39b138:	e4903004 	ldr	r3, [r0], #4
+  39b13c:	e4908004 	ldr	r8, [r0], #4
+  39b140:	e3730001 	cmn	r3, #1
+  39b144:	0a000021 	beq	39b1d0 <checkSnakeCollisions>
+  39b148:	e1a03283 	lsl	r3, r3, #5
+  39b14c:	e1a08288 	lsl	r8, r8, #5
+  39b150:	e1510003 	cmp	r1, r3
+  39b154:	1afffff7 	bne	39b138 <checkWalls>
+  39b158:	e1520008 	cmp	r2, r8
+  39b15c:	1afffff5 	bne	39b138 <checkWalls>
+  39b160:	e1a0a000 	mov	sl, r0
+  39b164:	e59f0398 	ldr	r0, [pc, #920]	; 39b504 <haltLoop+0x58>
+  39b168:	e5903000 	ldr	r3, [r0]
+  39b16c:	e3730001 	cmn	r3, #1
+  39b170:	0a000025 	beq	39b20c <collisionDetected>
+  39b174:	e92d0006 	push	{r1, r2}
+  39b178:	e3e01001 	mvn	r1, #1
+  39b17c:	e50a1008 	str	r1, [sl, #-8]
+  39b180:	e50a1004 	str	r1, [sl, #-4]
+  39b184:	e3e01000 	mvn	r1, #0
+  39b188:	e5801000 	str	r1, [r0]
+  39b18c:	e3a00000 	mov	r0, #0
+  39b190:	e3a01c02 	mov	r1, #512	; 0x200
+  39b194:	e3a02e2e 	mov	r2, #736	; 0x2e0
+  39b198:	e3a03020 	mov	r3, #32
+  39b19c:	e52d3004 	push	{r3}		; (str r3, [sp, #-4]!)
+  39b1a0:	ebfffdc9 	bl	39a8cc <Draw_Rect>
+  39b1a4:	e28dd004 	add	sp, sp, #4
+  39b1a8:	eb0004e8 	bl	39c550 <rand>
+  39b1ac:	e1a000a0 	lsr	r0, r0, #1
+  39b1b0:	e59f1364 	ldr	r1, [pc, #868]	; 39b51c <haltLoop+0x70>
+  39b1b4:	eb0004f6 	bl	39c594 <sdiv>
+  39b1b8:	e59f0360 	ldr	r0, [pc, #864]	; 39b520 <haltLoop+0x74>
+  39b1bc:	e0813000 	add	r3, r1, r0
+  39b1c0:	e1a00003 	mov	r0, r3
+  39b1c4:	e59f1358 	ldr	r1, [pc, #856]	; 39b524 <haltLoop+0x78>
+  39b1c8:	ebfff911 	bl	399614 <Wait_Async>
+  39b1cc:	e8bd0006 	pop	{r1, r2}
+
+0039b1d0 <checkSnakeCollisions>:
+  39b1d0:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+
+0039b1d4 <snakeCollisionLoop>:
+  39b1d4:	e4943004 	ldr	r3, [r4], #4
+  39b1d8:	e4948004 	ldr	r8, [r4], #4
+  39b1dc:	e1540006 	cmp	r4, r6
+  39b1e0:	a59f42f0 	ldrge	r4, [pc, #752]	; 39b4d8 <haltLoop+0x2c>
+  39b1e4:	e2450004 	sub	r0, r5, #4
+  39b1e8:	e1540000 	cmp	r4, r0
+  39b1ec:	0a000004 	beq	39b204 <doneSnakeCollisions>
+  39b1f0:	e1510003 	cmp	r1, r3
+  39b1f4:	1afffff6 	bne	39b1d4 <snakeCollisionLoop>
+  39b1f8:	e1520008 	cmp	r2, r8
+  39b1fc:	0a000002 	beq	39b20c <collisionDetected>
+  39b200:	eafffff3 	b	39b1d4 <snakeCollisionLoop>
+
+0039b204 <doneSnakeCollisions>:
+  39b204:	e49d4004 	pop	{r4}		; (ldr r4, [sp], #4)
+  39b208:	ea00000a 	b	39b238 <renderSnake>
+
+0039b20c <collisionDetected>:
+  39b20c:	e59f02a4 	ldr	r0, [pc, #676]	; 39b4b8 <haltLoop+0xc>
+  39b210:	e5901000 	ldr	r1, [r0]
+  39b214:	e2411001 	sub	r1, r1, #1
+  39b218:	e5801000 	str	r1, [r0]
+  39b21c:	ebfffdc9 	bl	39a948 <updateStats>
+  39b220:	e59f0290 	ldr	r0, [pc, #656]	; 39b4b8 <haltLoop+0xc>
+  39b224:	e5900000 	ldr	r0, [r0]
+  39b228:	e3500000 	cmp	r0, #0
+  39b22c:	0a00005a 	beq	39b39c <gameLost>
+  39b230:	ebfffdec 	bl	39a9e8 <Draw_Map>
+  39b234:	eaffff21 	b	39aec0 <initSnake>
+
+0039b238 <renderSnake>:
+  39b238:	e5051004 	str	r1, [r5, #-4]
+  39b23c:	e5852000 	str	r2, [r5]
+  39b240:	e59f02cc 	ldr	r0, [pc, #716]	; 39b514 <haltLoop+0x68>
+  39b244:	ebfffd87 	bl	39a868 <Draw_Image>
+  39b248:	e2453004 	sub	r3, r5, #4
+  39b24c:	e59f0284 	ldr	r0, [pc, #644]	; 39b4d8 <haltLoop+0x2c>
+  39b250:	e1530000 	cmp	r3, r0
+  39b254:	1515100c 	ldrne	r1, [r5, #-12]
+  39b258:	15152008 	ldrne	r2, [r5, #-8]
+  39b25c:	05161004 	ldreq	r1, [r6, #-4]
+  39b260:	05962000 	ldreq	r2, [r6]
+  39b264:	e59f02ac 	ldr	r0, [pc, #684]	; 39b518 <haltLoop+0x6c>
+  39b268:	ebfffd7e 	bl	39a868 <Draw_Image>
+  39b26c:	e59f0260 	ldr	r0, [pc, #608]	; 39b4d4 <haltLoop+0x28>
+  39b270:	e5805000 	str	r5, [r0]
+  39b274:	e59f0254 	ldr	r0, [pc, #596]	; 39b4d0 <haltLoop+0x24>
+  39b278:	e5804000 	str	r4, [r0]
+  39b27c:	e5150004 	ldr	r0, [r5, #-4]
+  39b280:	e5951000 	ldr	r1, [r5]
+  39b284:	e59f3250 	ldr	r3, [pc, #592]	; 39b4dc <haltLoop+0x30>
+  39b288:	e5932000 	ldr	r2, [r3]
+  39b28c:	e5933004 	ldr	r3, [r3, #4]
+  39b290:	e1500002 	cmp	r0, r2
+  39b294:	1a000012 	bne	39b2e4 <valuePackNotEaten>
+  39b298:	e1510003 	cmp	r1, r3
+  39b29c:	1a000010 	bne	39b2e4 <valuePackNotEaten>
+  39b2a0:	e59f025c 	ldr	r0, [pc, #604]	; 39b504 <haltLoop+0x58>
+  39b2a4:	e59f1230 	ldr	r1, [pc, #560]	; 39b4dc <haltLoop+0x30>
+  39b2a8:	e5911008 	ldr	r1, [r1, #8]
+  39b2ac:	e5801000 	str	r1, [r0]
+  39b2b0:	e59f0224 	ldr	r0, [pc, #548]	; 39b4dc <haltLoop+0x30>
+  39b2b4:	e3e01000 	mvn	r1, #0
+  39b2b8:	e5801000 	str	r1, [r0]
+  39b2bc:	e5801004 	str	r1, [r0, #4]
+  39b2c0:	e59f01ec 	ldr	r0, [pc, #492]	; 39b4b4 <haltLoop+0x8>
+  39b2c4:	e5901000 	ldr	r1, [r0]
+  39b2c8:	e2811001 	add	r1, r1, #1
+  39b2cc:	e5801000 	str	r1, [r0]
+  39b2d0:	ebfffd9c 	bl	39a948 <updateStats>
+  39b2d4:	e59f0214 	ldr	r0, [pc, #532]	; 39b4f0 <haltLoop+0x44>
+  39b2d8:	e3a01c02 	mov	r1, #512	; 0x200
+  39b2dc:	e3a02e2e 	mov	r2, #736	; 0x2e0
+  39b2e0:	ebfffd60 	bl	39a868 <Draw_Image>
+
+0039b2e4 <valuePackNotEaten>:
+  39b2e4:	e5150004 	ldr	r0, [r5, #-4]
+  39b2e8:	e5951000 	ldr	r1, [r5]
+  39b2ec:	e59f31ec 	ldr	r3, [pc, #492]	; 39b4e0 <haltLoop+0x34>
+  39b2f0:	e5932000 	ldr	r2, [r3]
+  39b2f4:	e5933004 	ldr	r3, [r3, #4]
+  39b2f8:	e1500002 	cmp	r0, r2
+  39b2fc:	1a000010 	bne	39b344 <appleNotEaten>
+  39b300:	e1510003 	cmp	r1, r3
+  39b304:	1a00000e 	bne	39b344 <appleNotEaten>
+  39b308:	e59f01d4 	ldr	r0, [pc, #468]	; 39b4e4 <haltLoop+0x38>
+  39b30c:	e5901000 	ldr	r1, [r0]
+  39b310:	e2811001 	add	r1, r1, #1
+  39b314:	e5801000 	str	r1, [r0]
+  39b318:	e59f0194 	ldr	r0, [pc, #404]	; 39b4b4 <haltLoop+0x8>
+  39b31c:	e5901000 	ldr	r1, [r0]
+  39b320:	e2811003 	add	r1, r1, #3
+  39b324:	e5801000 	str	r1, [r0]
+  39b328:	e59f01b4 	ldr	r0, [pc, #436]	; 39b4e4 <haltLoop+0x38>
+  39b32c:	e5900000 	ldr	r0, [r0]
+  39b330:	e3500015 	cmp	r0, #21
+  39b334:	0a00000c 	beq	39b36c <gameWon>
+  39b338:	ebfffd82 	bl	39a948 <updateStats>
+  39b33c:	ebfffdf0 	bl	39ab04 <Spawn_Apple>
+  39b340:	ea000006 	b	39b360 <gameLoopCycleEnd>
+
+0039b344 <appleNotEaten>:
+  39b344:	e5941000 	ldr	r1, [r4]
+  39b348:	e5942004 	ldr	r2, [r4, #4]
+  39b34c:	e59f0170 	ldr	r0, [pc, #368]	; 39b4c4 <haltLoop+0x18>
+  39b350:	ebfffd44 	bl	39a868 <Draw_Image>
+  39b354:	e2844008 	add	r4, r4, #8
+  39b358:	e1540006 	cmp	r4, r6
+  39b35c:	a59f4174 	ldrge	r4, [pc, #372]	; 39b4d8 <haltLoop+0x2c>
+
+0039b360 <gameLoopCycleEnd>:
+  39b360:	e59f01c0 	ldr	r0, [pc, #448]	; 39b528 <haltLoop+0x7c>
+  39b364:	ebfffd02 	bl	39a774 <Wait>
+  39b368:	eaffff05 	b	39af84 <gameLoop>
+
+0039b36c <gameWon>:
+  39b36c:	ebfff893 	bl	3995c0 <Disable_Timer_IRQ>
+  39b370:	e59f01b4 	ldr	r0, [pc, #436]	; 39b52c <haltLoop+0x80>
+  39b374:	e3a010ac 	mov	r1, #172	; 0xac
+  39b378:	e3a0207c 	mov	r2, #124	; 0x7c
+  39b37c:	ebfffd39 	bl	39a868 <Draw_Image>
+  39b380:	e59f01a8 	ldr	r0, [pc, #424]	; 39b530 <haltLoop+0x84>
+  39b384:	ebfffcfa 	bl	39a774 <Wait>
+  39b388:	ebfffd0a 	bl	39a7b8 <Read_SNES>
+  39b38c:	e3500000 	cmp	r0, #0
+  39b390:	0afffff5 	beq	39b36c <gameWon>
+  39b394:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  39b398:	ea000013 	b	39b3ec <initializeGame>
+
+0039b39c <gameLost>:
+  39b39c:	ebfff887 	bl	3995c0 <Disable_Timer_IRQ>
+  39b3a0:	e59f018c 	ldr	r0, [pc, #396]	; 39b534 <haltLoop+0x88>
+  39b3a4:	e3a010ac 	mov	r1, #172	; 0xac
+  39b3a8:	e3a0207c 	mov	r2, #124	; 0x7c
+  39b3ac:	ebfffd2d 	bl	39a868 <Draw_Image>
+  39b3b0:	e59f0148 	ldr	r0, [pc, #328]	; 39b500 <haltLoop+0x54>
+  39b3b4:	ebfffcee 	bl	39a774 <Wait>
+  39b3b8:	ebfffcfe 	bl	39a7b8 <Read_SNES>
+  39b3bc:	e3500000 	cmp	r0, #0
+  39b3c0:	0afffff5 	beq	39b39c <gameLost>
+  39b3c4:	e8bd47f0 	pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+  39b3c8:	ea000007 	b	39b3ec <initializeGame>
+  39b3cc:	e8bd87f0 	pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+
+0039b3d0 <main>:
+  39b3d0:	ebfff865 	bl	39956c <Install_Interrupt_Table>
+  39b3d4:	e92d0070 	push	{r4, r5, r6}
+  39b3d8:	eb00088d 	bl	39d614 <EnableJTAG>
+  39b3dc:	eb000abe 	bl	39dedc <InitUART>
+  39b3e0:	ebfffd10 	bl	39a828 <Init_SNES>
+  39b3e4:	ebfff86d 	bl	3995a0 <Enable_Interrupts>
+  39b3e8:	ebfffa9d 	bl	399e64 <InitFrameBuffer>
+
+0039b3ec <initializeGame>:
+  39b3ec:	e59f0144 	ldr	r0, [pc, #324]	; 39b538 <haltLoop+0x8c>
+  39b3f0:	e3a01000 	mov	r1, #0
+  39b3f4:	e3a02000 	mov	r2, #0
+  39b3f8:	ebfffd1a 	bl	39a868 <Draw_Image>
+  39b3fc:	e59f0138 	ldr	r0, [pc, #312]	; 39b53c <haltLoop+0x90>
+  39b400:	e3a010dc 	mov	r1, #220	; 0xdc
+  39b404:	e3a02f51 	mov	r2, #324	; 0x144
+  39b408:	ebfffd16 	bl	39a868 <Draw_Image>
+  39b40c:	e3a04001 	mov	r4, #1
+  39b410:	e3a05c01 	mov	r5, #256	; 0x100
+  39b414:	e59f00e4 	ldr	r0, [pc, #228]	; 39b500 <haltLoop+0x54>
+  39b418:	ebfffcd5 	bl	39a774 <Wait>
+
+0039b41c <menuLoop>:
+  39b41c:	ebfffce5 	bl	39a7b8 <Read_SNES>
+  39b420:	e1a06000 	mov	r6, r0
+  39b424:	e1c00005 	bic	r0, r0, r5
+  39b428:	e1a05006 	mov	r5, r6
+  39b42c:	e3500000 	cmp	r0, #0
+  39b430:	0afffff9 	beq	39b41c <menuLoop>
+  39b434:	e3100020 	tst	r0, #32
+  39b438:	1a000004 	bne	39b450 <flipSelection>
+  39b43c:	e3100010 	tst	r0, #16
+  39b440:	1a000002 	bne	39b450 <flipSelection>
+  39b444:	e3100c01 	tst	r0, #256	; 0x100
+  39b448:	1a00000c 	bne	39b480 <selectMenuItem>
+  39b44c:	eafffff2 	b	39b41c <menuLoop>
+
+0039b450 <flipSelection>:
+  39b450:	e2244001 	eor	r4, r4, #1
+  39b454:	e59f00dc 	ldr	r0, [pc, #220]	; 39b538 <haltLoop+0x8c>
+  39b458:	e3a01000 	mov	r1, #0
+  39b45c:	e3a02000 	mov	r2, #0
+  39b460:	ebfffd00 	bl	39a868 <Draw_Image>
+  39b464:	e3140001 	tst	r4, #1
+  39b468:	e59f00cc 	ldr	r0, [pc, #204]	; 39b53c <haltLoop+0x90>
+  39b46c:	e3a010dc 	mov	r1, #220	; 0xdc
+  39b470:	13a02f51 	movne	r2, #324	; 0x144
+  39b474:	03a02f6e 	moveq	r2, #440	; 0x1b8
+  39b478:	ebfffcfa 	bl	39a868 <Draw_Image>
+  39b47c:	eaffffe6 	b	39b41c <menuLoop>
+
+0039b480 <selectMenuItem>:
+  39b480:	e3140001 	tst	r4, #1
+  39b484:	1afffe63 	bne	39ae18 <mainGameLogic>
+
+0039b488 <quitGame>:
+  39b488:	e3a00000 	mov	r0, #0
+  39b48c:	e3a01000 	mov	r1, #0
+  39b490:	e3a02000 	mov	r2, #0
+  39b494:	e3a03b01 	mov	r3, #1024	; 0x400
+  39b498:	e3a04c03 	mov	r4, #768	; 0x300
+  39b49c:	e52d4004 	push	{r4}		; (str r4, [sp, #-4]!)
+  39b4a0:	ebfffd09 	bl	39a8cc <Draw_Rect>
+  39b4a4:	e28dd004 	add	sp, sp, #4
+  39b4a8:	e8bd0070 	pop	{r4, r5, r6}
+
+0039b4ac <haltLoop>:
+  39b4ac:	eafffffe 	b	39b4ac <haltLoop>
+  39b4b0:	000b7b90 	.word	0x000b7b90
+  39b4b4:	002e47ac 	.word	0x002e47ac
+  39b4b8:	002e47b0 	.word	0x002e47b0
+  39b4bc:	002e4774 	.word	0x002e4774
+  39b4c0:	0039ce0c 	.word	0x0039ce0c
+  39b4c4:	00399eec 	.word	0x00399eec
+  39b4c8:	002e46cc 	.word	0x002e46cc
+  39b4cc:	0039d6d4 	.word	0x0039d6d4
+  39b4d0:	002e4878 	.word	0x002e4878
+  39b4d4:	002e4874 	.word	0x002e4874
+  39b4d8:	002e47b4 	.word	0x002e47b4
+  39b4dc:	002e479c 	.word	0x002e479c
+  39b4e0:	002e4768 	.word	0x002e4768
+  39b4e4:	002e4770 	.word	0x002e4770
+  39b4e8:	0039b540 	.word	0x0039b540
+  39b4ec:	0039c604 	.word	0x0039c604
+  39b4f0:	0000a8cc 	.word	0x0000a8cc
+  39b4f4:	002ecae4 	.word	0x002ecae4
+  39b4f8:	002e487c 	.word	0x002e487c
+  39b4fc:	20003004 	.word	0x20003004
+  39b500:	000f4240 	.word	0x000f4240
+  39b504:	002e47a8 	.word	0x002e47a8
+  39b508:	002e4630 	.word	0x002e4630
+  39b50c:	00009080 	.word	0x00009080
+  39b510:	002eb2dc 	.word	0x002eb2dc
+  39b514:	0039965c 	.word	0x0039965c
+  39b518:	0039bd48 	.word	0x0039bd48
+  39b51c:	01312d00 	.word	0x01312d00
+  39b520:	00989680 	.word	0x00989680
+  39b524:	0039ac40 	.word	0x0039ac40
+  39b528:	000186a0 	.word	0x000186a0
+  39b52c:	000b7ba0 	.word	0x000b7ba0
+  39b530:	0007a120 	.word	0x0007a120
+  39b534:	0000b0d4 	.word	0x0000b0d4
+  39b538:	00164628 	.word	0x00164628
+  39b53c:	002e91d4 	.word	0x002e91d4
+
+0039b540 <appleImage>:
+  39b540:	00000020 	.word	0x00000020
+  39b544:	00000020 	.word	0x00000020
+  39b548:	fed2feb1 	.word	0xfed2feb1
+  39b54c:	f6d1feb1 	.word	0xf6d1feb1
+  39b550:	f6b1fef2 	.word	0xf6b1fef2
+  39b554:	f6d2fef2 	.word	0xf6d2fef2
+  39b558:	fef2fed2 	.word	0xfef2fed2
+  39b55c:	f713fe8f 	.word	0xf713fe8f
+  39b560:	feb0f6d3 	.word	0xfeb0f6d3
+  39b564:	fe92fed2 	.word	0xfe92fed2
+  39b568:	f6eefeb2 	.word	0xf6eefeb2
+  39b56c:	feb1feb5 	.word	0xfeb1feb5
+  39b570:	f6f1fe91 	.word	0xf6f1fe91
+  39b574:	fe91eed1 	.word	0xfe91eed1
+  39b578:	fef1f6d1 	.word	0xfef1f6d1
+  39b57c:	fed2feb1 	.word	0xfed2feb1
+  39b580:	f6f3f6d0 	.word	0xf6f3f6d0
+  39b584:	f590ff11 	.word	0xf590ff11
+  39b588:	f691fed2 	.word	0xf691fed2
+  39b58c:	f6f1fed1 	.word	0xf6f1fed1
+  39b590:	fed1feb1 	.word	0xfed1feb1
+  39b594:	feb3fe50 	.word	0xfeb3fe50
+  39b598:	fed1fef0 	.word	0xfed1fef0
+  39b59c:	fef1fed3 	.word	0xfef1fed3
+  39b5a0:	fef2fe8f 	.word	0xfef2fe8f
+  39b5a4:	f732fef0 	.word	0xf732fef0
+  39b5a8:	ff13fed2 	.word	0xff13fed2
+  39b5ac:	ff11fed2 	.word	0xff11fed2
+  39b5b0:	ff31fe93 	.word	0xff31fe93
+  39b5b4:	fef3fe92 	.word	0xfef3fe92
+  39b5b8:	feb4f6f3 	.word	0xfeb4f6f3
+  39b5bc:	feb1feb1 	.word	0xfeb1feb1
+  39b5c0:	f510fef4 	.word	0xf510fef4
+  39b5c4:	e444e404 	.word	0xe444e404
+  39b5c8:	fef1fe91 	.word	0xfef1fe91
+  39b5cc:	fef2feb2 	.word	0xfef2feb2
+  39b5d0:	f5aee50f 	.word	0xf5aee50f
+  39b5d4:	f54bfd8f 	.word	0xf54bfd8f
+  39b5d8:	f52ee54c 	.word	0xf52ee54c
+  39b5dc:	fd2cfd4f 	.word	0xfd2cfd4f
+  39b5e0:	f551ed6e 	.word	0xf551ed6e
+  39b5e4:	ed6efcec 	.word	0xed6efcec
+  39b5e8:	f711f52d 	.word	0xf711f52d
+  39b5ec:	f56cf52e 	.word	0xf56cf52e
+  39b5f0:	f54dfd4e 	.word	0xf54dfd4e
+  39b5f4:	f52df5cc 	.word	0xf52df5cc
+  39b5f8:	f52dfd4d 	.word	0xf52dfd4d
+  39b5fc:	ed6fed4d 	.word	0xed6fed4d
+  39b600:	fdaff52d 	.word	0xfdaff52d
+  39b604:	ec65d4a4 	.word	0xec65d4a4
+  39b608:	feb0ff12 	.word	0xfeb0ff12
+  39b60c:	fd8ee52c 	.word	0xfd8ee52c
+  39b610:	fd6dfd6e 	.word	0xfd6dfd6e
+  39b614:	f56cfd8f 	.word	0xf56cfd8f
+  39b618:	fd50fd8f 	.word	0xfd50fd8f
+  39b61c:	fd2cf58d 	.word	0xfd2cf58d
+  39b620:	fd2cf774 	.word	0xfd2cf774
+  39b624:	f58df58d 	.word	0xf58df58d
+  39b628:	fd2cedcd 	.word	0xfd2cedcd
+  39b62c:	f58efd8f 	.word	0xf58efd8f
+  39b630:	e58df54e 	.word	0xe58df54e
+  39b634:	f58cfd4d 	.word	0xf58cfd4d
+  39b638:	fdaefd4e 	.word	0xfdaefd4e
+  39b63c:	ed6cf5cd 	.word	0xed6cf5cd
+  39b640:	fd8fedcd 	.word	0xfd8fedcd
+  39b644:	dca6e424 	.word	0xdca6e424
+  39b648:	fef3eeb1 	.word	0xfef3eeb1
+  39b64c:	fd90fd6d 	.word	0xfd90fd6d
+  39b650:	fdadd3e2 	.word	0xfdadd3e2
+  39b654:	fdb1f54d 	.word	0xfdb1f54d
+  39b658:	b48bfd6d 	.word	0xb48bfd6d
+  39b65c:	ff53f52d 	.word	0xff53f52d
+  39b660:	edceed0d 	.word	0xedceed0d
+  39b664:	cc6bfd6f 	.word	0xcc6bfd6f
+  39b668:	fd8ff56f 	.word	0xfd8ff56f
+  39b66c:	fd4cfd0e 	.word	0xfd4cfd0e
+  39b670:	f715fef3 	.word	0xf715fef3
+  39b674:	fd30f56d 	.word	0xfd30f56d
+  39b678:	f54df5af 	.word	0xf54df5af
+  39b67c:	ff14e56d 	.word	0xff14e56d
+  39b680:	fdaef58c 	.word	0xfdaef58c
+  39b684:	ec46dc84 	.word	0xec46dc84
+  39b688:	fed0feb2 	.word	0xfed0feb2
+  39b68c:	ed6df56e 	.word	0xed6df56e
+  39b690:	f5cefdae 	.word	0xf5cefdae
+  39b694:	fd8bfd4f 	.word	0xfd8bfd4f
+  39b698:	f56dfd8d 	.word	0xf56dfd8d
+  39b69c:	f50bfdaf 	.word	0xf50bfdaf
+  39b6a0:	0902f5d1 	.word	0x0902f5d1
+  39b6a4:	00a000e2 	.word	0x00a000e2
+  39b6a8:	ed6c1902 	.word	0xed6c1902
+  39b6ac:	ff73f713 	.word	0xff73f713
+  39b6b0:	f58edbc1 	.word	0xf58edbc1
+  39b6b4:	ff33ed4e 	.word	0xff33ed4e
+  39b6b8:	fdd3dbc1 	.word	0xfdd3dbc1
+  39b6bc:	fd4bfd90 	.word	0xfd4bfd90
+  39b6c0:	f56ff56d 	.word	0xf56ff56d
+  39b6c4:	eca8dc63 	.word	0xeca8dc63
+  39b6c8:	ff0efeb3 	.word	0xff0efeb3
+  39b6cc:	f5aeed2d 	.word	0xf5aeed2d
+  39b6d0:	f5aef530 	.word	0xf5aef530
+  39b6d4:	d423fd50 	.word	0xd423fd50
+  39b6d8:	fd8fed8e 	.word	0xfd8fed8e
+  39b6dc:	fd6ecc2b 	.word	0xfd6ecc2b
+  39b6e0:	1881f52d 	.word	0x1881f52d
+  39b6e4:	744e0986 	.word	0x744e0986
+  39b6e8:	09030140 	.word	0x09030140
+  39b6ec:	fd2df56c 	.word	0xfd2df56c
+  39b6f0:	f5aefd8f 	.word	0xf5aefd8f
+  39b6f4:	e58fcc2a 	.word	0xe58fcc2a
+  39b6f8:	dc21fd90 	.word	0xdc21fd90
+  39b6fc:	fdd2d402 	.word	0xfdd2d402
+  39b700:	fd4ffd8f 	.word	0xfd4ffd8f
+  39b704:	e445eca8 	.word	0xe445eca8
+  39b708:	fef1eed2 	.word	0xfef1eed2
+  39b70c:	fd90f52d 	.word	0xfd90f52d
+  39b710:	f58bdc43 	.word	0xf58bdc43
+  39b714:	fd6ffd4e 	.word	0xfd6ffd4e
+  39b718:	20004123 	.word	0x20004123
+  39b71c:	10200822 	.word	0x10200822
+  39b720:	fd8ef58c 	.word	0xfd8ef58c
+  39b724:	5c2d08e2 	.word	0x5c2d08e2
+  39b728:	08c26c8b 	.word	0x08c26c8b
+  39b72c:	4123edaf 	.word	0x4123edaf
+  39b730:	20002000 	.word	0x20002000
+  39b734:	10002022 	.word	0x10002022
+  39b738:	fd6ff58e 	.word	0xfd6ff58e
+  39b73c:	d402e465 	.word	0xd402e465
+  39b740:	f590fdad 	.word	0xf590fdad
+  39b744:	eca4dc84 	.word	0xeca4dc84
+  39b748:	fef3feaf 	.word	0xfef3feaf
+  39b74c:	f54fed6d 	.word	0xf54fed6d
+  39b750:	ff12fd6e 	.word	0xff12fd6e
+  39b754:	0820fd6e 	.word	0x0820fd6e
+  39b758:	50633801 	.word	0x50633801
+  39b75c:	58a358a4 	.word	0x58a358a4
+  39b760:	39033000 	.word	0x39033000
+  39b764:	11011901 	.word	0x11011901
+  39b768:	10c16c6e 	.word	0x10c16c6e
+  39b76c:	50c31820 	.word	0x50c31820
+  39b770:	68836042 	.word	0x68836042
+  39b774:	48006082 	.word	0x48006082
+  39b778:	fd6d2001 	.word	0xfd6d2001
+  39b77c:	fdaff58e 	.word	0xfdaff58e
+  39b780:	fd4fed4f 	.word	0xfd4fed4f
+  39b784:	e485dca5 	.word	0xe485dca5
+  39b788:	f68dfef3 	.word	0xf68dfef3
+  39b78c:	fdf0fd6e 	.word	0xfdf0fd6e
+  39b790:	ed6ff58e 	.word	0xed6ff58e
+  39b794:	30001000 	.word	0x30001000
+  39b798:	60835883 	.word	0x60835883
+  39b79c:	602270a4 	.word	0x602270a4
+  39b7a0:	40405882 	.word	0x40405882
+  39b7a4:	28a11800 	.word	0x28a11800
+  39b7a8:	28a17bac 	.word	0x28a17bac
+  39b7ac:	70833000 	.word	0x70833000
+  39b7b0:	b1678001 	.word	0xb1678001
+  39b7b4:	68217842 	.word	0x68217842
+  39b7b8:	20005061 	.word	0x20005061
+  39b7bc:	f56ef5ac 	.word	0xf56ef5ac
+  39b7c0:	f630fd6f 	.word	0xf630fd6f
+  39b7c4:	dc85f404 	.word	0xdc85f404
+  39b7c8:	fed1f6b2 	.word	0xfed1f6b2
+  39b7cc:	ed2cf56c 	.word	0xed2cf56c
+  39b7d0:	10209b47 	.word	0x10209b47
+  39b7d4:	608358e6 	.word	0x608358e6
+  39b7d8:	70026842 	.word	0x70026842
+  39b7dc:	78018043 	.word	0x78018043
+  39b7e0:	68417862 	.word	0x68417862
+  39b7e4:	500068a2 	.word	0x500068a2
+  39b7e8:	48004840 	.word	0x48004840
+  39b7ec:	88016841 	.word	0x88016841
+  39b7f0:	d127c927 	.word	0xd127c927
+  39b7f4:	b9c7c987 	.word	0xb9c7c987
+  39b7f8:	30406822 	.word	0x30406822
+  39b7fc:	d3e21800 	.word	0xd3e21800
+  39b800:	f56df5f1 	.word	0xf56df5f1
+  39b804:	eca7e444 	.word	0xeca7e444
+  39b808:	fed2fed2 	.word	0xfed2fed2
+  39b80c:	fdaeed4d 	.word	0xfdaeed4d
+  39b810:	28410800 	.word	0x28410800
+  39b814:	68246023 	.word	0x68246023
+  39b818:	88018863 	.word	0x88018863
+  39b81c:	98019001 	.word	0x98019001
+  39b820:	c1a79000 	.word	0xc1a79000
+  39b824:	b966b946 	.word	0xb966b946
+  39b828:	b9c7a966 	.word	0xb9c7a966
+  39b82c:	c947c9a8 	.word	0xc947c9a8
+  39b830:	d188c106 	.word	0xd188c106
+  39b834:	d146c8e5 	.word	0xd146c8e5
+  39b838:	68c38042 	.word	0x68c38042
+  39b83c:	edaf2820 	.word	0xedaf2820
+  39b840:	f5aefd6d 	.word	0xf5aefd6d
+  39b844:	ec45e486 	.word	0xec45e486
+  39b848:	eef1feb1 	.word	0xeef1feb1
+  39b84c:	1020fd2d 	.word	0x1020fd2d
+  39b850:	48642000 	.word	0x48642000
+  39b854:	80247062 	.word	0x80247062
+  39b858:	98019001 	.word	0x98019001
+  39b85c:	d146a001 	.word	0xd146a001
+  39b860:	d125d125 	.word	0xd125d125
+  39b864:	d926d926 	.word	0xd926d926
+  39b868:	c926d146 	.word	0xc926d146
+  39b86c:	9002c906 	.word	0x9002c906
+  39b870:	78427063 	.word	0x78427063
+  39b874:	d105b905 	.word	0xd105b905
+  39b878:	7001b945 	.word	0x7001b945
+  39b87c:	18223800 	.word	0x18223800
+  39b880:	f5aefd4b 	.word	0xf5aefd4b
+  39b884:	e4a5e467 	.word	0xe4a5e467
+  39b888:	fed0f6f2 	.word	0xfed0f6f2
+  39b88c:	1000ed0e 	.word	0x1000ed0e
+  39b890:	68c42801 	.word	0x68c42801
+  39b894:	80228002 	.word	0x80228002
+  39b898:	a0019801 	.word	0xa0019801
+  39b89c:	d8e5d0e5 	.word	0xd8e5d0e5
+  39b8a0:	e0c4e0e5 	.word	0xe0c4e0e5
+  39b8a4:	e8e5e0c5 	.word	0xe8e5e0c5
+  39b8a8:	d926d8c5 	.word	0xd926d8c5
+  39b8ac:	8842d106 	.word	0x8842d106
+  39b8b0:	fe79fe9a 	.word	0xfe79fe9a
+  39b8b4:	c9058862 	.word	0xc9058862
+  39b8b8:	9040c166 	.word	0x9040c166
+  39b8bc:	180060a3 	.word	0x180060a3
+  39b8c0:	fd8fd48a 	.word	0xfd8fd48a
+  39b8c4:	dca6e423 	.word	0xdca6e423
+  39b8c8:	ff32f6b1 	.word	0xff32f6b1
+  39b8cc:	1800fd2e 	.word	0x1800fd2e
+  39b8d0:	60642821 	.word	0x60642821
+  39b8d4:	88228022 	.word	0x88228022
+  39b8d8:	e167a000 	.word	0xe167a000
+  39b8dc:	e905d8e4 	.word	0xe905d8e4
+  39b8e0:	f926e8c4 	.word	0xf926e8c4
+  39b8e4:	f0e5e8a4 	.word	0xf0e5e8a4
+  39b8e8:	e125f0a4 	.word	0xe125f0a4
+  39b8ec:	7842d126 	.word	0x7842d126
+  39b8f0:	f6baf6da 	.word	0xf6baf6da
+  39b8f4:	c1467021 	.word	0xc1467021
+  39b8f8:	a946b8e4 	.word	0xa946b8e4
+  39b8fc:	18006062 	.word	0x18006062
+  39b900:	f58ff58f 	.word	0xf58ff58f
+  39b904:	dca6f464 	.word	0xdca6f464
+  39b908:	fef1fed2 	.word	0xfef1fed2
+  39b90c:	9b47f50e 	.word	0x9b47f50e
+  39b910:	68641800 	.word	0x68641800
+  39b914:	90017044 	.word	0x90017044
+  39b918:	d0e5d147 	.word	0xd0e5d147
+  39b91c:	f0c4e8e5 	.word	0xf0c4e8e5
+  39b920:	e883e8a4 	.word	0xe883e8a4
+  39b924:	f0e5f0e5 	.word	0xf0e5f0e5
+  39b928:	d0a3f8c4 	.word	0xd0a3f8c4
+  39b92c:	7021d146 	.word	0x7021d146
+  39b930:	febaf6da 	.word	0xfebaf6da
+  39b934:	b1457022 	.word	0xb1457022
+  39b938:	a105b927 	.word	0xa105b927
+  39b93c:	10006063 	.word	0x10006063
+  39b940:	f5cef56e 	.word	0xf5cef56e
+  39b944:	e485ec05 	.word	0xe485ec05
+  39b948:	fef3fe71 	.word	0xfef3fe71
+  39b94c:	d5aeed2c 	.word	0xd5aeed2c
+  39b950:	60422083 	.word	0x60422083
+  39b954:	88227804 	.word	0x88227804
+  39b958:	d905d126 	.word	0xd905d126
+  39b95c:	f925e0a4 	.word	0xf925e0a4
+  39b960:	f105e8c3 	.word	0xf105e8c3
+  39b964:	e0a3e8e4 	.word	0xe0a3e8e4
+  39b968:	e8e4e0e4 	.word	0xe8e4e0e4
+  39b96c:	9823c905 	.word	0x9823c905
+  39b970:	ee1850a2 	.word	0xee1850a2
+  39b974:	a9068002 	.word	0xa9068002
+  39b978:	7842a8c5 	.word	0x7842a8c5
+  39b97c:	18005084 	.word	0x18005084
+  39b980:	fd8efd8f 	.word	0xfd8efd8f
+  39b984:	e485dc85 	.word	0xe485dc85
+  39b988:	f6f2fed2 	.word	0xf6f2fed2
+  39b98c:	ed4dfd2e 	.word	0xed4dfd2e
+  39b990:	58e41000 	.word	0x58e41000
+  39b994:	88427004 	.word	0x88427004
+  39b998:	d126a002 	.word	0xd126a002
+  39b99c:	e0c4e0e4 	.word	0xe0c4e0e4
+  39b9a0:	e0c4e0a3 	.word	0xe0c4e0a3
+  39b9a4:	f125e0c3 	.word	0xf125e0c3
+  39b9a8:	e0e5e0e4 	.word	0xe0e5e0e4
+  39b9ac:	b927d126 	.word	0xb927d126
+  39b9b0:	e5d758a3 	.word	0xe5d758a3
+  39b9b4:	a1267801 	.word	0xa1267801
+  39b9b8:	58009966 	.word	0x58009966
+  39b9bc:	f5ae3002 	.word	0xf5ae3002
+  39b9c0:	f5ace52f 	.word	0xf5ace52f
+  39b9c4:	f447dc66 	.word	0xf447dc66
+  39b9c8:	f711f6d1 	.word	0xf711f6d1
+  39b9cc:	fd4dfd2f 	.word	0xfd4dfd2f
+  39b9d0:	20001800 	.word	0x20001800
+  39b9d4:	78017085 	.word	0x78017085
+  39b9d8:	c9479802 	.word	0xc9479802
+  39b9dc:	f146d8e5 	.word	0xf146d8e5
+  39b9e0:	e905e0c4 	.word	0xe905e0c4
+  39b9e4:	e0a3e8e5 	.word	0xe0a3e8e5
+  39b9e8:	e0e5e0e5 	.word	0xe0e5e0e5
+  39b9ec:	c106d0e5 	.word	0xc106d0e5
+  39b9f0:	ed756041 	.word	0xed756041
+  39b9f4:	90c47802 	.word	0x90c47802
+  39b9f8:	48209106 	.word	0x48209106
+  39b9fc:	fdcc1800 	.word	0xfdcc1800
+  39ba00:	fd8ffd8c 	.word	0xfd8ffd8c
+  39ba04:	e488dc65 	.word	0xe488dc65
+  39ba08:	fed1fef1 	.word	0xfed1fef1
+  39ba0c:	fd6de54e 	.word	0xfd6de54e
+  39ba10:	1801cc8d 	.word	0x1801cc8d
+  39ba14:	786258c4 	.word	0x786258c4
+  39ba18:	98019002 	.word	0x98019002
+  39ba1c:	d8c4e167 	.word	0xd8c4e167
+  39ba20:	e905e0e4 	.word	0xe905e0e4
+  39ba24:	e8c4e8e4 	.word	0xe8c4e8e4
+  39ba28:	e8c5e8e5 	.word	0xe8c5e8e5
+  39ba2c:	c8e6d906 	.word	0xc8e6d906
+  39ba30:	60207821 	.word	0x60207821
+  39ba34:	99467801 	.word	0x99467801
+  39ba38:	30005823 	.word	0x30005823
+  39ba3c:	f56df58f 	.word	0xf56df58f
+  39ba40:	f570fdad 	.word	0xf570fdad
+  39ba44:	dc84dc65 	.word	0xdc84dc65
+  39ba48:	fed2feb0 	.word	0xfed2feb0
+  39ba4c:	f54eed8e 	.word	0xf54eed8e
+  39ba50:	2001e58d 	.word	0x2001e58d
+  39ba54:	786348a2 	.word	0x786348a2
+  39ba58:	98228001 	.word	0x98228001
+  39ba5c:	e0e5b001 	.word	0xe0e5b001
+  39ba60:	e8c4e0c4 	.word	0xe8c4e0c4
+  39ba64:	f0e4e8e4 	.word	0xf0e4e8e4
+  39ba68:	e8a4e8a3 	.word	0xe8a4e8a3
+  39ba6c:	d0c4e0c4 	.word	0xd0c4e0c4
+  39ba70:	a165b925 	.word	0xa165b925
+  39ba74:	600190e5 	.word	0x600190e5
+  39ba78:	20014061 	.word	0x20014061
+  39ba7c:	ed8dfd4d 	.word	0xed8dfd4d
+  39ba80:	ec86ed51 	.word	0xec86ed51
+  39ba84:	e4c6e486 	.word	0xe4c6e486
+  39ba88:	f6b2fef2 	.word	0xf6b2fef2
+  39ba8c:	fceefd8d 	.word	0xfceefd8d
+  39ba90:	1000ff52 	.word	0x1000ff52
+  39ba94:	68232800 	.word	0x68232800
+  39ba98:	88018063 	.word	0x88018063
+  39ba9c:	d905a001 	.word	0xd905a001
+  39baa0:	e0e5e925 	.word	0xe0e5e925
+  39baa4:	e0c3e905 	.word	0xe0c3e905
+  39baa8:	f105f0c4 	.word	0xf105f0c4
+  39baac:	d0a4d8a4 	.word	0xd0a4d8a4
+  39bab0:	a0c3c925 	.word	0xa0c3c925
+  39bab4:	50219146 	.word	0x50219146
+  39bab8:	51621800 	.word	0x51621800
+  39babc:	edacf58f 	.word	0xedacf58f
+  39bac0:	f3a4f5d0 	.word	0xf3a4f5d0
+  39bac4:	e448ec64 	.word	0xe448ec64
+  39bac8:	f6d1fe91 	.word	0xf6d1fe91
+  39bacc:	fd4ffd6c 	.word	0xfd4ffd6c
+  39bad0:	61e3edad 	.word	0x61e3edad
+  39bad4:	58632841 	.word	0x58632841
+  39bad8:	80426021 	.word	0x80426021
+  39badc:	d1469001 	.word	0xd1469001
+  39bae0:	d0e5d0e5 	.word	0xd0e5d0e5
+  39bae4:	d8e5e146 	.word	0xd8e5e146
+  39bae8:	e0c4e8e4 	.word	0xe0c4e8e4
+  39baec:	d926d083 	.word	0xd926d083
+  39baf0:	a945c8e5 	.word	0xa945c8e5
+  39baf4:	40826082 	.word	0x40826082
+  39baf8:	ed4b1800 	.word	0xed4b1800
+  39bafc:	f56cf56d 	.word	0xf56cf56d
+  39bb00:	fd51f5ce 	.word	0xfd51f5ce
+  39bb04:	f465e464 	.word	0xf465e464
+  39bb08:	fef1fed2 	.word	0xfef1fed2
+  39bb0c:	fdaef56c 	.word	0xfdaef56c
+  39bb10:	f54ffd2e 	.word	0xf54ffd2e
+  39bb14:	30001000 	.word	0x30001000
+  39bb18:	704260a3 	.word	0x704260a3
+  39bb1c:	98009042 	.word	0x98009042
+  39bb20:	d147d146 	.word	0xd147d146
+  39bb24:	d926c8c5 	.word	0xd926c8c5
+  39bb28:	e146d8c4 	.word	0xe146d8c4
+  39bb2c:	d105d926 	.word	0xd105d926
+  39bb30:	8001b8a4 	.word	0x8001b8a4
+  39bb34:	10004000 	.word	0x10004000
+  39bb38:	fd2dedae 	.word	0xfd2dedae
+  39bb3c:	f56ef590 	.word	0xf56ef590
+  39bb40:	edcefd4e 	.word	0xedcefd4e
+  39bb44:	dca6e484 	.word	0xdca6e484
+  39bb48:	feb1fed1 	.word	0xfeb1fed1
+  39bb4c:	ed6ced6c 	.word	0xed6ced6c
+  39bb50:	ff15fef2 	.word	0xff15fef2
+  39bb54:	10001020 	.word	0x10001020
+  39bb58:	68e33000 	.word	0x68e33000
+  39bb5c:	80636861 	.word	0x80636861
+  39bb60:	80628003 	.word	0x80628003
+  39bb64:	90028001 	.word	0x90028001
+  39bb68:	b9268822 	.word	0xb9268822
+  39bb6c:	b966b987 	.word	0xb966b987
+  39bb70:	60859823 	.word	0x60859823
+  39bb74:	fd8f2000 	.word	0xfd8f2000
+  39bb78:	fdacf54e 	.word	0xfdacf54e
+  39bb7c:	fd8ffd6f 	.word	0xfd8ffd6f
+  39bb80:	fd71fd4d 	.word	0xfd71fd4d
+  39bb84:	e485dc44 	.word	0xe485dc44
+  39bb88:	f6d1f6d1 	.word	0xf6d1f6d1
+  39bb8c:	fd0eff34 	.word	0xfd0eff34
+  39bb90:	fed1f56d 	.word	0xfed1f56d
+  39bb94:	fd0dfef2 	.word	0xfd0dfef2
+  39bb98:	48632001 	.word	0x48632001
+  39bb9c:	58e25082 	.word	0x58e25082
+  39bba0:	60626082 	.word	0x60626082
+  39bba4:	38604820 	.word	0x38604820
+  39bba8:	70636862 	.word	0x70636862
+  39bbac:	70c268a3 	.word	0x70c268a3
+  39bbb0:	48c25800 	.word	0x48c25800
+  39bbb4:	f56d2000 	.word	0xf56d2000
+  39bbb8:	fd8dfd6f 	.word	0xfd8dfd6f
+  39bbbc:	fd8fed4d 	.word	0xfd8fed4d
+  39bbc0:	fd6ffdef 	.word	0xfd6ffdef
+  39bbc4:	f4a7dc83 	.word	0xf4a7dc83
+  39bbc8:	feb2fef2 	.word	0xfeb2fef2
+  39bbcc:	ed6ef4ed 	.word	0xed6ef4ed
+  39bbd0:	e54dfd8f 	.word	0xe54dfd8f
+  39bbd4:	f590f52e 	.word	0xf590f52e
+  39bbd8:	1040fd6f 	.word	0x1040fd6f
+  39bbdc:	20002000 	.word	0x20002000
+  39bbe0:	30011800 	.word	0x30011800
+  39bbe4:	18001000 	.word	0x18001000
+  39bbe8:	28013000 	.word	0x28013000
+  39bbec:	30002000 	.word	0x30002000
+  39bbf0:	20003020 	.word	0x20003020
+  39bbf4:	fd70e592 	.word	0xfd70e592
+  39bbf8:	f5acf5af 	.word	0xf5acf5af
+  39bbfc:	cc65fd8d 	.word	0xcc65fd8d
+  39bc00:	fd8ddc22 	.word	0xfd8ddc22
+  39bc04:	d443e486 	.word	0xd443e486
+  39bc08:	feb1fef2 	.word	0xfeb1fef2
+  39bc0c:	f5adf58d 	.word	0xf5adf58d
+  39bc10:	fd8dfd8d 	.word	0xfd8dfd8d
+  39bc14:	f56dfdaf 	.word	0xf56dfdaf
+  39bc18:	fd2ee5ed 	.word	0xfd2ee5ed
+  39bc1c:	f56df58f 	.word	0xf56df58f
+  39bc20:	ed8efd6e 	.word	0xed8efd6e
+  39bc24:	f58dfdcf 	.word	0xf58dfdcf
+  39bc28:	9347f58d 	.word	0x9347f58d
+  39bc2c:	f58ecc8c 	.word	0xf58ecc8c
+  39bc30:	f5cfed6f 	.word	0xf5cfed6f
+  39bc34:	fd4dfd4d 	.word	0xfd4dfd4d
+  39bc38:	fd8ff52d 	.word	0xfd8ff52d
+  39bc3c:	fd8fed8d 	.word	0xfd8fed8d
+  39bc40:	fdaff5cf 	.word	0xfdaff5cf
+  39bc44:	f468dc83 	.word	0xf468dc83
+  39bc48:	fed1feaf 	.word	0xfed1feaf
+  39bc4c:	fd0efd4e 	.word	0xfd0efd4e
+  39bc50:	e5aefd2f 	.word	0xe5aefd2f
+  39bc54:	fd4ded6d 	.word	0xfd4ded6d
+  39bc58:	fd2ffd2e 	.word	0xfd2ffd2e
+  39bc5c:	ff53f734 	.word	0xff53f734
+  39bc60:	e443d404 	.word	0xe443d404
+  39bc64:	fdaedc04 	.word	0xfdaedc04
+  39bc68:	edaffd8b 	.word	0xedaffd8b
+  39bc6c:	fd6df56e 	.word	0xfd6df56e
+  39bc70:	f58ef5af 	.word	0xf58ef5af
+  39bc74:	fd8ffd6d 	.word	0xfd8ffd6d
+  39bc78:	fdcffdaf 	.word	0xfdcffdaf
+  39bc7c:	fd8ffd4e 	.word	0xfd8ffd4e
+  39bc80:	fdd0d3e3 	.word	0xfdd0d3e3
+  39bc84:	e4c7dc07 	.word	0xe4c7dc07
+  39bc88:	fef2fef3 	.word	0xfef2fef3
+  39bc8c:	ff53e58d 	.word	0xff53e58d
+  39bc90:	f5affdcf 	.word	0xf5affdcf
+  39bc94:	ff73f58e 	.word	0xff73f58e
+  39bc98:	ffb3f52d 	.word	0xffb3f52d
+  39bc9c:	fd6ef54c 	.word	0xfd6ef54c
+  39bca0:	fdaefe10 	.word	0xfdaefe10
+  39bca4:	f570fdcf 	.word	0xf570fdcf
+  39bca8:	f5b0fd4e 	.word	0xf5b0fd4e
+  39bcac:	fd4efd90 	.word	0xfd4efd90
+  39bcb0:	f58ef58e 	.word	0xf58ef58e
+  39bcb4:	f5cffdae 	.word	0xf5cffdae
+  39bcb8:	dc62dc44 	.word	0xdc62dc44
+  39bcbc:	d463fdaf 	.word	0xd463fdaf
+  39bcc0:	dc61fdd4 	.word	0xdc61fdd4
+  39bcc4:	e442ecc6 	.word	0xe442ecc6
+  39bcc8:	fd8efef4 	.word	0xfd8efef4
+  39bccc:	ec24dc46 	.word	0xec24dc46
+  39bcd0:	ec65cc83 	.word	0xec65cc83
+  39bcd4:	ebe4ec65 	.word	0xebe4ec65
+  39bcd8:	ec04e485 	.word	0xec04e485
+  39bcdc:	d463ec65 	.word	0xd463ec65
+  39bce0:	e484dca3 	.word	0xe484dca3
+  39bce4:	e447ec66 	.word	0xe447ec66
+  39bce8:	e464ec46 	.word	0xe464ec46
+  39bcec:	e403ec85 	.word	0xe403ec85
+  39bcf0:	ec64ec84 	.word	0xec64ec84
+  39bcf4:	e484e423 	.word	0xe484e423
+  39bcf8:	dc66e4a6 	.word	0xdc66e4a6
+  39bcfc:	e4a7e447 	.word	0xe4a7e447
+  39bd00:	e4a6dc04 	.word	0xe4a6dc04
+  39bd04:	ecc6e447 	.word	0xecc6e447
+  39bd08:	dc05fd8c 	.word	0xdc05fd8c
+  39bd0c:	e464e4a6 	.word	0xe464e4a6
+  39bd10:	ec46eca6 	.word	0xec46eca6
+  39bd14:	d4a6e486 	.word	0xd4a6e486
+  39bd18:	ec87dc85 	.word	0xec87dc85
+  39bd1c:	ec86e486 	.word	0xec86e486
+  39bd20:	e488e446 	.word	0xe488e446
+  39bd24:	ec83e465 	.word	0xec83e465
+  39bd28:	e484e487 	.word	0xe484e487
+  39bd2c:	e4e7dc84 	.word	0xe4e7dc84
+  39bd30:	e486dc85 	.word	0xe486dc85
+  39bd34:	e465ec67 	.word	0xe465ec67
+  39bd38:	ec86e465 	.word	0xec86e465
+  39bd3c:	e465e4a5 	.word	0xe465e4a5
+  39bd40:	e464ecc6 	.word	0xe464ecc6
+  39bd44:	e446ec86 	.word	0xe446ec86
+
+0039bd48 <bodyImage>:
+  39bd48:	00000020 	.word	0x00000020
+  39bd4c:	00000020 	.word	0x00000020
+  39bd50:	ff11f6b1 	.word	0xff11f6b1
+  39bd54:	feb2fed2 	.word	0xfeb2fed2
+  39bd58:	fed2f6b1 	.word	0xfed2f6b1
+  39bd5c:	feb0feb0 	.word	0xfeb0feb0
+  39bd60:	1920e712 	.word	0x1920e712
+  39bd64:	09e121e2 	.word	0x09e121e2
+  39bd68:	09c009c2 	.word	0x09c009c2
+  39bd6c:	1a211200 	.word	0x1a211200
+  39bd70:	228201e0 	.word	0x228201e0
+  39bd74:	12010180 	.word	0x12010180
+  39bd78:	21c20960 	.word	0x21c20960
+  39bd7c:	eed0ef71 	.word	0xeed0ef71
+  39bd80:	feaff6d2 	.word	0xfeaff6d2
+  39bd84:	fed3feb2 	.word	0xfed3feb2
+  39bd88:	f6d2fed1 	.word	0xf6d2fed1
+  39bd8c:	fd8cff12 	.word	0xfd8cff12
+  39bd90:	fed1feb1 	.word	0xfed1feb1
+  39bd94:	fed2fe71 	.word	0xfed2fe71
+  39bd98:	fef1fed0 	.word	0xfef1fed0
+  39bd9c:	29c6ff11 	.word	0x29c6ff11
+  39bda0:	326321a2 	.word	0x326321a2
+  39bda4:	01401200 	.word	0x01401200
+  39bda8:	01801aa0 	.word	0x01801aa0
+  39bdac:	09c01220 	.word	0x09c01220
+  39bdb0:	09801a00 	.word	0x09801a00
+  39bdb4:	1a4119e0 	.word	0x1a4119e0
+  39bdb8:	01401224 	.word	0x01401224
+  39bdbc:	298221c2 	.word	0x298221c2
+  39bdc0:	ff73feb3 	.word	0xff73feb3
+  39bdc4:	feb0fed0 	.word	0xfeb0fed0
+  39bdc8:	edadf6f2 	.word	0xedadf6f2
+  39bdcc:	ec26dbe4 	.word	0xec26dbe4
+  39bdd0:	fef1f6f4 	.word	0xfef1f6f4
+  39bdd4:	fef1fed0 	.word	0xfef1fed0
+  39bdd8:	fd6eed2e 	.word	0xfd6eed2e
+  39bddc:	09220183 	.word	0x09220183
+  39bde0:	09a011e0 	.word	0x09a011e0
+  39bde4:	1a8001c0 	.word	0x1a8001c0
+  39bde8:	53e709c0 	.word	0x53e709c0
+  39bdec:	64665424 	.word	0x64665424
+  39bdf0:	64646465 	.word	0x64646465
+  39bdf4:	014053e4 	.word	0x014053e4
+  39bdf8:	12801240 	.word	0x12801240
+  39bdfc:	1a400180 	.word	0x1a400180
+  39be00:	01400980 	.word	0x01400980
+  39be04:	fccded90 	.word	0xfccded90
+  39be08:	f5b1fd4e 	.word	0xf5b1fd4e
+  39be0c:	e4a6ec45 	.word	0xe4a6ec45
+  39be10:	fed1fe72 	.word	0xfed1fe72
+  39be14:	f54ef52d 	.word	0xf54ef52d
+  39be18:	298321e6 	.word	0x298321e6
+  39be1c:	226019e3 	.word	0x226019e3
+  39be20:	09e01a60 	.word	0x09e01a60
+  39be24:	43c25ca5 	.word	0x43c25ca5
+  39be28:	22201a01 	.word	0x22201a01
+  39be2c:	54205c62 	.word	0x54205c62
+  39be30:	44004c41 	.word	0x44004c41
+  39be34:	c7cd11e1 	.word	0xc7cd11e1
+  39be38:	0a009ee9 	.word	0x0a009ee9
+  39be3c:	1a001a41 	.word	0x1a001a41
+  39be40:	32611a01 	.word	0x32611a01
+  39be44:	fd8e0965 	.word	0xfd8e0965
+  39be48:	fd8cedad 	.word	0xfd8cedad
+  39be4c:	e464e465 	.word	0xe464e465
+  39be50:	feb2fef1 	.word	0xfeb2fef1
+  39be54:	3245f54c 	.word	0x3245f54c
+  39be58:	29a300c0 	.word	0x29a300c0
+  39be5c:	09a02180 	.word	0x09a02180
+  39be60:	5c815c42 	.word	0x5c815c42
+  39be64:	1a205c64 	.word	0x1a205c64
+  39be68:	bf4ab6ed 	.word	0xbf4ab6ed
+  39be6c:	54401a01 	.word	0x54401a01
+  39be70:	22a04c40 	.word	0x22a04c40
+  39be74:	9e65bf8b 	.word	0x9e65bf8b
+  39be78:	bf89af09 	.word	0xbf89af09
+  39be7c:	11c0a6e6 	.word	0x11c0a6e6
+  39be80:	09c109a0 	.word	0x09c109a0
+  39be84:	114021e2 	.word	0x114021e2
+  39be88:	f5b0f58d 	.word	0xf5b0f58d
+  39be8c:	e4e6e443 	.word	0xe4e6e443
+  39be90:	feb2f711 	.word	0xfeb2f711
+  39be94:	1183fd6e 	.word	0x1183fd6e
+  39be98:	22002a61 	.word	0x22002a61
+  39be9c:	12600a60 	.word	0x12600a60
+  39bea0:	5c205400 	.word	0x5c205400
+  39bea4:	b7461a00 	.word	0xb7461a00
+  39bea8:	a6a5b6c8 	.word	0xa6a5b6c8
+  39beac:	1a40b709 	.word	0x1a40b709
+  39beb0:	b70721e1 	.word	0xb70721e1
+  39beb4:	af03b727 	.word	0xaf03b727
+  39beb8:	af28b746 	.word	0xaf28b746
+  39bebc:	b7c7a6e6 	.word	0xb7c7a6e6
+  39bec0:	11a12260 	.word	0x11a12260
+  39bec4:	22032160 	.word	0x22032160
+  39bec8:	fd6e1904 	.word	0xfd6e1904
+  39becc:	e426e486 	.word	0xe426e486
+  39bed0:	eef1feaf 	.word	0xeef1feaf
+  39bed4:	014032e6 	.word	0x014032e6
+  39bed8:	2a600960 	.word	0x2a600960
+  39bedc:	bf298de4 	.word	0xbf298de4
+  39bee0:	22202260 	.word	0x22202260
+  39bee4:	aec6b729 	.word	0xaec6b729
+  39bee8:	c767b704 	.word	0xc767b704
+  39beec:	b6cbb6e6 	.word	0xb6cbb6e6
+  39bef0:	beed2a00 	.word	0xbeed2a00
+  39bef4:	b746a6a4 	.word	0xb746a6a4
+  39bef8:	b747aee4 	.word	0xb747aee4
+  39befc:	1200a68a 	.word	0x1200a68a
+  39bf00:	2ac15be0 	.word	0x2ac15be0
+  39bf04:	11c10960 	.word	0x11c10960
+  39bf08:	ed6d1983 	.word	0xed6d1983
+  39bf0c:	e4a7e484 	.word	0xe4a7e484
+  39bf10:	29a0feb5 	.word	0x29a0feb5
+  39bf14:	11c11180 	.word	0x11c11180
+  39bf18:	9e8722c0 	.word	0x9e8722c0
+  39bf1c:	aee3cfe8 	.word	0xaee3cfe8
+  39bf20:	1200b729 	.word	0x1200b729
+  39bf24:	bfa7a6a7 	.word	0xbfa7a6a7
+  39bf28:	b6c5b6e5 	.word	0xb6c5b6e5
+  39bf2c:	21e0c767 	.word	0x21e0c767
+  39bf30:	19e05be2 	.word	0x19e05be2
+  39bf34:	b746b727 	.word	0xb746b727
+  39bf38:	bf47af05 	.word	0xbf47af05
+  39bf3c:	64442200 	.word	0x64442200
+  39bf40:	43805c82 	.word	0x43805c82
+  39bf44:	19e01261 	.word	0x19e01261
+  39bf48:	194611a3 	.word	0x194611a3
+  39bf4c:	f463dc46 	.word	0xf463dc46
+  39bf50:	3222e731 	.word	0x3222e731
+  39bf54:	12400981 	.word	0x12400981
+  39bf58:	aee8aeec 	.word	0xaee8aeec
+  39bf5c:	af26af25 	.word	0xaf26af25
+  39bf60:	2220b708 	.word	0x2220b708
+  39bf64:	bf0919a2 	.word	0xbf0919a2
+  39bf68:	b707b6c7 	.word	0xb707b6c7
+  39bf6c:	5bc23240 	.word	0x5bc23240
+  39bf70:	5ba463e5 	.word	0x5ba463e5
+  39bf74:	b6ea2a41 	.word	0xb6ea2a41
+  39bf78:	2240aec9 	.word	0x2240aec9
+  39bf7c:	5c245be4 	.word	0x5c245be4
+  39bf80:	64435be3 	.word	0x64435be3
+  39bf84:	22004be2 	.word	0x22004be2
+  39bf88:	198121a0 	.word	0x198121a0
+  39bf8c:	e486e465 	.word	0xe486e465
+  39bf90:	222021c0 	.word	0x222021c0
+  39bf94:	01a109a1 	.word	0x01a109a1
+  39bf98:	bf4daf09 	.word	0xbf4daf09
+  39bf9c:	a688aee7 	.word	0xa688aee7
+  39bfa0:	54002a60 	.word	0x54002a60
+  39bfa4:	22206ca2 	.word	0x22206ca2
+  39bfa8:	21e0aec7 	.word	0x21e0aec7
+  39bfac:	6c236421 	.word	0x6c236421
+  39bfb0:	6c446c44 	.word	0x6c446c44
+  39bfb4:	1a0053c1 	.word	0x1a0053c1
+  39bfb8:	53e319e0 	.word	0x53e319e0
+  39bfbc:	53e46465 	.word	0x53e46465
+  39bfc0:	5c835440 	.word	0x5c835440
+  39bfc4:	12200a40 	.word	0x12200a40
+  39bfc8:	198011e1 	.word	0x198011e1
+  39bfcc:	dc87d4a3 	.word	0xdc87d4a3
+  39bfd0:	1a4011e1 	.word	0x1a4011e1
+  39bfd4:	6d2401a0 	.word	0x6d2401a0
+  39bfd8:	9e490981 	.word	0x9e490981
+  39bfdc:	2aa0bf2a 	.word	0x2aa0bf2a
+  39bfe0:	5c035be1 	.word	0x5c035be1
+  39bfe4:	64234bc0 	.word	0x64234bc0
+  39bfe8:	74853260 	.word	0x74853260
+  39bfec:	64234b43 	.word	0x64234b43
+  39bff0:	64035383 	.word	0x64035383
+  39bff4:	2a406444 	.word	0x2a406444
+  39bff8:	64442220 	.word	0x64442220
+  39bffc:	53e26483 	.word	0x53e26483
+  39c000:	2a0153c1 	.word	0x2a0153c1
+  39c004:	ae87bf29 	.word	0xae87bf29
+  39c008:	12001a81 	.word	0x12001a81
+  39c00c:	006021c2 	.word	0x006021c2
+  39c010:	016009e2 	.word	0x016009e2
+  39c014:	54041a80 	.word	0x54041a80
+  39c018:	22206483 	.word	0x22206483
+  39c01c:	53e019c0 	.word	0x53e019c0
+  39c020:	74c45383 	.word	0x74c45383
+  39c024:	6c465be2 	.word	0x6c465be2
+  39c028:	19a04b42 	.word	0x19a04b42
+  39c02c:	53c06c83 	.word	0x53c06c83
+  39c030:	53c06c84 	.word	0x53c06c84
+  39c034:	b70919e0 	.word	0xb70919e0
+  39c038:	19e0aee9 	.word	0x19e0aee9
+  39c03c:	646153e0 	.word	0x646153e0
+  39c040:	a7271a60 	.word	0xa7271a60
+  39c044:	b769a6e5 	.word	0xb769a6e5
+  39c048:	22210260 	.word	0x22210260
+  39c04c:	086111a0 	.word	0x086111a0
+  39c050:	1a4011c2 	.word	0x1a4011c2
+  39c054:	4b826464 	.word	0x4b826464
+  39c058:	5c0353e3 	.word	0x5c0353e3
+  39c05c:	64670980 	.word	0x64670980
+  39c060:	53c06c62 	.word	0x53c06c62
+  39c064:	5bc46425 	.word	0x5bc46425
+  39c068:	1a006446 	.word	0x1a006446
+  39c06c:	64412221 	.word	0x64412221
+  39c070:	2a6053e1 	.word	0x2a6053e1
+  39c074:	b741b745 	.word	0xb741b745
+  39c078:	bf4ab743 	.word	0xbf4ab743
+  39c07c:	224019c2 	.word	0x224019c2
+  39c080:	b763aee5 	.word	0xb763aee5
+  39c084:	a688a6c2 	.word	0xa688a6c2
+  39c088:	1a000200 	.word	0x1a000200
+  39c08c:	1a200220 	.word	0x1a200220
+  39c090:	11a011c0 	.word	0x11a011c0
+  39c094:	5c235c05 	.word	0x5c235c05
+  39c098:	6c856462 	.word	0x6c856462
+  39c09c:	19e05c23 	.word	0x19e05c23
+  39c0a0:	644153e0 	.word	0x644153e0
+  39c0a4:	644253c1 	.word	0x644253c1
+  39c0a8:	bf6b19a3 	.word	0xbf6b19a3
+  39c0ac:	32c19624 	.word	0x32c19624
+  39c0b0:	aee81a20 	.word	0xaee81a20
+  39c0b4:	b761af01 	.word	0xb761af01
+  39c0b8:	aec6b703 	.word	0xaec6b703
+  39c0bc:	11c0aecd 	.word	0x11c0aecd
+  39c0c0:	af64af48 	.word	0xaf64af48
+  39c0c4:	c76ab703 	.word	0xc76ab703
+  39c0c8:	21e119c0 	.word	0x21e119c0
+  39c0cc:	11e00a61 	.word	0x11e00a61
+  39c0d0:	222109a0 	.word	0x222109a0
+  39c0d4:	642353c1 	.word	0x642353c1
+  39c0d8:	53c05c02 	.word	0x53c05c02
+  39c0dc:	19e06441 	.word	0x19e06441
+  39c0e0:	5c232a40 	.word	0x5c232a40
+  39c0e4:	1a006462 	.word	0x1a006462
+  39c0e8:	aec8b728 	.word	0xaec8b728
+  39c0ec:	a6e3b765 	.word	0xa6e3b765
+  39c0f0:	aee92221 	.word	0xaee92221
+  39c0f4:	bf83b744 	.word	0xbf83b744
+  39c0f8:	b707b744 	.word	0xb707b744
+  39c0fc:	2260b70c 	.word	0x2260b70c
+  39c100:	a68719e0 	.word	0xa68719e0
+  39c104:	0a60bf8a 	.word	0x0a60bf8a
+  39c108:	1a204bc5 	.word	0x1a204bc5
+  39c10c:	19a00140 	.word	0x19a00140
+  39c110:	11c01a02 	.word	0x11c01a02
+  39c114:	5c216443 	.word	0x5c216443
+  39c118:	5c415c02 	.word	0x5c415c02
+  39c11c:	b6ca2a20 	.word	0xb6ca2a20
+  39c120:	2240aec9 	.word	0x2240aec9
+  39c124:	aec82260 	.word	0xaec82260
+  39c128:	b765af09 	.word	0xb765af09
+  39c12c:	af46af43 	.word	0xaf46af43
+  39c130:	3b00a6a9 	.word	0x3b00a6a9
+  39c134:	aee39e64 	.word	0xaee39e64
+  39c138:	ae8abf26 	.word	0xae8abf26
+  39c13c:	54002220 	.word	0x54002220
+  39c140:	21e35c61 	.word	0x21e35c61
+  39c144:	0a60a66c 	.word	0x0a60a66c
+  39c148:	0a0063e5 	.word	0x0a0063e5
+  39c14c:	12020a03 	.word	0x12020a03
+  39c150:	01821a00 	.word	0x01821a00
+  39c154:	64a31a60 	.word	0x64a31a60
+  39c158:	2a803be0 	.word	0x2a803be0
+  39c15c:	af62bf24 	.word	0xaf62bf24
+  39c160:	aee5b706 	.word	0xaee5b706
+  39c164:	aeaa2a21 	.word	0xaeaa2a21
+  39c168:	af24b765 	.word	0xaf24b765
+  39c16c:	af05af22 	.word	0xaf05af22
+  39c170:	1a40a747 	.word	0x1a40a747
+  39c174:	b6ed1a01 	.word	0xb6ed1a01
+  39c178:	21c0b6ab 	.word	0x21c0b6ab
+  39c17c:	6be363e1 	.word	0x6be363e1
+  39c180:	53e26c00 	.word	0x53e26c00
+  39c184:	54051240 	.word	0x54051240
+  39c188:	02405ba6 	.word	0x02405ba6
+  39c18c:	01a01a01 	.word	0x01a01a01
+  39c190:	124019e2 	.word	0x124019e2
+  39c194:	1a21a6ac 	.word	0x1a21a6ac
+  39c198:	a6691a22 	.word	0xa6691a22
+  39c19c:	a720bf47 	.word	0xa720bf47
+  39c1a0:	bf65b743 	.word	0xbf65b743
+  39c1a4:	2203b6ea 	.word	0x2203b6ea
+  39c1a8:	af45a6c5 	.word	0xaf45a6c5
+  39c1ac:	b748aee8 	.word	0xb748aee8
+  39c1b0:	4be01200 	.word	0x4be01200
+  39c1b4:	19e15c24 	.word	0x19e15c24
+  39c1b8:	6c4819c0 	.word	0x6c4819c0
+  39c1bc:	74625380 	.word	0x74625380
+  39c1c0:	7d045ba0 	.word	0x7d045ba0
+  39c1c4:	22005341 	.word	0x22005341
+  39c1c8:	01a05c46 	.word	0x01a05c46
+  39c1cc:	128101a0 	.word	0x128101a0
+  39c1d0:	1a810160 	.word	0x1a810160
+  39c1d4:	b746a6e8 	.word	0xb746a6e8
+  39c1d8:	c7ad1a60 	.word	0xc7ad1a60
+  39c1dc:	bf64a648 	.word	0xbf64a648
+  39c1e0:	af02aec4 	.word	0xaf02aec4
+  39c1e4:	a6c6b728 	.word	0xa6c6b728
+  39c1e8:	a6c72a82 	.word	0xa6c72a82
+  39c1ec:	2a60a6a8 	.word	0x2a60a6a8
+  39c1f0:	64845401 	.word	0x64845401
+  39c1f4:	19c05c23 	.word	0x19c05c23
+  39c1f8:	5bc521c1 	.word	0x5bc521c1
+  39c1fc:	53626c44 	.word	0x53626c44
+  39c200:	7c225bc2 	.word	0x7c225bc2
+  39c204:	5c027c40 	.word	0x5c027c40
+  39c208:	2ac20200 	.word	0x2ac20200
+  39c20c:	09c00900 	.word	0x09c00900
+  39c210:	01e011e2 	.word	0x01e011e2
+  39c214:	bf67a6e8 	.word	0xbf67a6e8
+  39c218:	12409665 	.word	0x12409665
+  39c21c:	aea6beed 	.word	0xaea6beed
+  39c220:	af21b763 	.word	0xaf21b763
+  39c224:	19c1af06 	.word	0x19c1af06
+  39c228:	19e06cc4 	.word	0x19e06cc4
+  39c22c:	5c402240 	.word	0x5c402240
+  39c230:	64225c23 	.word	0x64225c23
+  39c234:	74a653c1 	.word	0x74a653c1
+  39c238:	2a604b60 	.word	0x2a604b60
+  39c23c:	64416422 	.word	0x64416422
+  39c240:	33c06c42 	.word	0x33c06c42
+  39c244:	22205441 	.word	0x22205441
+  39c248:	11e00a20 	.word	0x11e00a20
+  39c24c:	dca411a2 	.word	0xdca411a2
+  39c250:	0a4011c0 	.word	0x0a4011c0
+  39c254:	b72a0a00 	.word	0xb72a0a00
+  39c258:	1a60af2d 	.word	0x1a60af2d
+  39c25c:	b6ac2a80 	.word	0xb6ac2a80
+  39c260:	b709aee5 	.word	0xb709aee5
+  39c264:	5c2032a0 	.word	0x5c2032a0
+  39c268:	64254ba0 	.word	0x64254ba0
+  39c26c:	5c0319c1 	.word	0x5c0319c1
+  39c270:	64235bc1 	.word	0x64235bc1
+  39c274:	5be36440 	.word	0x5be36440
+  39c278:	53a06460 	.word	0x53a06460
+  39c27c:	540019c0 	.word	0x540019c0
+  39c280:	74a15c80 	.word	0x74a15c80
+  39c284:	a68b01e0 	.word	0xa68b01e0
+  39c288:	12601242 	.word	0x12601242
+  39c28c:	ecc708e0 	.word	0xecc708e0
+  39c290:	12202181 	.word	0x12202181
+  39c294:	9e4a22a1 	.word	0x9e4a22a1
+  39c298:	5cc02241 	.word	0x5cc02241
+  39c29c:	22003b60 	.word	0x22003b60
+  39c2a0:	2a60b6cc 	.word	0x2a60b6cc
+  39c2a4:	5c204ba0 	.word	0x5c204ba0
+  39c2a8:	5c0374e5 	.word	0x5c0374e5
+  39c2ac:	22016445 	.word	0x22016445
+  39c2b0:	5be16c24 	.word	0x5be16c24
+  39c2b4:	53e06440 	.word	0x53e06440
+  39c2b8:	2a816480 	.word	0x2a816480
+  39c2bc:	2260aeeb 	.word	0x2260aeeb
+  39c2c0:	224153e0 	.word	0x224153e0
+  39c2c4:	aeeab70a 	.word	0xaeeab70a
+  39c2c8:	11a011e0 	.word	0x11a011e0
+  39c2cc:	e4853265 	.word	0xe4853265
+  39c2d0:	11c1eed0 	.word	0x11c1eed0
+  39c2d4:	22020a00 	.word	0x22020a00
+  39c2d8:	43a04bc0 	.word	0x43a04bc0
+  39c2dc:	5c237d25 	.word	0x5c237d25
+  39c2e0:	53c121e2 	.word	0x53c121e2
+  39c2e4:	64436443 	.word	0x64436443
+  39c2e8:	5c044320 	.word	0x5c044320
+  39c2ec:	1a006424 	.word	0x1a006424
+  39c2f0:	644029c1 	.word	0x644029c1
+  39c2f4:	5c206422 	.word	0x5c206422
+  39c2f8:	af072240 	.word	0xaf072240
+  39c2fc:	b72b9ea6 	.word	0xb72b9ea6
+  39c300:	bf8e0200 	.word	0xbf8e0200
+  39c304:	2ac29648 	.word	0x2ac29648
+  39c308:	29a00960 	.word	0x29a00960
+  39c30c:	e464d4c4 	.word	0xe464d4c4
+  39c310:	21c4fed2 	.word	0x21c4fed2
+  39c314:	19c001a2 	.word	0x19c001a2
+  39c318:	5c426443 	.word	0x5c426443
+  39c31c:	640453c0 	.word	0x640453c0
+  39c320:	19a15c24 	.word	0x19a15c24
+  39c324:	64445c03 	.word	0x64445c03
+  39c328:	64236444 	.word	0x64236444
+  39c32c:	b6ec21e0 	.word	0xb6ec21e0
+  39c330:	2a01b6a8 	.word	0x2a01b6a8
+  39c334:	2a406440 	.word	0x2a406440
+  39c338:	af27aec7 	.word	0xaf27aec7
+  39c33c:	a707b748 	.word	0xa707b748
+  39c340:	09e0bf69 	.word	0x09e0bf69
+  39c344:	11c0bf2c 	.word	0x11c0bf2c
+  39c348:	19411240 	.word	0x19411240
+  39c34c:	ec48e465 	.word	0xec48e465
+  39c350:	feb2f6ef 	.word	0xfeb2f6ef
+  39c354:	21c219a2 	.word	0x21c219a2
+  39c358:	542221a2 	.word	0x542221a2
+  39c35c:	5bc36c47 	.word	0x5bc36c47
+  39c360:	0a606424 	.word	0x0a606424
+  39c364:	644311c0 	.word	0x644311c0
+  39c368:	11c06403 	.word	0x11c06403
+  39c36c:	af27bf26 	.word	0xaf27bf26
+  39c370:	b6c8c705 	.word	0xb6c8c705
+  39c374:	b6e711c0 	.word	0xb6e711c0
+  39c378:	aee7b6e9 	.word	0xaee7b6e9
+  39c37c:	a788af05 	.word	0xa788af05
+  39c380:	beea9748 	.word	0xbeea9748
+  39c384:	01602280 	.word	0x01602280
+  39c388:	ed8f1202 	.word	0xed8f1202
+  39c38c:	e484e465 	.word	0xe484e465
+  39c390:	f6f2fed4 	.word	0xf6f2fed4
+  39c394:	11e12104 	.word	0x11e12104
+  39c398:	220009a0 	.word	0x220009a0
+  39c39c:	4c425364 	.word	0x4c425364
+  39c3a0:	b6ca19e0 	.word	0xb6ca19e0
+  39c3a4:	2280aec7 	.word	0x2280aec7
+  39c3a8:	b66c09c0 	.word	0xb66c09c0
+  39c3ac:	b704c707 	.word	0xb704c707
+  39c3b0:	b709b6e6 	.word	0xb709b6e6
+  39c3b4:	1a60c76b 	.word	0x1a60c76b
+  39c3b8:	bf26aec5 	.word	0xbf26aec5
+  39c3bc:	aea7a76a 	.word	0xaea7a76a
+  39c3c0:	19e0b688 	.word	0x19e0b688
+  39c3c4:	3a220160 	.word	0x3a220160
+  39c3c8:	f58e1981 	.word	0xf58e1981
+  39c3cc:	e467e463 	.word	0xe467e463
+  39c3d0:	f6d1fe92 	.word	0xf6d1fe92
+  39c3d4:	11e0fd6c 	.word	0x11e0fd6c
+  39c3d8:	09812983 	.word	0x09812983
+  39c3dc:	22402220 	.word	0x22402220
+  39c3e0:	bf47b72c 	.word	0xbf47b72c
+  39c3e4:	b6e8af67 	.word	0xb6e8af67
+  39c3e8:	c78d0a20 	.word	0xc78d0a20
+  39c3ec:	af229f03 	.word	0xaf229f03
+  39c3f0:	aee5bee6 	.word	0xaee5bee6
+  39c3f4:	1200af4a 	.word	0x1200af4a
+  39c3f8:	a6872aa2 	.word	0xa6872aa2
+  39c3fc:	aeeabf27 	.word	0xaeeabf27
+  39c400:	01402ae4 	.word	0x01402ae4
+  39c404:	09a232a2 	.word	0x09a232a2
+  39c408:	fd6ffbc4 	.word	0xfd6ffbc4
+  39c40c:	ec87dc83 	.word	0xec87dc83
+  39c410:	fed4fecf 	.word	0xfed4fecf
+  39c414:	ed8efccd 	.word	0xed8efccd
+  39c418:	118029c2 	.word	0x118029c2
+  39c41c:	118119a0 	.word	0x118119a0
+  39c420:	bf4b9e49 	.word	0xbf4b9e49
+  39c424:	a6a79ee5 	.word	0xa6a79ee5
+  39c428:	022001c2 	.word	0x022001c2
+  39c42c:	b6e4afe7 	.word	0xb6e4afe7
+  39c430:	cfacaec7 	.word	0xcfacaec7
+  39c434:	5ba11180 	.word	0x5ba11180
+  39c438:	1aa25c60 	.word	0x1aa25c60
+  39c43c:	2241ae49 	.word	0x2241ae49
+  39c440:	22610980 	.word	0x22610980
+  39c444:	f5ae2980 	.word	0xf5ae2980
+  39c448:	fd8eed8f 	.word	0xfd8eed8f
+  39c44c:	e465dc66 	.word	0xe465dc66
+  39c450:	fef1f6d1 	.word	0xfef1f6d1
+  39c454:	f54ff56b 	.word	0xf54ff56b
+  39c458:	2163e5ce 	.word	0x2163e5ce
+  39c45c:	29c109a0 	.word	0x29c109a0
+  39c460:	1a401a60 	.word	0x1a401a60
+  39c464:	09c0bf2c 	.word	0x09c0bf2c
+  39c468:	5c2274e5 	.word	0x5c2274e5
+  39c46c:	b7a90900 	.word	0xb7a90900
+  39c470:	0160bf8d 	.word	0x0160bf8d
+  39c474:	44026cc4 	.word	0x44026cc4
+  39c478:	09615404 	.word	0x09615404
+  39c47c:	220001e0 	.word	0x220001e0
+  39c480:	19601a00 	.word	0x19601a00
+  39c484:	f5aef5ae 	.word	0xf5aef5ae
+  39c488:	fdf0ebc3 	.word	0xfdf0ebc3
+  39c48c:	e465ec84 	.word	0xe465ec84
+  39c490:	fed2fed2 	.word	0xfed2fed2
+  39c494:	ff35fd8f 	.word	0xff35fd8f
+  39c498:	fdb0fd2f 	.word	0xfdb0fd2f
+  39c49c:	11c2fd10 	.word	0x11c2fd10
+  39c4a0:	01e011e1 	.word	0x01e011e1
+  39c4a4:	09e02a40 	.word	0x09e02a40
+  39c4a8:	442443e1 	.word	0x442443e1
+  39c4ac:	12206c65 	.word	0x12206c65
+  39c4b0:	3bc30241 	.word	0x3bc30241
+  39c4b4:	22405c45 	.word	0x22405c45
+  39c4b8:	222011c0 	.word	0x222011c0
+  39c4bc:	21a02200 	.word	0x21a02200
+  39c4c0:	d3e4ec23 	.word	0xd3e4ec23
+  39c4c4:	ec63fdf0 	.word	0xec63fdf0
+  39c4c8:	e425f612 	.word	0xe425f612
+  39c4cc:	e467e4a6 	.word	0xe467e4a6
+  39c4d0:	fd4fff10 	.word	0xfd4fff10
+  39c4d4:	dc03e464 	.word	0xdc03e464
+  39c4d8:	d464ec43 	.word	0xd464ec43
+  39c4dc:	e463dc84 	.word	0xe463dc84
+  39c4e0:	29a4e483 	.word	0x29a4e483
+  39c4e4:	22820181 	.word	0x22820181
+  39c4e8:	22610a21 	.word	0x22610a21
+  39c4ec:	01c01980 	.word	0x01c01980
+  39c4f0:	226109c0 	.word	0x226109c0
+  39c4f4:	11a009e0 	.word	0x11a009e0
+  39c4f8:	19a10a01 	.word	0x19a10a01
+  39c4fc:	e446d4c4 	.word	0xe446d4c4
+  39c500:	ece6ec47 	.word	0xece6ec47
+  39c504:	e446ec07 	.word	0xe446ec07
+  39c508:	dca5e464 	.word	0xdca5e464
+  39c50c:	ec87ec65 	.word	0xec87ec65
+  39c510:	dc03fd8f 	.word	0xdc03fd8f
+  39c514:	e4a7e4a7 	.word	0xe4a7e4a7
+  39c518:	f466e484 	.word	0xf466e484
+  39c51c:	e445ec88 	.word	0xe445ec88
+  39c520:	dc87e4a5 	.word	0xdc87e4a5
+  39c524:	e486ec26 	.word	0xe486ec26
+  39c528:	11e311c0 	.word	0x11e311c0
+  39c52c:	0a621181 	.word	0x0a621181
+  39c530:	0a6211c0 	.word	0x0a6211c0
+  39c534:	be3801a0 	.word	0xbe3801a0
+  39c538:	f3e7dd04 	.word	0xf3e7dd04
+  39c53c:	dc85ec86 	.word	0xdc85ec86
+  39c540:	dc43e487 	.word	0xdc43e487
+  39c544:	e482dce6 	.word	0xe482dce6
+  39c548:	ec86f42a 	.word	0xec86f42a
+  39c54c:	ec67d4c4 	.word	0xec67d4c4
+
+0039c550 <rand>:
+  39c550:	e92d4010 	push	{r4, lr}
+  39c554:	e59f0034 	ldr	r0, [pc, #52]	; 39c590 <rand+0x40>
+  39c558:	e5900000 	ldr	r0, [r0]
+  39c55c:	e3a01005 	mov	r1, #5
+  39c560:	e3a02004 	mov	r2, #4
+  39c564:	e3a0300a 	mov	r3, #10
+  39c568:	e1a04000 	mov	r4, r0
+  39c56c:	e0244584 	eor	r4, r4, r4, lsl #11
+  39c570:	e0244424 	eor	r4, r4, r4, lsr #8
+  39c574:	e1a00001 	mov	r0, r1
+  39c578:	e1a01002 	mov	r1, r2
+  39c57c:	e1a02003 	mov	r2, r3
+  39c580:	e02339a3 	eor	r3, r3, r3, lsr #19
+  39c584:	e0233004 	eor	r3, r3, r4
+  39c588:	e1a00003 	mov	r0, r3
+  39c58c:	e8bd8010 	pop	{r4, pc}
+  39c590:	20003004 	.word	0x20003004
+
+0039c594 <sdiv>:
+  39c594:	e92d4010 	push	{r4, lr}
+  39c598:	e0204001 	eor	r4, r0, r1
+  39c59c:	e1a04fa4 	lsr	r4, r4, #31
+  39c5a0:	e3a02102 	mov	r2, #-2147483648	; 0x80000000
+  39c5a4:	e1100002 	tst	r0, r2
+  39c5a8:	12600000 	rsbne	r0, r0, #0
+  39c5ac:	e1110002 	tst	r1, r2
+  39c5b0:	12611000 	rsbne	r1, r1, #0
+  39c5b4:	e1a02000 	mov	r2, r0
+  39c5b8:	e3a00000 	mov	r0, #0
+  39c5bc:	e3a03001 	mov	r3, #1
+
+0039c5c0 <sdiv_pow2_loop>:
+  39c5c0:	e1a01081 	lsl	r1, r1, #1
+  39c5c4:	e1a03083 	lsl	r3, r3, #1
+  39c5c8:	e1510002 	cmp	r1, r2
+  39c5cc:	3afffffb 	bcc	39c5c0 <sdiv_pow2_loop>
+
+0039c5d0 <sdiv_shift_sub_loop>:
+  39c5d0:	e1520001 	cmp	r2, r1
+  39c5d4:	3a000001 	bcc	39c5e0 <sdiv_shift_right>
+  39c5d8:	e0422001 	sub	r2, r2, r1
+  39c5dc:	e0800003 	add	r0, r0, r3
+
+0039c5e0 <sdiv_shift_right>:
+  39c5e0:	e1a010a1 	lsr	r1, r1, #1
+  39c5e4:	e1a030a3 	lsr	r3, r3, #1
+  39c5e8:	e3530000 	cmp	r3, #0
+  39c5ec:	1afffff7 	bne	39c5d0 <sdiv_shift_sub_loop>
+  39c5f0:	e1a01002 	mov	r1, r2
+  39c5f4:	e3540001 	cmp	r4, #1
+  39c5f8:	02600000 	rsbeq	r0, r0, #0
+  39c5fc:	02611000 	rsbeq	r1, r1, #0
+  39c600:	e8bd8010 	pop	{r4, pc}
+
+0039c604 <doorImage>:
+  39c604:	00000020 	.word	0x00000020
+  39c608:	00000020 	.word	0x00000020
+  39c60c:	00010001 	.word	0x00010001
+  39c610:	08000822 	.word	0x08000822
+  39c614:	18001000 	.word	0x18001000
+  39c618:	20002000 	.word	0x20002000
+  39c61c:	20201800 	.word	0x20201800
+  39c620:	20001800 	.word	0x20001800
+  39c624:	30002800 	.word	0x30002800
+  39c628:	28002000 	.word	0x28002000
+  39c62c:	20002000 	.word	0x20002000
+  39c630:	28002800 	.word	0x28002800
+  39c634:	20002000 	.word	0x20002000
+  39c638:	20002000 	.word	0x20002000
+  39c63c:	28002800 	.word	0x28002800
+  39c640:	10001800 	.word	0x10001800
+  39c644:	08200800 	.word	0x08200800
+  39c648:	08010000 	.word	0x08010000
+  39c64c:	00000000 	.word	0x00000000
+  39c650:	08000000 	.word	0x08000000
+  39c654:	59c51820 	.word	0x59c51820
+  39c658:	62046a25 	.word	0x62046a25
+  39c65c:	62256a45 	.word	0x62256a45
+  39c660:	6a246a45 	.word	0x6a246a45
+  39c664:	720469c2 	.word	0x720469c2
+  39c668:	72057205 	.word	0x72057205
+  39c66c:	6a056a05 	.word	0x6a056a05
+  39c670:	72037223 	.word	0x72037223
+  39c674:	6a256a04 	.word	0x6a256a04
+  39c678:	6a046a25 	.word	0x6a046a25
+  39c67c:	6a256a04 	.word	0x6a256a04
+  39c680:	182059c6 	.word	0x182059c6
+  39c684:	00000800 	.word	0x00000800
+  39c688:	00000000 	.word	0x00000000
+  39c68c:	08400000 	.word	0x08400000
+  39c690:	08000000 	.word	0x08000000
+  39c694:	6a451000 	.word	0x6a451000
+  39c698:	72237264 	.word	0x72237264
+  39c69c:	59c16a43 	.word	0x59c16a43
+  39c6a0:	72427243 	.word	0x72427243
+  39c6a4:	7a227201 	.word	0x7a227201
+  39c6a8:	722371c2 	.word	0x722371c2
+  39c6ac:	72227223 	.word	0x72227223
+  39c6b0:	72007221 	.word	0x72007221
+  39c6b4:	6a237202 	.word	0x6a237202
+  39c6b8:	6a236a23 	.word	0x6a236a23
+  39c6bc:	72647223 	.word	0x72647223
+  39c6c0:	10006a46 	.word	0x10006a46
+  39c6c4:	00000800 	.word	0x00000800
+  39c6c8:	00000840 	.word	0x00000840
+  39c6cc:	00400020 	.word	0x00400020
+  39c6d0:	08200000 	.word	0x08200000
+  39c6d4:	62031000 	.word	0x62031000
+  39c6d8:	720169e1 	.word	0x720169e1
+  39c6dc:	7a837242 	.word	0x7a837242
+  39c6e0:	720069e0 	.word	0x720069e0
+  39c6e4:	71c07a21 	.word	0x71c07a21
+  39c6e8:	72027a22 	.word	0x72027a22
+  39c6ec:	72017201 	.word	0x72017201
+  39c6f0:	7a207200 	.word	0x7a207200
+  39c6f4:	72017a21 	.word	0x72017a21
+  39c6f8:	72017201 	.word	0x72017201
+  39c6fc:	69e27201 	.word	0x69e27201
+  39c700:	10006204 	.word	0x10006204
+  39c704:	00000840 	.word	0x00000840
+  39c708:	00000020 	.word	0x00000020
+  39c70c:	00000020 	.word	0x00000020
+  39c710:	08000000 	.word	0x08000000
+  39c714:	6a031800 	.word	0x6a031800
+  39c718:	7a627202 	.word	0x7a627202
+  39c71c:	b409a387 	.word	0xb409a387
+  39c720:	bc08bc4a 	.word	0xbc08bc4a
+  39c724:	cc29b3a7 	.word	0xcc29b3a7
+  39c728:	b3c9bbc8 	.word	0xb3c9bbc8
+  39c72c:	c42ab3c9 	.word	0xc42ab3c9
+  39c730:	bbe8b3c7 	.word	0xbbe8b3c7
+  39c734:	b3c8bbe9 	.word	0xb3c8bbe9
+  39c738:	b3e9bc4a 	.word	0xb3e9bc4a
+  39c73c:	72028263 	.word	0x72028263
+  39c740:	18006204 	.word	0x18006204
+  39c744:	00000820 	.word	0x00000820
+  39c748:	00010000 	.word	0x00010000
+  39c74c:	00000020 	.word	0x00000020
+  39c750:	08000000 	.word	0x08000000
+  39c754:	6a041800 	.word	0x6a041800
+  39c758:	71e171e2 	.word	0x71e171e2
+  39c75c:	b3e9bc2a 	.word	0xb3e9bc2a
+  39c760:	bbc871a0 	.word	0xbbc871a0
+  39c764:	c3c8c3e8 	.word	0xc3c8c3e8
+  39c768:	8202bbe9 	.word	0x8202bbe9
+  39c76c:	7180bc0b 	.word	0x7180bc0b
+  39c770:	79c08a22 	.word	0x79c08a22
+  39c774:	822379c1 	.word	0x822379c1
+  39c778:	bc0a7180 	.word	0xbc0a7180
+  39c77c:	720279e1 	.word	0x720279e1
+  39c780:	18006a04 	.word	0x18006a04
+  39c784:	00000800 	.word	0x00000800
+  39c788:	00210000 	.word	0x00210000
+  39c78c:	00010001 	.word	0x00010001
+  39c790:	08000001 	.word	0x08000001
+  39c794:	72252000 	.word	0x72252000
+  39c798:	79c179e3 	.word	0x79c179e3
+  39c79c:	bbeab3a9 	.word	0xbbeab3a9
+  39c7a0:	c40a79e2 	.word	0xc40a79e2
+  39c7a4:	b368c3a9 	.word	0xb368c3a9
+  39c7a8:	79c38a23 	.word	0x79c38a23
+  39c7ac:	bbcbb3ab 	.word	0xbbcbb3ab
+  39c7b0:	c3cac3ca 	.word	0xc3cac3ca
+  39c7b4:	bbebc3cb 	.word	0xbbebc3cb
+  39c7b8:	b3a9bbca 	.word	0xb3a9bbca
+  39c7bc:	79e279c1 	.word	0x79e279c1
+  39c7c0:	18007245 	.word	0x18007245
+  39c7c4:	00000800 	.word	0x00000800
+  39c7c8:	00010000 	.word	0x00010000
+  39c7cc:	00010002 	.word	0x00010002
+  39c7d0:	10000001 	.word	0x10000001
+  39c7d4:	72041800 	.word	0x72041800
+  39c7d8:	820279c2 	.word	0x820279c2
+  39c7dc:	bc0abbca 	.word	0xbc0abbca
+  39c7e0:	79c179c2 	.word	0x79c179c2
+  39c7e4:	c3ea8a03 	.word	0xc3ea8a03
+  39c7e8:	bbeb71a2 	.word	0xbbeb71a2
+  39c7ec:	bbcbbbec 	.word	0xbbcbbbec
+  39c7f0:	bb8abbca 	.word	0xbb8abbca
+  39c7f4:	bbcabb8a 	.word	0xbbcabb8a
+  39c7f8:	bbeabbca 	.word	0xbbeabbca
+  39c7fc:	71c18202 	.word	0x71c18202
+  39c800:	18007224 	.word	0x18007224
+  39c804:	00001000 	.word	0x00001000
+  39c808:	00010000 	.word	0x00010000
+  39c80c:	00000001 	.word	0x00000001
+  39c810:	08000800 	.word	0x08000800
+  39c814:	71e32000 	.word	0x71e32000
+  39c818:	79c18202 	.word	0x79c18202
+  39c81c:	c40bb3a9 	.word	0xc40bb3a9
+  39c820:	bbcabbca 	.word	0xbbcabbca
+  39c824:	bbca79e2 	.word	0xbbca79e2
+  39c828:	b3ebb3ca 	.word	0xb3ebb3ca
+  39c82c:	b3ebabca 	.word	0xb3ebabca
+  39c830:	820379e2 	.word	0x820379e2
+  39c834:	79e271a1 	.word	0x79e271a1
+  39c838:	bbeab3a9 	.word	0xbbeab3a9
+  39c83c:	7a21bbe9 	.word	0x7a21bbe9
+  39c840:	28606a02 	.word	0x28606a02
+  39c844:	00000800 	.word	0x00000800
+  39c848:	00010000 	.word	0x00010000
+  39c84c:	00000021 	.word	0x00000021
+  39c850:	18200000 	.word	0x18200000
+  39c854:	7a2359c3 	.word	0x7a2359c3
+  39c858:	bba88202 	.word	0xbba88202
+  39c85c:	6980c42a 	.word	0x6980c42a
+  39c860:	71c279e2 	.word	0x71c279e2
+  39c864:	bc0a8203 	.word	0xbc0a8203
+  39c868:	abcabc0b 	.word	0xabcabc0b
+  39c86c:	b40ab42b 	.word	0xb40ab42b
+  39c870:	ab67b3c9 	.word	0xab67b3c9
+  39c874:	79e1c42a 	.word	0x79e1c42a
+  39c878:	bbe98222 	.word	0xbbe98222
+  39c87c:	7a01bbe8 	.word	0x7a01bbe8
+  39c880:	51827243 	.word	0x51827243
+  39c884:	08001020 	.word	0x08001020
+	...
+  39c890:	10000800 	.word	0x10000800
+  39c894:	71e27245 	.word	0x71e27245
+  39c898:	c3e971c0 	.word	0xc3e971c0
+  39c89c:	bc0ab3a8 	.word	0xbc0ab3a8
+  39c8a0:	bc0bbbea 	.word	0xbc0bbbea
+  39c8a4:	bc0aab88 	.word	0xbc0aab88
+  39c8a8:	b42bab89 	.word	0xb42bab89
+  39c8ac:	b409ac09 	.word	0xb409ac09
+  39c8b0:	8221b3e8 	.word	0x8221b3e8
+  39c8b4:	b3c879e0 	.word	0xb3c879e0
+  39c8b8:	bbe87a01 	.word	0xbbe87a01
+  39c8bc:	71e0bbe8 	.word	0x71e0bbe8
+  39c8c0:	6a447222 	.word	0x6a447222
+  39c8c4:	08001000 	.word	0x08001000
+  39c8c8:	00010000 	.word	0x00010000
+  39c8cc:	00000000 	.word	0x00000000
+  39c8d0:	10000800 	.word	0x10000800
+  39c8d4:	72026a24 	.word	0x72026a24
+  39c8d8:	bbc88201 	.word	0xbbc88201
+  39c8dc:	c42bbbe9 	.word	0xc42bbbe9
+  39c8e0:	b3a9b3ca 	.word	0xb3a9b3ca
+  39c8e4:	bbeabc0a 	.word	0xbbeabc0a
+  39c8e8:	b40aabca 	.word	0xb40aabca
+  39c8ec:	69e0b409 	.word	0x69e0b409
+  39c8f0:	82017a21 	.word	0x82017a21
+  39c8f4:	bc0879e0 	.word	0xbc0879e0
+  39c8f8:	b3c87a22 	.word	0xb3c87a22
+  39c8fc:	71e0bbe8 	.word	0x71e0bbe8
+  39c900:	6a447202 	.word	0x6a447202
+  39c904:	00000800 	.word	0x00000800
+  39c908:	00010001 	.word	0x00010001
+  39c90c:	00000000 	.word	0x00000000
+  39c910:	18000800 	.word	0x18000800
+  39c914:	72036a24 	.word	0x72036a24
+  39c918:	bbe98222 	.word	0xbbe98222
+  39c91c:	b3a9b3ca 	.word	0xb3a9b3ca
+  39c920:	c42cb3aa 	.word	0xc42cb3aa
+  39c924:	71818223 	.word	0x71818223
+  39c928:	abc9c44c 	.word	0xabc9c44c
+  39c92c:	7a01b3c8 	.word	0x7a01b3c8
+  39c930:	bba8bbc9 	.word	0xbba8bbc9
+  39c934:	bbe9bc09 	.word	0xbbe9bc09
+  39c938:	bbea71c1 	.word	0xbbea71c1
+  39c93c:	7a21bbc8 	.word	0x7a21bbc8
+  39c940:	6a447222 	.word	0x6a447222
+  39c944:	08001000 	.word	0x08001000
+  39c948:	00010001 	.word	0x00010001
+  39c94c:	08200001 	.word	0x08200001
+  39c950:	10000800 	.word	0x10000800
+  39c954:	72026a24 	.word	0x72026a24
+  39c958:	bbc971c0 	.word	0xbbc971c0
+  39c95c:	c42cbbea 	.word	0xc42cbbea
+  39c960:	b389b3aa 	.word	0xb389b3aa
+  39c964:	c40a79a1 	.word	0xc40a79a1
+  39c968:	bbeab3a9 	.word	0xbbeab3a9
+  39c96c:	79c1bc09 	.word	0x79c1bc09
+  39c970:	820281e2 	.word	0x820281e2
+  39c974:	7a0271a0 	.word	0x7a0271a0
+  39c978:	bbea8223 	.word	0xbbea8223
+  39c97c:	7a42bbc8 	.word	0x7a42bbc8
+  39c980:	62237222 	.word	0x62237222
+  39c984:	08001000 	.word	0x08001000
+  39c988:	00010000 	.word	0x00010000
+  39c98c:	00000000 	.word	0x00000000
+  39c990:	10000800 	.word	0x10000800
+  39c994:	7a436a24 	.word	0x7a436a24
+  39c998:	bbe97a01 	.word	0xbbe97a01
+  39c99c:	79e271c1 	.word	0x79e271c1
+  39c9a0:	c40bbbca 	.word	0xc40bbbca
+  39c9a4:	c3e979a1 	.word	0xc3e979a1
+  39c9a8:	bbc9c42a 	.word	0xbbc9c42a
+  39c9ac:	c40bb3a8 	.word	0xc40bb3a8
+  39c9b0:	81c281a2 	.word	0x81c281a2
+  39c9b4:	b3a9c3ea 	.word	0xb3a9c3ea
+  39c9b8:	b3a9b3a9 	.word	0xb3a9b3a9
+  39c9bc:	7a21bbe8 	.word	0x7a21bbe8
+  39c9c0:	62236a00 	.word	0x62236a00
+  39c9c4:	00000800 	.word	0x00000800
+  39c9c8:	00000800 	.word	0x00000800
+  39c9cc:	00000020 	.word	0x00000020
+  39c9d0:	18200800 	.word	0x18200800
+  39c9d4:	71e16a44 	.word	0x71e16a44
+  39c9d8:	bbc97a01 	.word	0xbbc97a01
+  39c9dc:	71c2bc0a 	.word	0x71c2bc0a
+  39c9e0:	bbeabbea 	.word	0xbbeabbea
+  39c9e4:	79c081e1 	.word	0x79c081e1
+  39c9e8:	bbc881e1 	.word	0xbbc881e1
+  39c9ec:	bb89bbc9 	.word	0xbb89bbc9
+  39c9f0:	bba9cbeb 	.word	0xbba9cbeb
+  39c9f4:	bbe9bba8 	.word	0xbbe9bba8
+  39c9f8:	822279e1 	.word	0x822279e1
+  39c9fc:	7a20bbe8 	.word	0x7a20bbe8
+  39ca00:	72846a00 	.word	0x72846a00
+  39ca04:	08001000 	.word	0x08001000
+	...
+  39ca10:	20400800 	.word	0x20400800
+  39ca14:	72016a02 	.word	0x72016a02
+  39ca18:	b3a98263 	.word	0xb3a98263
+  39ca1c:	7a03b3ca 	.word	0x7a03b3ca
+  39ca20:	bbebb3aa 	.word	0xbbebb3aa
+  39ca24:	b3a8bbea 	.word	0xb3a8bbea
+  39ca28:	c3a8c409 	.word	0xc3a8c409
+  39ca2c:	c3eac3ca 	.word	0xc3eac3ca
+  39ca30:	bbe9bbc9 	.word	0xbbe9bbc9
+  39ca34:	bc07bbe7 	.word	0xbc07bbe7
+  39ca38:	bbe8bbe7 	.word	0xbbe8bbe7
+  39ca3c:	79e0bbe8 	.word	0x79e0bbe8
+  39ca40:	72637a41 	.word	0x72637a41
+  39ca44:	08001000 	.word	0x08001000
+  39ca48:	00210000 	.word	0x00210000
+  39ca4c:	00000000 	.word	0x00000000
+  39ca50:	10000800 	.word	0x10000800
+  39ca54:	7a017243 	.word	0x7a017243
+  39ca58:	bc0a71a1 	.word	0xbc0a71a1
+  39ca5c:	bbeabc0a 	.word	0xbbeabc0a
+  39ca60:	b3abbbcb 	.word	0xb3abbbcb
+  39ca64:	bc0ab3eb 	.word	0xbc0ab3eb
+  39ca68:	c3e8bba8 	.word	0xc3e8bba8
+  39ca6c:	c3e9bb88 	.word	0xc3e9bb88
+  39ca70:	b3e6b3c7 	.word	0xb3e6b3c7
+  39ca74:	f5ebf5ec 	.word	0xf5ebf5ec
+  39ca78:	bc06bc25 	.word	0xbc06bc25
+  39ca7c:	7a01bbe7 	.word	0x7a01bbe7
+  39ca80:	6a0269a0 	.word	0x6a0269a0
+  39ca84:	08002040 	.word	0x08002040
+  39ca88:	00210000 	.word	0x00210000
+  39ca8c:	00000001 	.word	0x00000001
+  39ca90:	18200800 	.word	0x18200800
+  39ca94:	7a216a02 	.word	0x7a216a02
+  39ca98:	bbea7a02 	.word	0xbbea7a02
+  39ca9c:	b3caab88 	.word	0xb3caab88
+  39caa0:	c42cbbcb 	.word	0xc42cbbcb
+  39caa4:	7a02abaa 	.word	0x7a02abaa
+  39caa8:	79a08a22 	.word	0x79a08a22
+  39caac:	c4078201 	.word	0xc4078201
+  39cab0:	f62bb3e5 	.word	0xf62bb3e5
+  39cab4:	f609f62a 	.word	0xf609f62a
+  39cab8:	b403fe4a 	.word	0xb403fe4a
+  39cabc:	8a42b3a6 	.word	0x8a42b3a6
+  39cac0:	72237a42 	.word	0x72237a42
+  39cac4:	08001000 	.word	0x08001000
+  39cac8:	00000000 	.word	0x00000000
+  39cacc:	00010000 	.word	0x00010000
+  39cad0:	10000000 	.word	0x10000000
+  39cad4:	82427223 	.word	0x82427223
+  39cad8:	b3c971c1 	.word	0xb3c971c1
+  39cadc:	bbeac42b 	.word	0xbbeac42b
+  39cae0:	bbcbb3aa 	.word	0xbbcbb3aa
+  39cae4:	7a03abaa 	.word	0x7a03abaa
+  39cae8:	c3e971a1 	.word	0xc3e971a1
+  39caec:	b3c5bbe8 	.word	0xb3c5bbe8
+  39caf0:	f608f62b 	.word	0xf608f62b
+  39caf4:	f626ff6c 	.word	0xf626ff6c
+  39caf8:	fe2af607 	.word	0xfe2af607
+  39cafc:	6960c448 	.word	0x6960c448
+  39cb00:	6a037a22 	.word	0x6a037a22
+  39cb04:	08001800 	.word	0x08001800
+  39cb08:	00400020 	.word	0x00400020
+  39cb0c:	00000021 	.word	0x00000021
+  39cb10:	18400800 	.word	0x18400800
+  39cb14:	7a017264 	.word	0x7a017264
+  39cb18:	c40a71a0 	.word	0xc40a71a0
+  39cb1c:	718079e1 	.word	0x718079e1
+  39cb20:	79c2c42b 	.word	0x79c2c42b
+  39cb24:	bc0bbc0b 	.word	0xbc0bbc0b
+  39cb28:	822279e2 	.word	0x822279e2
+  39cb2c:	c467b3a7 	.word	0xc467b3a7
+  39cb30:	ee07fe4b 	.word	0xee07fe4b
+  39cb34:	f625ff4a 	.word	0xf625ff4a
+  39cb38:	f5e8fe46 	.word	0xf5e8fe46
+  39cb3c:	7a01bbe6 	.word	0x7a01bbe6
+  39cb40:	724471e1 	.word	0x724471e1
+  39cb44:	10001800 	.word	0x10001800
+  39cb48:	00000000 	.word	0x00000000
+  39cb4c:	00210021 	.word	0x00210021
+  39cb50:	10000000 	.word	0x10000000
+  39cb54:	71e06a02 	.word	0x71e06a02
+  39cb58:	b3a9c42b 	.word	0xb3a9c42b
+  39cb5c:	cc6b79c0 	.word	0xcc6b79c0
+  39cb60:	79e2bba9 	.word	0x79e2bba9
+  39cb64:	b3eab3ca 	.word	0xb3eab3ca
+  39cb68:	71a0b3ea 	.word	0x71a0b3ea
+  39cb6c:	aba5c409 	.word	0xaba5c409
+  39cb70:	ede8edca 	.word	0xede8edca
+  39cb74:	fe66fe88 	.word	0xfe66fe88
+  39cb78:	fe4af5e5 	.word	0xfe4af5e5
+  39cb7c:	c42abbe6 	.word	0xc42abbe6
+  39cb80:	69e37a02 	.word	0x69e37a02
+  39cb84:	08001800 	.word	0x08001800
+  39cb88:	00200000 	.word	0x00200000
+  39cb8c:	73af73f0 	.word	0x73af73f0
+  39cb90:	5a460800 	.word	0x5a460800
+  39cb94:	7a226a02 	.word	0x7a226a02
+  39cb98:	c40ab3a8 	.word	0xc40ab3a8
+  39cb9c:	79c08a22 	.word	0x79c08a22
+  39cba0:	81e281c1 	.word	0x81e281c1
+  39cba4:	aba9b3ca 	.word	0xaba9b3ca
+  39cba8:	8223bc0a 	.word	0x8223bc0a
+  39cbac:	bc09bbca 	.word	0xbc09bbca
+  39cbb0:	fe4cbc26 	.word	0xfe4cbc26
+  39cbb4:	f628e586 	.word	0xf628e586
+  39cbb8:	bbc2fe49 	.word	0xbbc2fe49
+  39cbbc:	bbe8bbc5 	.word	0xbbe8bbc5
+  39cbc0:	72037a02 	.word	0x72037a02
+  39cbc4:	08007288 	.word	0x08007288
+  39cbc8:	00000820 	.word	0x00000820
+  39cbcc:	84307c10 	.word	0x84307c10
+  39cbd0:	93ed7bae 	.word	0x93ed7bae
+  39cbd4:	7a226a03 	.word	0x7a226a03
+  39cbd8:	bbc9bbc9 	.word	0xbbc9bbc9
+  39cbdc:	c3e8bba8 	.word	0xc3e8bba8
+  39cbe0:	bba9bba8 	.word	0xbba9bba8
+  39cbe4:	b3eabc0b 	.word	0xb3eabc0b
+  39cbe8:	bbcab3a9 	.word	0xbbcab3a9
+  39cbec:	b3a9bbca 	.word	0xb3a9bbca
+  39cbf0:	b3a5c429 	.word	0xb3a5c429
+  39cbf4:	eda9fe4c 	.word	0xeda9fe4c
+  39cbf8:	c426c424 	.word	0xc426c424
+  39cbfc:	c408bbe6 	.word	0xc408bbe6
+  39cc00:	722371c1 	.word	0x722371c1
+  39cc04:	100061e5 	.word	0x100061e5
+  39cc08:	08200800 	.word	0x08200800
+  39cc0c:	ce58840f 	.word	0xce58840f
+  39cc10:	940ec5d6 	.word	0x940ec5d6
+  39cc14:	71c16a03 	.word	0x71c16a03
+  39cc18:	bbeab3ea 	.word	0xbbeab3ea
+  39cc1c:	bbc8bbe8 	.word	0xbbc8bbe8
+  39cc20:	bba9cc0a 	.word	0xbba9cc0a
+  39cc24:	bc0ab3c9 	.word	0xbc0ab3c9
+  39cc28:	bbcab3c9 	.word	0xbbcab3c9
+  39cc2c:	b389bbca 	.word	0xb389bbca
+  39cc30:	bbc8bbea 	.word	0xbbc8bbea
+  39cc34:	bbe5bc06 	.word	0xbbe5bc06
+  39cc38:	bbe7bbe6 	.word	0xbbe7bbe6
+  39cc3c:	c42979e0 	.word	0xc42979e0
+  39cc40:	6a2271e0 	.word	0x6a2271e0
+  39cc44:	10006a25 	.word	0x10006a25
+  39cc48:	08000800 	.word	0x08000800
+  39cc4c:	bdd6840f 	.word	0xbdd6840f
+  39cc50:	838cd679 	.word	0x838cd679
+  39cc54:	7a647245 	.word	0x7a647245
+  39cc58:	bbeaaba9 	.word	0xbbeaaba9
+  39cc5c:	79c0bc09 	.word	0x79c0bc09
+  39cc60:	bba87180 	.word	0xbba87180
+  39cc64:	b3a9c44b 	.word	0xb3a9c44b
+  39cc68:	822379e2 	.word	0x822379e2
+  39cc6c:	b38ac40c 	.word	0xb38ac40c
+  39cc70:	bbeabbca 	.word	0xbbeabbca
+  39cc74:	c409b3a8 	.word	0xc409b3a8
+  39cc78:	79e08a42 	.word	0x79e08a42
+  39cc7c:	b3e88221 	.word	0xb3e88221
+  39cc80:	6a217220 	.word	0x6a217220
+  39cc84:	10006a65 	.word	0x10006a65
+  39cc88:	08000800 	.word	0x08000800
+  39cc8c:	c617840f 	.word	0xc617840f
+  39cc90:	8badc5f7 	.word	0x8badc5f7
+  39cc94:	61c39bcb 	.word	0x61c39bcb
+  39cc98:	abaab44d 	.word	0xabaab44d
+  39cc9c:	8222b3e9 	.word	0x8222b3e9
+  39cca0:	cc4b8222 	.word	0xcc4b8222
+  39cca4:	bc0a6980 	.word	0xbc0a6980
+  39cca8:	b368c3ea 	.word	0xb368c3ea
+  39ccac:	8a43ab48 	.word	0x8a43ab48
+  39ccb0:	b38879e2 	.word	0xb38879e2
+  39ccb4:	c40abbc9 	.word	0xc40abbc9
+  39ccb8:	b3e971c1 	.word	0xb3e971c1
+  39ccbc:	abe9b3ea 	.word	0xabe9b3ea
+  39ccc0:	6a827261 	.word	0x6a827261
+  39ccc4:	93ee5a04 	.word	0x93ee5a04
+  39ccc8:	8bf0838e 	.word	0x8bf0838e
+  39cccc:	c6377bee 	.word	0xc6377bee
+  39ccd0:	8c0ece38 	.word	0x8c0ece38
+  39ccd4:	6a2593ed 	.word	0x6a2593ed
+  39ccd8:	b44da3ed 	.word	0xb44da3ed
+  39ccdc:	69c1b40a 	.word	0x69c1b40a
+  39cce0:	b3a9b3c9 	.word	0xb3a9b3c9
+  39cce4:	c42b71c1 	.word	0xc42b71c1
+  39cce8:	cc2bb388 	.word	0xcc2bb388
+  39ccec:	8202c3e9 	.word	0x8202c3e9
+  39ccf0:	822371a0 	.word	0x822371a0
+  39ccf4:	bbeabbeb 	.word	0xbbeabbeb
+  39ccf8:	b40baba9 	.word	0xb40baba9
+  39ccfc:	ac2cb3ec 	.word	0xac2cb3ec
+  39cd00:	62426a62 	.word	0x62426a62
+  39cd04:	93ef5205 	.word	0x93ef5205
+  39cd08:	83cfd659 	.word	0x83cfd659
+  39cd0c:	8430840f 	.word	0x8430840f
+  39cd10:	83ef7bef 	.word	0x83ef7bef
+  39cd14:	93cc8bcd 	.word	0x93cc8bcd
+  39cd18:	a40d93ac 	.word	0xa40d93ac
+  39cd1c:	6a02a40c 	.word	0x6a02a40c
+  39cd20:	bc0ac44b 	.word	0xbc0ac44b
+  39cd24:	b3c971e2 	.word	0xb3c971e2
+  39cd28:	7980c40b 	.word	0x7980c40b
+  39cd2c:	79e179c1 	.word	0x79e179c1
+  39cd30:	71c0c429 	.word	0x71c0c429
+  39cd34:	6981bbea 	.word	0x6981bbea
+  39cd38:	61c3c48d 	.word	0x61c3c48d
+  39cd3c:	a3ed69e5 	.word	0xa3ed69e5
+  39cd40:	5a645a23 	.word	0x5a645a23
+  39cd44:	83ae942e 	.word	0x83ae942e
+  39cd48:	840fc5d7 	.word	0x840fc5d7
+  39cd4c:	73ce7c0e 	.word	0x73ce7c0e
+  39cd50:	c618c639 	.word	0xc618c639
+  39cd54:	d616d657 	.word	0xd616d657
+  39cd58:	93cd838d 	.word	0x93cd838d
+  39cd5c:	6a239c0c 	.word	0x6a239c0c
+  39cd60:	7a0371e2 	.word	0x7a0371e2
+  39cd64:	bbea71e2 	.word	0xbbea71e2
+  39cd68:	8a02bba9 	.word	0x8a02bba9
+  39cd6c:	b3a8c3ea 	.word	0xb3a8c3ea
+  39cd70:	71c0bbe8 	.word	0x71c0bbe8
+  39cd74:	8285bc2a 	.word	0x8285bc2a
+  39cd78:	a3ec5981 	.word	0xa3ec5981
+  39cd7c:	93ce9bce 	.word	0x93ce9bce
+  39cd80:	8c0c940c 	.word	0x8c0c940c
+  39cd84:	ce3883cd 	.word	0xce3883cd
+  39cd88:	7beece38 	.word	0x7beece38
+  39cd8c:	73ce844f 	.word	0x73ce844f
+  39cd90:	c639c639 	.word	0xc639c639
+  39cd94:	ce17bdb5 	.word	0xce17bdb5
+  39cd98:	83adde79 	.word	0x83adde79
+  39cd9c:	ac4d8bab 	.word	0xac4d8bab
+  39cda0:	abcaabeb 	.word	0xabcaabeb
+  39cda4:	aba9c46c 	.word	0xaba9c46c
+  39cda8:	81e2bba9 	.word	0x81e2bba9
+  39cdac:	bc0abba9 	.word	0xbc0abba9
+  39cdb0:	7a22b3e9 	.word	0x7a22b3e9
+  39cdb4:	a3c9b409 	.word	0xa3c9b409
+  39cdb8:	9bcda40c 	.word	0x9bcda40c
+  39cdbc:	bd35ddf8 	.word	0xbd35ddf8
+  39cdc0:	ce37d658 	.word	0xce37d658
+  39cdc4:	7bce7bcf 	.word	0x7bce7bcf
+  39cdc8:	842f842f 	.word	0x842f842f
+  39cdcc:	7c0f7c0e 	.word	0x7c0f7c0e
+  39cdd0:	7bf07c11 	.word	0x7bf07c11
+  39cdd4:	83ef8410 	.word	0x83ef8410
+  39cdd8:	8bef83cf 	.word	0x8bef83cf
+  39cddc:	93ab940d 	.word	0x93ab940d
+  39cde0:	b42babeb 	.word	0xb42babeb
+  39cde4:	b3eaa389 	.word	0xb3eaa389
+  39cde8:	79a1cc2b 	.word	0x79a1cc2b
+  39cdec:	71a28203 	.word	0x71a28203
+  39cdf0:	b3e9bbea 	.word	0xb3e9bbea
+  39cdf4:	ac2aac09 	.word	0xac2aac09
+  39cdf8:	93cd9bcb 	.word	0x93cd9bcb
+  39cdfc:	9c528b8f 	.word	0x9c528b8f
+  39ce00:	7bae83af 	.word	0x7bae83af
+  39ce04:	7c0f8410 	.word	0x7c0f8410
+  39ce08:	7c0e7bee 	.word	0x7c0e7bee
+
+0039ce0c <borderImage>:
+  39ce0c:	00000020 	.word	0x00000020
+  39ce10:	00000020 	.word	0x00000020
+  39ce14:	e444bb41 	.word	0xe444bb41
+  39ce18:	fe10fe51 	.word	0xfe10fe51
+  39ce1c:	b2c0fdcf 	.word	0xb2c0fdcf
+  39ce20:	fdeffe71 	.word	0xfdeffe71
+  39ce24:	feb1fed1 	.word	0xfeb1fed1
+  39ce28:	fd4cfed2 	.word	0xfd4cfed2
+  39ce2c:	fd8dfd6d 	.word	0xfd8dfd6d
+  39ce30:	dc23fdae 	.word	0xdc23fdae
+  39ce34:	fed2ff13 	.word	0xfed2ff13
+  39ce38:	fdeffdef 	.word	0xfdeffdef
+  39ce3c:	feb1fed1 	.word	0xfeb1fed1
+  39ce40:	fed1feb1 	.word	0xfed1feb1
+  39ce44:	fe50fdef 	.word	0xfe50fdef
+  39ce48:	b300fdcf 	.word	0xb300fdcf
+  39ce4c:	e485e485 	.word	0xe485e485
+  39ce50:	c382bb41 	.word	0xc382bb41
+  39ce54:	fe92e444 	.word	0xfe92e444
+  39ce58:	ff12fdef 	.word	0xff12fdef
+  39ce5c:	e444fd8e 	.word	0xe444fd8e
+  39ce60:	fed2fe51 	.word	0xfed2fe51
+  39ce64:	feb1feb1 	.word	0xfeb1feb1
+  39ce68:	fed2feb1 	.word	0xfed2feb1
+  39ce6c:	f610fef2 	.word	0xf610fef2
+  39ce70:	dc23fdae 	.word	0xdc23fdae
+  39ce74:	f5effe51 	.word	0xf5effe51
+  39ce78:	fed1fed2 	.word	0xfed1fed2
+  39ce7c:	feb1feb1 	.word	0xfeb1feb1
+  39ce80:	feb1feb1 	.word	0xfeb1feb1
+  39ce84:	fd4cfef2 	.word	0xfd4cfef2
+  39ce88:	e464fdae 	.word	0xe464fdae
+  39ce8c:	fdaffdcf 	.word	0xfdaffdcf
+  39ce90:	c361e444 	.word	0xc361e444
+  39ce94:	fdeffe51 	.word	0xfdeffe51
+  39ce98:	fed2fed2 	.word	0xfed2fed2
+  39ce9c:	dc23fd8e 	.word	0xdc23fd8e
+  39cea0:	fed1fe30 	.word	0xfed1fe30
+  39cea4:	feb1feb1 	.word	0xfeb1feb1
+  39cea8:	feb1feb1 	.word	0xfeb1feb1
+  39ceac:	fef2feb1 	.word	0xfef2feb1
+  39ceb0:	dc23fd8e 	.word	0xdc23fd8e
+  39ceb4:	fed2fe51 	.word	0xfed2fe51
+  39ceb8:	feb1feb1 	.word	0xfeb1feb1
+  39cebc:	feb1feb1 	.word	0xfeb1feb1
+  39cec0:	feb1feb1 	.word	0xfeb1feb1
+  39cec4:	f610fed1 	.word	0xf610fed1
+  39cec8:	dc44fdae 	.word	0xdc44fdae
+  39cecc:	ff12fd8e 	.word	0xff12fd8e
+  39ced0:	bb20ff75 	.word	0xbb20ff75
+  39ced4:	fed2fe0f 	.word	0xfed2fe0f
+  39ced8:	fed2feb1 	.word	0xfed2feb1
+  39cedc:	dc23fd8e 	.word	0xdc23fd8e
+  39cee0:	feb1ff33 	.word	0xfeb1ff33
+  39cee4:	feb1feb1 	.word	0xfeb1feb1
+  39cee8:	feb1feb1 	.word	0xfeb1feb1
+  39ceec:	fed2feb1 	.word	0xfed2feb1
+  39cef0:	dc44fd8e 	.word	0xdc44fd8e
+  39cef4:	fed2fd8e 	.word	0xfed2fd8e
+  39cef8:	feb1feb1 	.word	0xfeb1feb1
+  39cefc:	feb1feb1 	.word	0xfeb1feb1
+  39cf00:	feb1feb1 	.word	0xfeb1feb1
+  39cf04:	fef2feb1 	.word	0xfef2feb1
+  39cf08:	dc44fd8e 	.word	0xdc44fd8e
+  39cf0c:	fed2fd8e 	.word	0xfed2fd8e
+  39cf10:	bb20ff13 	.word	0xbb20ff13
+  39cf14:	fed1fe0f 	.word	0xfed1fe0f
+  39cf18:	fed2feb1 	.word	0xfed2feb1
+  39cf1c:	dc23fd8e 	.word	0xdc23fd8e
+  39cf20:	fed1fe30 	.word	0xfed1fe30
+  39cf24:	feb1feb1 	.word	0xfeb1feb1
+  39cf28:	feb1feb1 	.word	0xfeb1feb1
+  39cf2c:	ff12feb1 	.word	0xff12feb1
+  39cf30:	dc44fd8e 	.word	0xdc44fd8e
+  39cf34:	ff12fd8e 	.word	0xff12fd8e
+  39cf38:	feb1feb1 	.word	0xfeb1feb1
+  39cf3c:	feb1feb1 	.word	0xfeb1feb1
+  39cf40:	feb1feb1 	.word	0xfeb1feb1
+  39cf44:	fed2feb1 	.word	0xfed2feb1
+  39cf48:	dc23fd8e 	.word	0xdc23fd8e
+  39cf4c:	fed1fe71 	.word	0xfed1fe71
+  39cf50:	bb20ff13 	.word	0xbb20ff13
+  39cf54:	ff13fe51 	.word	0xff13fe51
+  39cf58:	ff12fed2 	.word	0xff12fed2
+  39cf5c:	dc23fd8e 	.word	0xdc23fd8e
+  39cf60:	fed2fe51 	.word	0xfed2fe51
+  39cf64:	feb1fed1 	.word	0xfeb1fed1
+  39cf68:	feb1feb1 	.word	0xfeb1feb1
+  39cf6c:	fd4cff12 	.word	0xfd4cff12
+  39cf70:	dc44fdae 	.word	0xdc44fdae
+  39cf74:	fd4cfdcf 	.word	0xfd4cfdcf
+  39cf78:	fed2ff12 	.word	0xfed2ff12
+  39cf7c:	fed2fed2 	.word	0xfed2fed2
+  39cf80:	fed2fed2 	.word	0xfed2fed2
+  39cf84:	ff12fed2 	.word	0xff12fed2
+  39cf88:	dc44fd8e 	.word	0xdc44fd8e
+  39cf8c:	ff12fdaf 	.word	0xff12fdaf
+  39cf90:	bb20ff54 	.word	0xbb20ff54
+  39cf94:	dc23e465 	.word	0xdc23e465
+  39cf98:	fd8efdaf 	.word	0xfd8efdaf
+  39cf9c:	dc23fdae 	.word	0xdc23fdae
+  39cfa0:	f630fd8e 	.word	0xf630fd8e
+  39cfa4:	fef2f60f 	.word	0xfef2f60f
+  39cfa8:	ff33fef3 	.word	0xff33fef3
+  39cfac:	fdaefd6d 	.word	0xfdaefd6d
+  39cfb0:	e465fdcf 	.word	0xe465fdcf
+  39cfb4:	fdcfdc44 	.word	0xfdcfdc44
+  39cfb8:	fd8efdae 	.word	0xfd8efdae
+  39cfbc:	fd8efd8e 	.word	0xfd8efd8e
+  39cfc0:	fd8efd8e 	.word	0xfd8efd8e
+  39cfc4:	fd8efd8e 	.word	0xfd8efd8e
+  39cfc8:	e465fdcf 	.word	0xe465fdcf
+  39cfcc:	fdafdc44 	.word	0xfdafdc44
+  39cfd0:	bb40fdcf 	.word	0xbb40fdcf
+  39cfd4:	e465bb20 	.word	0xe465bb20
+  39cfd8:	dc02dc23 	.word	0xdc02dc23
+  39cfdc:	fdaefd8e 	.word	0xfdaefd8e
+  39cfe0:	fd6dfd8d 	.word	0xfd6dfd8d
+  39cfe4:	fd6dfd8d 	.word	0xfd6dfd8d
+  39cfe8:	dbe3dbc2 	.word	0xdbe3dbc2
+  39cfec:	dc23dc23 	.word	0xdc23dc23
+  39cff0:	e444dc23 	.word	0xe444dc23
+  39cff4:	e444e444 	.word	0xe444e444
+  39cff8:	eca6b2e0 	.word	0xeca6b2e0
+  39cffc:	dc44e465 	.word	0xdc44e465
+  39d000:	dc23dc23 	.word	0xdc23dc23
+  39d004:	dc23dc23 	.word	0xdc23dc23
+  39d008:	e444dc23 	.word	0xe444dc23
+  39d00c:	dc23e444 	.word	0xdc23e444
+  39d010:	c361e464 	.word	0xc361e464
+  39d014:	fe72e444 	.word	0xfe72e444
+  39d018:	fe30fe51 	.word	0xfe30fe51
+  39d01c:	f60fff12 	.word	0xf60fff12
+  39d020:	fe50fe10 	.word	0xfe50fe10
+  39d024:	ff12fd6d 	.word	0xff12fd6d
+  39d028:	fef3fef3 	.word	0xfef3fef3
+  39d02c:	fe30ff13 	.word	0xfe30ff13
+  39d030:	fe51fe51 	.word	0xfe51fe51
+  39d034:	fe72fe51 	.word	0xfe72fe51
+  39d038:	bb20ec85 	.word	0xbb20ec85
+  39d03c:	fdf0eca6 	.word	0xfdf0eca6
+  39d040:	ff13fe51 	.word	0xff13fe51
+  39d044:	fe30ff13 	.word	0xfe30ff13
+  39d048:	fe51fe51 	.word	0xfe51fe51
+  39d04c:	ff33fe30 	.word	0xff33fe30
+  39d050:	bb40fdcf 	.word	0xbb40fdcf
+  39d054:	fed2fe30 	.word	0xfed2fe30
+  39d058:	fed1fed1 	.word	0xfed1fed1
+  39d05c:	fed1feb1 	.word	0xfed1feb1
+  39d060:	f60ffed2 	.word	0xf60ffed2
+  39d064:	fed2fd6d 	.word	0xfed2fd6d
+  39d068:	feb1feb1 	.word	0xfeb1feb1
+  39d06c:	fed2feb1 	.word	0xfed2feb1
+  39d070:	fdeffdef 	.word	0xfdeffdef
+  39d074:	ff33fef2 	.word	0xff33fef2
+  39d078:	bb41e424 	.word	0xbb41e424
+  39d07c:	e444bb41 	.word	0xe444bb41
+  39d080:	fed1fe51 	.word	0xfed1fe51
+  39d084:	fed1feb1 	.word	0xfed1feb1
+  39d088:	fed1fed1 	.word	0xfed1fed1
+  39d08c:	fed2fed1 	.word	0xfed2fed1
+  39d090:	bb40fdae 	.word	0xbb40fdae
+  39d094:	feb1fed2 	.word	0xfeb1fed2
+  39d098:	feb1feb1 	.word	0xfeb1feb1
+  39d09c:	feb1feb1 	.word	0xfeb1feb1
+  39d0a0:	fef2feb1 	.word	0xfef2feb1
+  39d0a4:	fed2fd4c 	.word	0xfed2fd4c
+  39d0a8:	feb1feb1 	.word	0xfeb1feb1
+  39d0ac:	feb1feb1 	.word	0xfeb1feb1
+  39d0b0:	fef2fed1 	.word	0xfef2fed1
+  39d0b4:	f630fdef 	.word	0xf630fdef
+  39d0b8:	eca6fdcf 	.word	0xeca6fdcf
+  39d0bc:	e465bb41 	.word	0xe465bb41
+  39d0c0:	fed2fe51 	.word	0xfed2fe51
+  39d0c4:	feb1feb1 	.word	0xfeb1feb1
+  39d0c8:	fed1feb1 	.word	0xfed1feb1
+  39d0cc:	fed2feb1 	.word	0xfed2feb1
+  39d0d0:	bb40fdae 	.word	0xbb40fdae
+  39d0d4:	fed1fdef 	.word	0xfed1fdef
+  39d0d8:	feb1feb1 	.word	0xfeb1feb1
+  39d0dc:	feb1feb1 	.word	0xfeb1feb1
+  39d0e0:	fed2feb1 	.word	0xfed2feb1
+  39d0e4:	ff12fd4c 	.word	0xff12fd4c
+  39d0e8:	feb1feb1 	.word	0xfeb1feb1
+  39d0ec:	fed1feb1 	.word	0xfed1feb1
+  39d0f0:	f60ffed2 	.word	0xf60ffed2
+  39d0f4:	fd6dfe50 	.word	0xfd6dfe50
+  39d0f8:	eca6fdcf 	.word	0xeca6fdcf
+  39d0fc:	e465bb41 	.word	0xe465bb41
+  39d100:	fdeffe51 	.word	0xfdeffe51
+  39d104:	fed1fed2 	.word	0xfed1fed2
+  39d108:	f5cffed2 	.word	0xf5cffed2
+  39d10c:	fed2fed1 	.word	0xfed2fed1
+  39d110:	bb40fdae 	.word	0xbb40fdae
+  39d114:	fed2fe10 	.word	0xfed2fe10
+  39d118:	feb1feb1 	.word	0xfeb1feb1
+  39d11c:	feb1feb1 	.word	0xfeb1feb1
+  39d120:	fed2feb1 	.word	0xfed2feb1
+  39d124:	fd6dfd6d 	.word	0xfd6dfd6d
+  39d128:	fed1ff12 	.word	0xfed1ff12
+  39d12c:	f60ffed2 	.word	0xf60ffed2
+  39d130:	fd6df630 	.word	0xfd6df630
+  39d134:	fdcffdae 	.word	0xfdcffdae
+  39d138:	bb41e485 	.word	0xbb41e485
+  39d13c:	e465c361 	.word	0xe465c361
+  39d140:	fe30fe71 	.word	0xfe30fe71
+  39d144:	fe0ffe0f 	.word	0xfe0ffe0f
+  39d148:	fed2fdef 	.word	0xfed2fdef
+  39d14c:	ff12feb1 	.word	0xff12feb1
+  39d150:	bb40fdae 	.word	0xbb40fdae
+  39d154:	f610fd8e 	.word	0xf610fd8e
+  39d158:	fed2fef2 	.word	0xfed2fef2
+  39d15c:	fed2fed2 	.word	0xfed2fed2
+  39d160:	ff12fed2 	.word	0xff12fed2
+  39d164:	dc23fd8e 	.word	0xdc23fd8e
+  39d168:	f630fd8e 	.word	0xf630fd8e
+  39d16c:	fdaefe51 	.word	0xfdaefe51
+  39d170:	fdcffdcf 	.word	0xfdcffdcf
+  39d174:	eca6dc44 	.word	0xeca6dc44
+  39d178:	c382bb41 	.word	0xc382bb41
+  39d17c:	e485c361 	.word	0xe485c361
+  39d180:	fe50fdaf 	.word	0xfe50fdaf
+  39d184:	fe30fe30 	.word	0xfe30fe30
+  39d188:	fef2fe10 	.word	0xfef2fe10
+  39d18c:	fd4cff12 	.word	0xfd4cff12
+  39d190:	bb40fdf0 	.word	0xbb40fdf0
+  39d194:	fdcfe464 	.word	0xfdcfe464
+  39d198:	fd8efd8e 	.word	0xfd8efd8e
+  39d19c:	fd8efd8e 	.word	0xfd8efd8e
+  39d1a0:	fd8efd8e 	.word	0xfd8efd8e
+  39d1a4:	dc44fdcf 	.word	0xdc44fdcf
+  39d1a8:	fdaefdcf 	.word	0xfdaefdcf
+  39d1ac:	b300e444 	.word	0xb300e444
+  39d1b0:	eca6bb20 	.word	0xeca6bb20
+  39d1b4:	bb41ecc7 	.word	0xbb41ecc7
+  39d1b8:	c382c382 	.word	0xc382c382
+  39d1bc:	ecc7c361 	.word	0xecc7c361
+  39d1c0:	fdcfdc44 	.word	0xfdcfdc44
+  39d1c4:	fdaefdae 	.word	0xfdaefdae
+  39d1c8:	fd8efdae 	.word	0xfd8efdae
+  39d1cc:	fdf0fdae 	.word	0xfdf0fdae
+  39d1d0:	c361e485 	.word	0xc361e485
+  39d1d4:	e424bb20 	.word	0xe424bb20
+  39d1d8:	e465dc44 	.word	0xe465dc44
+  39d1dc:	dc23dc23 	.word	0xdc23dc23
+  39d1e0:	dc23dc23 	.word	0xdc23dc23
+  39d1e4:	e444dc23 	.word	0xe444dc23
+  39d1e8:	fdafdc02 	.word	0xfdafdc02
+  39d1ec:	ec85dc23 	.word	0xec85dc23
+  39d1f0:	bb41bb20 	.word	0xbb41bb20
+  39d1f4:	c382c361 	.word	0xc382c361
+  39d1f8:	c361c361 	.word	0xc361c361
+  39d1fc:	bb20c361 	.word	0xbb20c361
+  39d200:	dc23e465 	.word	0xdc23e465
+  39d204:	dc23dc23 	.word	0xdc23dc23
+  39d208:	e485dc44 	.word	0xe485dc44
+  39d20c:	b2e0b2c0 	.word	0xb2e0b2c0
+  39d210:	c382bb41 	.word	0xc382bb41
+  39d214:	ff75e423 	.word	0xff75e423
+  39d218:	dc23fdaf 	.word	0xdc23fdaf
+  39d21c:	fe51fe92 	.word	0xfe51fe92
+  39d220:	fe51fe51 	.word	0xfe51fe51
+  39d224:	fe51fe51 	.word	0xfe51fe51
+  39d228:	fef2fe30 	.word	0xfef2fe30
+  39d22c:	ff33fef3 	.word	0xff33fef3
+  39d230:	eca6fdcf 	.word	0xeca6fdcf
+  39d234:	bb41c361 	.word	0xbb41c361
+  39d238:	e465ecc7 	.word	0xe465ecc7
+  39d23c:	e423e465 	.word	0xe423e465
+  39d240:	fe51fe72 	.word	0xfe51fe72
+  39d244:	fe71fe51 	.word	0xfe71fe51
+  39d248:	dc23fdcf 	.word	0xdc23fdcf
+  39d24c:	ff75ff75 	.word	0xff75ff75
+  39d250:	c361e424 	.word	0xc361e424
+  39d254:	fef2fe51 	.word	0xfef2fe51
+  39d258:	dc23fd8e 	.word	0xdc23fd8e
+  39d25c:	fed2fe30 	.word	0xfed2fe30
+  39d260:	fed1fed1 	.word	0xfed1fed1
+  39d264:	fed1fed1 	.word	0xfed1fed1
+  39d268:	fed1fed1 	.word	0xfed1fed1
+  39d26c:	fed2fed1 	.word	0xfed2fed1
+  39d270:	e485fd8e 	.word	0xe485fd8e
+  39d274:	ec85bb20 	.word	0xec85bb20
+  39d278:	fe72dc03 	.word	0xfe72dc03
+  39d27c:	fef3ff13 	.word	0xfef3ff13
+  39d280:	fed1fed1 	.word	0xfed1fed1
+  39d284:	f60ffed2 	.word	0xf60ffed2
+  39d288:	dc23fdae 	.word	0xdc23fdae
+  39d28c:	feb1fef3 	.word	0xfeb1fef3
+  39d290:	bb20ff75 	.word	0xbb20ff75
+  39d294:	ff12fe0f 	.word	0xff12fe0f
+  39d298:	dbe2fd8e 	.word	0xdbe2fd8e
+  39d29c:	feb1ff13 	.word	0xfeb1ff13
+  39d2a0:	feb1feb1 	.word	0xfeb1feb1
+  39d2a4:	feb1feb1 	.word	0xfeb1feb1
+  39d2a8:	f5effed2 	.word	0xf5effed2
+  39d2ac:	fef2f5ef 	.word	0xfef2f5ef
+  39d2b0:	e465fd8e 	.word	0xe465fd8e
+  39d2b4:	fe72e444 	.word	0xfe72e444
+  39d2b8:	fed2ff13 	.word	0xfed2ff13
+  39d2bc:	feb1feb1 	.word	0xfeb1feb1
+  39d2c0:	feb1feb1 	.word	0xfeb1feb1
+  39d2c4:	fef2feb1 	.word	0xfef2feb1
+  39d2c8:	dc23fd8e 	.word	0xdc23fd8e
+  39d2cc:	feb1fef3 	.word	0xfeb1fef3
+  39d2d0:	bb20ff13 	.word	0xbb20ff13
+  39d2d4:	fe10fe30 	.word	0xfe10fe30
+  39d2d8:	fd8efd8d 	.word	0xfd8efd8d
+  39d2dc:	feb1fed2 	.word	0xfeb1fed2
+  39d2e0:	feb1feb1 	.word	0xfeb1feb1
+  39d2e4:	fed1feb1 	.word	0xfed1feb1
+  39d2e8:	fed2f5cf 	.word	0xfed2f5cf
+  39d2ec:	fed2fed1 	.word	0xfed2fed1
+  39d2f0:	dc23fd8e 	.word	0xdc23fd8e
+  39d2f4:	fed2fe72 	.word	0xfed2fe72
+  39d2f8:	f5cffed1 	.word	0xf5cffed1
+  39d2fc:	feb1fed1 	.word	0xfeb1fed1
+  39d300:	feb1feb1 	.word	0xfeb1feb1
+  39d304:	fed2feb1 	.word	0xfed2feb1
+  39d308:	dc23fd8e 	.word	0xdc23fd8e
+  39d30c:	feb1fef3 	.word	0xfeb1fef3
+  39d310:	bb20ff54 	.word	0xbb20ff54
+  39d314:	f650fd8e 	.word	0xf650fd8e
+  39d318:	fd6dfd8d 	.word	0xfd6dfd8d
+  39d31c:	feb1fed2 	.word	0xfeb1fed2
+  39d320:	feb1feb1 	.word	0xfeb1feb1
+  39d324:	feb1feb1 	.word	0xfeb1feb1
+  39d328:	feb1fed1 	.word	0xfeb1fed1
+  39d32c:	fed2fed1 	.word	0xfed2fed1
+  39d330:	dc23fd8e 	.word	0xdc23fd8e
+  39d334:	feb1ff33 	.word	0xfeb1ff33
+  39d338:	fed1feb1 	.word	0xfed1feb1
+  39d33c:	feb1feb1 	.word	0xfeb1feb1
+  39d340:	feb1feb1 	.word	0xfeb1feb1
+  39d344:	ff12feb1 	.word	0xff12feb1
+  39d348:	dc23fd8e 	.word	0xdc23fd8e
+  39d34c:	ff12ff33 	.word	0xff12ff33
+  39d350:	bb40fd8e 	.word	0xbb40fd8e
+  39d354:	fdcfdc44 	.word	0xfdcfdc44
+  39d358:	fd8efdae 	.word	0xfd8efdae
+  39d35c:	fed2ff12 	.word	0xfed2ff12
+  39d360:	fed2fed2 	.word	0xfed2fed2
+  39d364:	fed1fed1 	.word	0xfed1fed1
+  39d368:	fed2fed1 	.word	0xfed2fed1
+  39d36c:	ff12f5ef 	.word	0xff12f5ef
+  39d370:	dc44fd8e 	.word	0xdc44fd8e
+  39d374:	ff12fd8e 	.word	0xff12fd8e
+  39d378:	fed2fed2 	.word	0xfed2fed2
+  39d37c:	fed2fed2 	.word	0xfed2fed2
+  39d380:	fef3fef3 	.word	0xfef3fef3
+  39d384:	fd4cff12 	.word	0xfd4cff12
+  39d388:	dc44fdcf 	.word	0xdc44fdcf
+  39d38c:	fd8efdaf 	.word	0xfd8efdaf
+  39d390:	bb40fdf0 	.word	0xbb40fdf0
+  39d394:	e465eca6 	.word	0xe465eca6
+  39d398:	dc44e465 	.word	0xdc44e465
+  39d39c:	fd8efdaf 	.word	0xfd8efdaf
+  39d3a0:	fd6dfd8e 	.word	0xfd6dfd8e
+  39d3a4:	fe10f630 	.word	0xfe10f630
+  39d3a8:	fe10fe10 	.word	0xfe10fe10
+  39d3ac:	fd6dfe50 	.word	0xfd6dfe50
+  39d3b0:	dc44fdcf 	.word	0xdc44fdcf
+  39d3b4:	fdafdc44 	.word	0xfdafdc44
+  39d3b8:	fd8efd8e 	.word	0xfd8efd8e
+  39d3bc:	fdcffd8e 	.word	0xfdcffd8e
+  39d3c0:	dc23e424 	.word	0xdc23e424
+  39d3c4:	fdcffdaf 	.word	0xfdcffdaf
+  39d3c8:	e486dc44 	.word	0xe486dc44
+  39d3cc:	e465e465 	.word	0xe465e465
+  39d3d0:	c361eca6 	.word	0xc361eca6
+  39d3d4:	eca6bb20 	.word	0xeca6bb20
+  39d3d8:	e444e444 	.word	0xe444e444
+  39d3dc:	dc23dc23 	.word	0xdc23dc23
+  39d3e0:	fdaedc02 	.word	0xfdaedc02
+  39d3e4:	fdaefd8d 	.word	0xfdaefd8d
+  39d3e8:	fd6dfd6d 	.word	0xfd6dfd6d
+  39d3ec:	fd8efd6d 	.word	0xfd8efd6d
+  39d3f0:	fdd0dbc1 	.word	0xfdd0dbc1
+  39d3f4:	dc23dc23 	.word	0xdc23dc23
+  39d3f8:	e465e465 	.word	0xe465e465
+  39d3fc:	bb20eca6 	.word	0xbb20eca6
+  39d400:	eca6bb20 	.word	0xeca6bb20
+  39d404:	dc23e465 	.word	0xdc23e465
+  39d408:	e444e444 	.word	0xe444e444
+  39d40c:	e465e444 	.word	0xe465e444
+  39d410:	c382b300 	.word	0xc382b300
+  39d414:	dc03eca6 	.word	0xdc03eca6
+  39d418:	fe51fe72 	.word	0xfe51fe72
+  39d41c:	fe51fe51 	.word	0xfe51fe51
+  39d420:	fe50fe51 	.word	0xfe50fe51
+  39d424:	dc02fdae 	.word	0xdc02fdae
+  39d428:	fe10fe51 	.word	0xfe10fe51
+  39d42c:	fef2f60f 	.word	0xfef2f60f
+  39d430:	fed2fef3 	.word	0xfed2fef3
+  39d434:	ff54fef3 	.word	0xff54fef3
+  39d438:	eca6dbe3 	.word	0xeca6dbe3
+  39d43c:	c361bb20 	.word	0xc361bb20
+  39d440:	e444ecc7 	.word	0xe444ecc7
+  39d444:	ff54dbe3 	.word	0xff54dbe3
+  39d448:	fef3fef3 	.word	0xfef3fef3
+  39d44c:	ff33fef3 	.word	0xff33fef3
+  39d450:	bb40fdf0 	.word	0xbb40fdf0
+  39d454:	ff54e444 	.word	0xff54e444
+  39d458:	f5effed2 	.word	0xf5effed2
+  39d45c:	fed1fed2 	.word	0xfed1fed2
+  39d460:	fe10fed2 	.word	0xfe10fed2
+  39d464:	dc23fdae 	.word	0xdc23fdae
+  39d468:	fed1ff13 	.word	0xfed1ff13
+  39d46c:	feb1fed1 	.word	0xfeb1fed1
+  39d470:	fed1feb1 	.word	0xfed1feb1
+  39d474:	fed1fed1 	.word	0xfed1fed1
+  39d478:	dbe3ff54 	.word	0xdbe3ff54
+  39d47c:	bb41ecc7 	.word	0xbb41ecc7
+  39d480:	ff54e403 	.word	0xff54e403
+  39d484:	feb1fef3 	.word	0xfeb1fef3
+  39d488:	fed1fed1 	.word	0xfed1fed1
+  39d48c:	ff12feb1 	.word	0xff12feb1
+  39d490:	bb40fdae 	.word	0xbb40fdae
+  39d494:	fef3dc23 	.word	0xfef3dc23
+  39d498:	fed1feb1 	.word	0xfed1feb1
+  39d49c:	feb1feb1 	.word	0xfeb1feb1
+  39d4a0:	f60ffed1 	.word	0xf60ffed1
+  39d4a4:	dc23fdae 	.word	0xdc23fdae
+  39d4a8:	feb1fef3 	.word	0xfeb1fef3
+  39d4ac:	feb1feb1 	.word	0xfeb1feb1
+  39d4b0:	f5effed1 	.word	0xf5effed1
+  39d4b4:	fdeffdef 	.word	0xfdeffdef
+  39d4b8:	ff75fed1 	.word	0xff75fed1
+  39d4bc:	bb00e424 	.word	0xbb00e424
+  39d4c0:	feb1ff75 	.word	0xfeb1ff75
+  39d4c4:	fed2feb1 	.word	0xfed2feb1
+  39d4c8:	f5eff5ef 	.word	0xf5eff5ef
+  39d4cc:	fd4cfef2 	.word	0xfd4cfef2
+  39d4d0:	bb40fdcf 	.word	0xbb40fdcf
+  39d4d4:	ff12fd8e 	.word	0xff12fd8e
+  39d4d8:	feb1feb1 	.word	0xfeb1feb1
+  39d4dc:	feb1feb1 	.word	0xfeb1feb1
+  39d4e0:	fef2feb1 	.word	0xfef2feb1
+  39d4e4:	dc23fd8e 	.word	0xdc23fd8e
+  39d4e8:	feb1ff33 	.word	0xfeb1ff33
+  39d4ec:	feb1feb1 	.word	0xfeb1feb1
+  39d4f0:	fed1feb1 	.word	0xfed1feb1
+  39d4f4:	f5effed2 	.word	0xf5effed2
+  39d4f8:	fd4cff12 	.word	0xfd4cff12
+  39d4fc:	b2c0fdf0 	.word	0xb2c0fdf0
+  39d500:	feb1ff13 	.word	0xfeb1ff13
+  39d504:	f5cffed1 	.word	0xf5cffed1
+  39d508:	fed1fed2 	.word	0xfed1fed2
+  39d50c:	fd6dfed2 	.word	0xfd6dfed2
+  39d510:	bb40fdcf 	.word	0xbb40fdcf
+  39d514:	fd4cfd8d 	.word	0xfd4cfd8d
+  39d518:	feb1ff12 	.word	0xfeb1ff12
+  39d51c:	feb1feb1 	.word	0xfeb1feb1
+  39d520:	ff12feb1 	.word	0xff12feb1
+  39d524:	dc02fd8e 	.word	0xdc02fd8e
+  39d528:	ff12fd6d 	.word	0xff12fd6d
+  39d52c:	feb1fed2 	.word	0xfeb1fed2
+  39d530:	fed2feb1 	.word	0xfed2feb1
+  39d534:	ff12fed2 	.word	0xff12fed2
+  39d538:	fd8dfd4c 	.word	0xfd8dfd4c
+  39d53c:	e424fdae 	.word	0xe424fdae
+  39d540:	feb1ff13 	.word	0xfeb1ff13
+  39d544:	fed1feb1 	.word	0xfed1feb1
+  39d548:	fed2feb1 	.word	0xfed2feb1
+  39d54c:	fd6dff12 	.word	0xfd6dff12
+  39d550:	bb40fdcf 	.word	0xbb40fdcf
+  39d554:	fd8dfdcf 	.word	0xfd8dfdcf
+  39d558:	ff12fd4c 	.word	0xff12fd4c
+  39d55c:	fed2fed2 	.word	0xfed2fed2
+  39d560:	fd4cff12 	.word	0xfd4cff12
+  39d564:	fed3fd8d 	.word	0xfed3fd8d
+  39d568:	fd6dfd8d 	.word	0xfd6dfd8d
+  39d56c:	ff12fd4c 	.word	0xff12fd4c
+  39d570:	fd4cff12 	.word	0xfd4cff12
+  39d574:	fd6dfd6d 	.word	0xfd6dfd6d
+  39d578:	fd8dfd8d 	.word	0xfd8dfd8d
+  39d57c:	e444fdae 	.word	0xe444fdae
+  39d580:	fef2fe31 	.word	0xfef2fe31
+  39d584:	fed2fed2 	.word	0xfed2fed2
+  39d588:	fd4cff12 	.word	0xfd4cff12
+  39d58c:	fd8dfd6d 	.word	0xfd8dfd6d
+  39d590:	bb40fe10 	.word	0xbb40fe10
+  39d594:	fe10b300 	.word	0xfe10b300
+  39d598:	fdaefdcf 	.word	0xfdaefdcf
+  39d59c:	fdaefdae 	.word	0xfdaefdae
+  39d5a0:	fdcffdae 	.word	0xfdcffdae
+  39d5a4:	b2a0fe10 	.word	0xb2a0fe10
+  39d5a8:	fdcffe10 	.word	0xfdcffe10
+  39d5ac:	fdaefdcf 	.word	0xfdaefdcf
+  39d5b0:	fdcffdae 	.word	0xfdcffdae
+  39d5b4:	fdcffdcf 	.word	0xfdcffdcf
+  39d5b8:	fdcffdcf 	.word	0xfdcffdcf
+  39d5bc:	b2e0fe10 	.word	0xb2e0fe10
+  39d5c0:	fdaefe10 	.word	0xfdaefe10
+  39d5c4:	fdaefdae 	.word	0xfdaefdae
+  39d5c8:	fdcffdae 	.word	0xfdcffdae
+  39d5cc:	fe10fdcf 	.word	0xfe10fdcf
+  39d5d0:	c382b300 	.word	0xc382b300
+  39d5d4:	bb40c382 	.word	0xbb40c382
+  39d5d8:	bb40bb40 	.word	0xbb40bb40
+  39d5dc:	bb40bb40 	.word	0xbb40bb40
+  39d5e0:	bb40bb40 	.word	0xbb40bb40
+  39d5e4:	c382bb40 	.word	0xc382bb40
+  39d5e8:	bb40bb40 	.word	0xbb40bb40
+  39d5ec:	bb40bb40 	.word	0xbb40bb40
+  39d5f0:	bb40bb40 	.word	0xbb40bb40
+  39d5f4:	bb40bb40 	.word	0xbb40bb40
+  39d5f8:	bb40bb40 	.word	0xbb40bb40
+  39d5fc:	c382bb40 	.word	0xc382bb40
+  39d600:	bb40bb40 	.word	0xbb40bb40
+  39d604:	bb40bb40 	.word	0xbb40bb40
+  39d608:	bb40bb40 	.word	0xbb40bb40
+  39d60c:	bb40bb40 	.word	0xbb40bb40
+  39d610:	c382c382 	.word	0xc382c382
+
+0039d614 <EnableJTAG>:
+  39d614:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  39d618:	e59f0064 	ldr	r0, [pc, #100]	; 39d684 <dowaitloop+0xc>
+  39d61c:	e0211001 	eor	r1, r1, r1
+  39d620:	e5801000 	str	r1, [r0]
+  39d624:	eb000012 	bl	39d674 <dowait>
+  39d628:	e59f0058 	ldr	r0, [pc, #88]	; 39d688 <dowaitloop+0x10>
+  39d62c:	e59f1058 	ldr	r1, [pc, #88]	; 39d68c <dowaitloop+0x14>
+  39d630:	e5801000 	str	r1, [r0]
+  39d634:	eb00000e 	bl	39d674 <dowait>
+  39d638:	e0211001 	eor	r1, r1, r1
+  39d63c:	e5801000 	str	r1, [r0]
+  39d640:	e59f0048 	ldr	r0, [pc, #72]	; 39d690 <dowaitloop+0x18>
+  39d644:	e5901000 	ldr	r1, [r0]
+  39d648:	e3c11a07 	bic	r1, r1, #28672	; 0x7000
+  39d64c:	e3811a02 	orr	r1, r1, #8192	; 0x2000
+  39d650:	e5801000 	str	r1, [r0]
+  39d654:	e59f0038 	ldr	r0, [pc, #56]	; 39d694 <dowaitloop+0x1c>
+  39d658:	e5901000 	ldr	r1, [r0]
+  39d65c:	e59f2034 	ldr	r2, [pc, #52]	; 39d698 <dowaitloop+0x20>
+  39d660:	e1c11002 	bic	r1, r1, r2
+  39d664:	e59f2030 	ldr	r2, [pc, #48]	; 39d69c <dowaitloop+0x24>
+  39d668:	e1811002 	orr	r1, r1, r2
+  39d66c:	e5801000 	str	r1, [r0]
+  39d670:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+0039d674 <dowait>:
+  39d674:	e3a02f4b 	mov	r2, #300	; 0x12c
+
+0039d678 <dowaitloop>:
+  39d678:	e2522001 	subs	r2, r2, #1
+  39d67c:	1afffffd 	bne	39d678 <dowaitloop>
+  39d680:	e12fff1e 	bx	lr
+  39d684:	20200094 	.word	0x20200094
+  39d688:	20200098 	.word	0x20200098
+  39d68c:	0bc00010 	.word	0x0bc00010
+  39d690:	20200000 	.word	0x20200000
+  39d694:	20200008 	.word	0x20200008
+  39d698:	00e3ffc0 	.word	0x00e3ffc0
+  39d69c:	0061b6c0 	.word	0x0061b6c0
+
+0039d6a0 <strlen>:
+  39d6a0:	e2802001 	add	r2, r0, #1
+
+0039d6a4 <strlen_next_char>:
+  39d6a4:	e4d01001 	ldrb	r1, [r0], #1
+  39d6a8:	e3510000 	cmp	r1, #0
+  39d6ac:	1afffffc 	bne	39d6a4 <strlen_next_char>
+  39d6b0:	e0400002 	sub	r0, r0, r2
+  39d6b4:	e12fff1e 	bx	lr
+
+0039d6b8 <Print_Message>:
+  39d6b8:	e92d4010 	push	{r4, lr}
+  39d6bc:	e1a04000 	mov	r4, r0
+  39d6c0:	ebfffff6 	bl	39d6a0 <strlen>
+  39d6c4:	e1a01000 	mov	r1, r0
+  39d6c8:	e1a00004 	mov	r0, r4
+  39d6cc:	eb000240 	bl	39dfd4 <WriteStringUART>
+  39d6d0:	e8bd8010 	pop	{r4, pc}
+
+0039d6d4 <wallImage>:
+  39d6d4:	00000020 	.word	0x00000020
+  39d6d8:	00000020 	.word	0x00000020
+  39d6dc:	ffffb595 	.word	0xffffb595
+  39d6e0:	ffffffff 	.word	0xffffffff
+  39d6e4:	ffffffff 	.word	0xffffffff
+  39d6e8:	ffffffff 	.word	0xffffffff
+  39d6ec:	ffffffff 	.word	0xffffffff
+  39d6f0:	ffffffff 	.word	0xffffffff
+  39d6f4:	ffffffff 	.word	0xffffffff
+  39d6f8:	0000ffff 	.word	0x0000ffff
+  39d6fc:	ffffb595 	.word	0xffffb595
+  39d700:	ffffffff 	.word	0xffffffff
+  39d704:	ffffffff 	.word	0xffffffff
+  39d708:	ffffffff 	.word	0xffffffff
+  39d70c:	fffefffe 	.word	0xfffefffe
+  39d710:	fffefffe 	.word	0xfffefffe
+  39d714:	ffffffff 	.word	0xffffffff
+  39d718:	0000ffff 	.word	0x0000ffff
+  39d71c:	d6ba7bce 	.word	0xd6ba7bce
+  39d720:	ce78d699 	.word	0xce78d699
+  39d724:	d6b9ce58 	.word	0xd6b9ce58
+  39d728:	debadeda 	.word	0xdebadeda
+  39d72c:	d699deba 	.word	0xd699deba
+  39d730:	ce78ce79 	.word	0xce78ce79
+  39d734:	ce79ce58 	.word	0xce79ce58
+  39d738:	0000ffff 	.word	0x0000ffff
+  39d73c:	ce387bae 	.word	0xce387bae
+  39d740:	ce38c617 	.word	0xce38c617
+  39d744:	c5f7ce58 	.word	0xc5f7ce58
+  39d748:	dedace38 	.word	0xdedace38
+  39d74c:	defae73b 	.word	0xdefae73b
+  39d750:	ce58c637 	.word	0xce58c637
+  39d754:	defbd699 	.word	0xdefbd699
+  39d758:	0000ffff 	.word	0x0000ffff
+  39d75c:	e6fb73ce 	.word	0xe6fb73ce
+  39d760:	defadeda 	.word	0xdefadeda
+  39d764:	ce58ce37 	.word	0xce58ce37
+  39d768:	ce58d699 	.word	0xce58d699
+  39d76c:	dedad6b9 	.word	0xdedad6b9
+  39d770:	c617d699 	.word	0xc617d699
+  39d774:	bdf7bdf6 	.word	0xbdf7bdf6
+  39d778:	0000ffff 	.word	0x0000ffff
+  39d77c:	deba7bce 	.word	0xdeba7bce
+  39d780:	d679deba 	.word	0xd679deba
+  39d784:	bdd6d679 	.word	0xbdd6d679
+  39d788:	d6b9c617 	.word	0xd6b9c617
+  39d78c:	dedadefa 	.word	0xdedadefa
+  39d790:	dedace58 	.word	0xdedace58
+  39d794:	e71bdeda 	.word	0xe71bdeda
+  39d798:	0000ffff 	.word	0x0000ffff
+  39d79c:	d6ba7bce 	.word	0xd6ba7bce
+  39d7a0:	e6fbdeda 	.word	0xe6fbdeda
+  39d7a4:	ce58c617 	.word	0xce58c617
+  39d7a8:	debade99 	.word	0xdebade99
+  39d7ac:	ef3be71b 	.word	0xef3be71b
+  39d7b0:	e71bdefa 	.word	0xe71bdefa
+  39d7b4:	c617d699 	.word	0xc617d699
+  39d7b8:	0000ffff 	.word	0x0000ffff
+  39d7bc:	d6997bae 	.word	0xd6997bae
+  39d7c0:	de99deda 	.word	0xde99deda
+  39d7c4:	ce38d679 	.word	0xce38d679
+  39d7c8:	debac637 	.word	0xdebac637
+  39d7cc:	d699deda 	.word	0xd699deda
+  39d7d0:	e71bce78 	.word	0xe71bce78
+  39d7d4:	e71be71b 	.word	0xe71be71b
+  39d7d8:	0000ffff 	.word	0x0000ffff
+  39d7dc:	ce5973ce 	.word	0xce5973ce
+  39d7e0:	debad699 	.word	0xdebad699
+  39d7e4:	defad679 	.word	0xdefad679
+  39d7e8:	dedad699 	.word	0xdedad699
+  39d7ec:	ef5cef5c 	.word	0xef5cef5c
+  39d7f0:	e73bef3c 	.word	0xe73bef3c
+  39d7f4:	ce58e73b 	.word	0xce58e73b
+  39d7f8:	0000ffff 	.word	0x0000ffff
+  39d7fc:	d6997bae 	.word	0xd6997bae
+  39d800:	d679ce58 	.word	0xd679ce58
+  39d804:	debadeba 	.word	0xdebadeba
+  39d808:	ce58c618 	.word	0xce58c618
+  39d80c:	ce78d699 	.word	0xce78d699
+  39d810:	dedace78 	.word	0xdedace78
+  39d814:	e71be71b 	.word	0xe71be71b
+  39d818:	0000ffff 	.word	0x0000ffff
+  39d81c:	c63873cf 	.word	0xc63873cf
+  39d820:	ce58c638 	.word	0xce58c638
+  39d824:	d6b9bdd6 	.word	0xd6b9bdd6
+  39d828:	debad699 	.word	0xdebad699
+  39d82c:	e71bef5c 	.word	0xe71bef5c
+  39d830:	defae6fb 	.word	0xdefae6fb
+  39d834:	d6badeda 	.word	0xd6badeda
+  39d838:	0000ffff 	.word	0x0000ffff
+  39d83c:	d69a7bae 	.word	0xd69a7bae
+  39d840:	c5f7ce58 	.word	0xc5f7ce58
+  39d844:	d699ce38 	.word	0xd699ce38
+  39d848:	c617ce58 	.word	0xc617ce58
+  39d84c:	ce78ce79 	.word	0xce78ce79
+  39d850:	d6bace79 	.word	0xd6bace79
+  39d854:	e71ce71b 	.word	0xe71ce71b
+  39d858:	0000ffff 	.word	0x0000ffff
+  39d85c:	73cf7bcf 	.word	0x73cf7bcf
+  39d860:	7bce7bcf 	.word	0x7bce7bcf
+  39d864:	7bae7bce 	.word	0x7bae7bce
+  39d868:	7bce7bae 	.word	0x7bce7bae
+  39d86c:	7bce7bce 	.word	0x7bce7bce
+  39d870:	7bce7bce 	.word	0x7bce7bce
+  39d874:	7bce7bce 	.word	0x7bce7bce
+  39d878:	0000b595 	.word	0x0000b595
+  39d87c:	7bce7bce 	.word	0x7bce7bce
+  39d880:	7bce7bce 	.word	0x7bce7bce
+  39d884:	7bce73ae 	.word	0x7bce73ae
+  39d888:	7bce7bce 	.word	0x7bce7bce
+  39d88c:	7bce7bce 	.word	0x7bce7bce
+  39d890:	7bae7bae 	.word	0x7bae7bae
+  39d894:	7bce7bce 	.word	0x7bce7bce
+  39d898:	0000b596 	.word	0x0000b596
+	...
+  39d8dc:	ffffffff 	.word	0xffffffff
+  39d8e0:	ffffffff 	.word	0xffffffff
+  39d8e4:	ffffffff 	.word	0xffffffff
+  39d8e8:	0000ffff 	.word	0x0000ffff
+  39d8ec:	ffffb595 	.word	0xffffb595
+  39d8f0:	ffffffff 	.word	0xffffffff
+  39d8f4:	ffffffff 	.word	0xffffffff
+  39d8f8:	ffffffff 	.word	0xffffffff
+  39d8fc:	ffffffff 	.word	0xffffffff
+  39d900:	ffffffff 	.word	0xffffffff
+  39d904:	ffffffff 	.word	0xffffffff
+  39d908:	0000ffff 	.word	0x0000ffff
+  39d90c:	ffffb595 	.word	0xffffb595
+  39d910:	ffffffff 	.word	0xffffffff
+  39d914:	ffffffff 	.word	0xffffffff
+  39d918:	ffffffff 	.word	0xffffffff
+  39d91c:	be18c679 	.word	0xbe18c679
+  39d920:	ce59c659 	.word	0xce59c659
+  39d924:	dedace79 	.word	0xdedace79
+  39d928:	0000ffff 	.word	0x0000ffff
+  39d92c:	e75c73ce 	.word	0xe75c73ce
+  39d930:	ef5cef5c 	.word	0xef5cef5c
+  39d934:	e73bef5c 	.word	0xe73bef5c
+  39d938:	e71be73b 	.word	0xe71be73b
+  39d93c:	d6b9defa 	.word	0xd6b9defa
+  39d940:	e6fbe6fb 	.word	0xe6fbe6fb
+  39d944:	bdd6ce78 	.word	0xbdd6ce78
+  39d948:	0000ffff 	.word	0x0000ffff
+  39d94c:	c61873ae 	.word	0xc61873ae
+  39d950:	ce58ce38 	.word	0xce58ce38
+  39d954:	d699ce58 	.word	0xd699ce58
+  39d958:	e6fadeba 	.word	0xe6fadeba
+  39d95c:	c639ce9a 	.word	0xc639ce9a
+  39d960:	ce9ac639 	.word	0xce9ac639
+  39d964:	d699c618 	.word	0xd699c618
+  39d968:	0000ffff 	.word	0x0000ffff
+  39d96c:	e71b7bce 	.word	0xe71b7bce
+  39d970:	e73be71b 	.word	0xe73be71b
+  39d974:	e71be73b 	.word	0xe71be73b
+  39d978:	e71aef5c 	.word	0xe71aef5c
+  39d97c:	d699ef3b 	.word	0xd699ef3b
+  39d980:	e6fadeb9 	.word	0xe6fadeb9
+  39d984:	c617d6b9 	.word	0xc617d6b9
+  39d988:	0000ffff 	.word	0x0000ffff
+  39d98c:	c6177bce 	.word	0xc6177bce
+  39d990:	c5f7c617 	.word	0xc5f7c617
+  39d994:	d658ce37 	.word	0xd658ce37
+  39d998:	deb9de99 	.word	0xdeb9de99
+  39d99c:	c659ce9a 	.word	0xc659ce9a
+  39d9a0:	ce79ce7a 	.word	0xce79ce7a
+  39d9a4:	c638c638 	.word	0xc638c638
+  39d9a8:	0000ffff 	.word	0x0000ffff
+  39d9ac:	e71b7bce 	.word	0xe71b7bce
+  39d9b0:	e71be71b 	.word	0xe71be71b
+  39d9b4:	e71ae71b 	.word	0xe71ae71b
+  39d9b8:	e71bef3b 	.word	0xe71bef3b
+  39d9bc:	deb9ded9 	.word	0xdeb9ded9
+  39d9c0:	deb9e6fa 	.word	0xdeb9e6fa
+  39d9c4:	d679deda 	.word	0xd679deda
+  39d9c8:	0000ffff 	.word	0x0000ffff
+  39d9cc:	c6177bae 	.word	0xc6177bae
+  39d9d0:	c617c617 	.word	0xc617c617
+  39d9d4:	d658ce38 	.word	0xd658ce38
+  39d9d8:	d678de99 	.word	0xd678de99
+  39d9dc:	be18ce7a 	.word	0xbe18ce7a
+  39d9e0:	ce7ace79 	.word	0xce7ace79
+  39d9e4:	c618ce9a 	.word	0xc618ce9a
+  39d9e8:	0000ffff 	.word	0x0000ffff
+  39d9ec:	e71b7bce 	.word	0xe71b7bce
+  39d9f0:	e6fbe71b 	.word	0xe6fbe71b
+  39d9f4:	e71ae71b 	.word	0xe71ae71b
+  39d9f8:	e71be71b 	.word	0xe71be71b
+  39d9fc:	e6fae71a 	.word	0xe6fae71a
+  39da00:	deb9e71b 	.word	0xdeb9e71b
+  39da04:	d6badefa 	.word	0xd6badefa
+  39da08:	0000ffff 	.word	0x0000ffff
+  39da0c:	d6ba7bce 	.word	0xd6ba7bce
+  39da10:	ce17d699 	.word	0xce17d699
+  39da14:	d679ce37 	.word	0xd679ce37
+  39da18:	de99deba 	.word	0xde99deba
+  39da1c:	c639c659 	.word	0xc639c659
+  39da20:	ce79d6ba 	.word	0xce79d6ba
+  39da24:	c658dedb 	.word	0xc658dedb
+  39da28:	0000ffff 	.word	0x0000ffff
+  39da2c:	deda73ae 	.word	0xdeda73ae
+  39da30:	e71be71b 	.word	0xe71be71b
+  39da34:	e71be6fb 	.word	0xe71be6fb
+  39da38:	e71be6fb 	.word	0xe71be6fb
+  39da3c:	defaef3b 	.word	0xdefaef3b
+  39da40:	e73be71b 	.word	0xe73be71b
+  39da44:	dedae71b 	.word	0xdedae71b
+  39da48:	0000ffff 	.word	0x0000ffff
+  39da4c:	e71b73ae 	.word	0xe71b73ae
+  39da50:	d679e6fb 	.word	0xd679e6fb
+  39da54:	d699c617 	.word	0xd699c617
+  39da58:	d679deba 	.word	0xd679deba
+  39da5c:	7bcf7bcf 	.word	0x7bcf7bcf
+  39da60:	7bcf73cf 	.word	0x7bcf73cf
+  39da64:	7bcf7bcf 	.word	0x7bcf7bcf
+  39da68:	0000b596 	.word	0x0000b596
+  39da6c:	7bce7bce 	.word	0x7bce7bce
+  39da70:	7bce7bce 	.word	0x7bce7bce
+  39da74:	7bce7bae 	.word	0x7bce7bae
+  39da78:	7bae7bce 	.word	0x7bae7bce
+  39da7c:	7bce7bce 	.word	0x7bce7bce
+  39da80:	7bce7bce 	.word	0x7bce7bce
+  39da84:	7bce7bce 	.word	0x7bce7bce
+  39da88:	0000b595 	.word	0x0000b595
+  39da8c:	7bce7bce 	.word	0x7bce7bce
+  39da90:	7bce7bce 	.word	0x7bce7bce
+  39da94:	7bae7bae 	.word	0x7bae7bae
+  39da98:	7bae7bae 	.word	0x7bae7bae
+	...
+  39dadc:	ffffb596 	.word	0xffffb596
+  39dae0:	ffffffff 	.word	0xffffffff
+  39dae4:	ffffffff 	.word	0xffffffff
+  39dae8:	ffffffff 	.word	0xffffffff
+  39daec:	ffffffff 	.word	0xffffffff
+  39daf0:	ffffffff 	.word	0xffffffff
+  39daf4:	ffffffff 	.word	0xffffffff
+  39daf8:	0000ffff 	.word	0x0000ffff
+  39dafc:	ffffb595 	.word	0xffffb595
+  39db00:	ffffffff 	.word	0xffffffff
+  39db04:	ffffffff 	.word	0xffffffff
+  39db08:	ffffffff 	.word	0xffffffff
+  39db0c:	ffffffff 	.word	0xffffffff
+  39db10:	ffffffff 	.word	0xffffffff
+  39db14:	ffffffff 	.word	0xffffffff
+  39db18:	0000ffff 	.word	0x0000ffff
+  39db1c:	c6387bcf 	.word	0xc6387bcf
+  39db20:	ce58c638 	.word	0xce58c638
+  39db24:	deface79 	.word	0xdeface79
+  39db28:	ce58d6ba 	.word	0xce58d6ba
+  39db2c:	c617c617 	.word	0xc617c617
+  39db30:	defbce58 	.word	0xdefbce58
+  39db34:	e73ce73c 	.word	0xe73ce73c
+  39db38:	0000ffff 	.word	0x0000ffff
+  39db3c:	e73c7bce 	.word	0xe73c7bce
+  39db40:	e71be71b 	.word	0xe71be71b
+  39db44:	e71be6fa 	.word	0xe71be6fa
+  39db48:	ef7cef3c 	.word	0xef7cef3c
+  39db4c:	f77cf77c 	.word	0xf77cf77c
+  39db50:	ef5cf77d 	.word	0xef5cf77d
+  39db54:	e71be6fb 	.word	0xe71be6fb
+  39db58:	0000ffff 	.word	0x0000ffff
+  39db5c:	c61873cf 	.word	0xc61873cf
+  39db60:	ce38ce58 	.word	0xce38ce58
+  39db64:	ce79ce58 	.word	0xce79ce58
+  39db68:	d679e6fb 	.word	0xd679e6fb
+  39db6c:	c638ce58 	.word	0xc638ce58
+  39db70:	d6dac658 	.word	0xd6dac658
+  39db74:	ef5ce73b 	.word	0xef5ce73b
+  39db78:	0000ffff 	.word	0x0000ffff
+  39db7c:	e71b7bce 	.word	0xe71b7bce
+  39db80:	e6fbe6fb 	.word	0xe6fbe6fb
+  39db84:	e71be71b 	.word	0xe71be71b
+  39db88:	e6fbe6fb 	.word	0xe6fbe6fb
+  39db8c:	ef5cef3b 	.word	0xef5cef3b
+  39db90:	ef5cef3c 	.word	0xef5cef3c
+  39db94:	e73ce73c 	.word	0xe73ce73c
+  39db98:	0000ffff 	.word	0x0000ffff
+  39db9c:	bdf773cf 	.word	0xbdf773cf
+  39dba0:	ce79ce58 	.word	0xce79ce58
+  39dba4:	ce79ce58 	.word	0xce79ce58
+  39dba8:	dedadeba 	.word	0xdedadeba
+  39dbac:	c638d679 	.word	0xc638d679
+  39dbb0:	d6bac638 	.word	0xd6bac638
+  39dbb4:	ef5de73c 	.word	0xef5de73c
+  39dbb8:	0000ffff 	.word	0x0000ffff
+  39dbbc:	defb7bae 	.word	0xdefb7bae
+  39dbc0:	dedadeda 	.word	0xdedadeda
+  39dbc4:	e71bdeda 	.word	0xe71bdeda
+  39dbc8:	ef3bef1b 	.word	0xef3bef1b
+  39dbcc:	ef5cef3b 	.word	0xef5cef3b
+  39dbd0:	e6fbe71b 	.word	0xe6fbe71b
+  39dbd4:	ef5ce71b 	.word	0xef5ce71b
+  39dbd8:	0000ffff 	.word	0x0000ffff
+  39dbdc:	ce5973ae 	.word	0xce5973ae
+  39dbe0:	d699ce58 	.word	0xd699ce58
+  39dbe4:	d699d679 	.word	0xd699d679
+  39dbe8:	debadeba 	.word	0xdebadeba
+  39dbec:	ce38d699 	.word	0xce38d699
+  39dbf0:	d699ce58 	.word	0xd699ce58
+  39dbf4:	e71cdf1b 	.word	0xe71cdf1b
+  39dbf8:	0000ffff 	.word	0x0000ffff
+  39dbfc:	ef7d7bce 	.word	0xef7d7bce
+  39dc00:	e6fbef3c 	.word	0xe6fbef3c
+  39dc04:	dedadeda 	.word	0xdedadeda
+  39dc08:	ef1be6da 	.word	0xef1be6da
+  39dc0c:	ef1bef5c 	.word	0xef1bef5c
+  39dc10:	ef5cef3c 	.word	0xef5cef3c
+  39dc14:	e73ce6fb 	.word	0xe73ce6fb
+  39dc18:	0000ffff 	.word	0x0000ffff
+  39dc1c:	d6997bce 	.word	0xd6997bce
+  39dc20:	d69ad69a 	.word	0xd69ad69a
+  39dc24:	dedae71b 	.word	0xdedae71b
+  39dc28:	d679deba 	.word	0xd679deba
+  39dc2c:	ce58d6ba 	.word	0xce58d6ba
+  39dc30:	ce58c638 	.word	0xce58c638
+  39dc34:	dedbd6da 	.word	0xdedbd6da
+  39dc38:	0000ffff 	.word	0x0000ffff
+  39dc3c:	ef3c7bce 	.word	0xef3c7bce
+  39dc40:	e6fbe71b 	.word	0xe6fbe71b
+  39dc44:	e6fbe71b 	.word	0xe6fbe71b
+  39dc48:	debadeda 	.word	0xdebadeda
+  39dc4c:	ef3ce6fb 	.word	0xef3ce6fb
+  39dc50:	ef3cef3c 	.word	0xef3cef3c
+  39dc54:	e71ce73c 	.word	0xe71ce73c
+  39dc58:	0000ffff 	.word	0x0000ffff
+  39dc5c:	7bcf7bcf 	.word	0x7bcf7bcf
+  39dc60:	7bce7baf 	.word	0x7bce7baf
+  39dc64:	7bae7bce 	.word	0x7bae7bce
+  39dc68:	7bce7bce 	.word	0x7bce7bce
+  39dc6c:	7bce7bae 	.word	0x7bce7bae
+  39dc70:	7bce7bce 	.word	0x7bce7bce
+  39dc74:	7bce7bce 	.word	0x7bce7bce
+  39dc78:	0000b596 	.word	0x0000b596
+  39dc7c:	7bce7bce 	.word	0x7bce7bce
+  39dc80:	7bce7bce 	.word	0x7bce7bce
+  39dc84:	7bce7bce 	.word	0x7bce7bce
+  39dc88:	7bae7bce 	.word	0x7bae7bce
+  39dc8c:	7bce7bae 	.word	0x7bce7bae
+  39dc90:	7bae7bae 	.word	0x7bae7bae
+  39dc94:	73ae7bce 	.word	0x73ae7bce
+  39dc98:	0000b595 	.word	0x0000b595
+	...
+  39dcdc:	ffffffff 	.word	0xffffffff
+  39dce0:	ffffffff 	.word	0xffffffff
+  39dce4:	ffffffff 	.word	0xffffffff
+  39dce8:	0000ffff 	.word	0x0000ffff
+  39dcec:	ffffb595 	.word	0xffffb595
+  39dcf0:	ffffffff 	.word	0xffffffff
+  39dcf4:	ffffffff 	.word	0xffffffff
+  39dcf8:	ffffffff 	.word	0xffffffff
+  39dcfc:	ffffffff 	.word	0xffffffff
+  39dd00:	ffffffff 	.word	0xffffffff
+  39dd04:	ffffffff 	.word	0xffffffff
+  39dd08:	0000ffff 	.word	0x0000ffff
+  39dd0c:	ffffb595 	.word	0xffffb595
+  39dd10:	ffffffff 	.word	0xffffffff
+  39dd14:	fffeffff 	.word	0xfffeffff
+  39dd18:	ffffffff 	.word	0xffffffff
+  39dd1c:	d699ce58 	.word	0xd699ce58
+  39dd20:	dedad699 	.word	0xdedad699
+  39dd24:	c637ce79 	.word	0xc637ce79
+  39dd28:	0000ffff 	.word	0x0000ffff
+  39dd2c:	d6997bce 	.word	0xd6997bce
+  39dd30:	ce79ce58 	.word	0xce79ce58
+  39dd34:	c617ce58 	.word	0xc617ce58
+  39dd38:	ce58ce58 	.word	0xce58ce58
+  39dd3c:	ef5cd699 	.word	0xef5cd699
+  39dd40:	ef5cef5c 	.word	0xef5cef5c
+  39dd44:	e73be71b 	.word	0xe73be71b
+  39dd48:	0000ffff 	.word	0x0000ffff
+  39dd4c:	e71b7bce 	.word	0xe71b7bce
+  39dd50:	d6b9deda 	.word	0xd6b9deda
+  39dd54:	ded9d678 	.word	0xded9d678
+  39dd58:	dedadeda 	.word	0xdedadeda
+  39dd5c:	d699c637 	.word	0xd699c637
+  39dd60:	ce58deba 	.word	0xce58deba
+  39dd64:	ce58c637 	.word	0xce58c637
+  39dd68:	0000ffff 	.word	0x0000ffff
+  39dd6c:	defb7bce 	.word	0xdefb7bce
+  39dd70:	ce38deda 	.word	0xce38deda
+  39dd74:	d6b9e71b 	.word	0xd6b9e71b
+  39dd78:	c617ce37 	.word	0xc617ce37
+  39dd7c:	e6fbd679 	.word	0xe6fbd679
+  39dd80:	e71be71b 	.word	0xe71be71b
+  39dd84:	e71bdefb 	.word	0xe71bdefb
+  39dd88:	0000ffff 	.word	0x0000ffff
+  39dd8c:	defa7bae 	.word	0xdefa7bae
+  39dd90:	debadeba 	.word	0xdebadeba
+  39dd94:	deb9d678 	.word	0xdeb9d678
+  39dd98:	e6dadeda 	.word	0xe6dadeda
+  39dd9c:	d679c617 	.word	0xd679c617
+  39dda0:	ce78d6b9 	.word	0xce78d6b9
+  39dda4:	d679d699 	.word	0xd679d699
+  39dda8:	0000ffff 	.word	0x0000ffff
+  39ddac:	defa73ce 	.word	0xdefa73ce
+  39ddb0:	debaef3c 	.word	0xdebaef3c
+  39ddb4:	ef1bd699 	.word	0xef1bd699
+  39ddb8:	c617de99 	.word	0xc617de99
+  39ddbc:	de99ce17 	.word	0xde99ce17
+  39ddc0:	e6fbe6fb 	.word	0xe6fbe6fb
+  39ddc4:	defbdeda 	.word	0xdefbdeda
+  39ddc8:	0000ffff 	.word	0x0000ffff
+  39ddcc:	deda7bae 	.word	0xdeda7bae
+  39ddd0:	dedadefa 	.word	0xdedadefa
+  39ddd4:	deb9d699 	.word	0xdeb9d699
+  39ddd8:	deb9e6da 	.word	0xdeb9e6da
+  39dddc:	c617bdd6 	.word	0xc617bdd6
+  39dde0:	dedad699 	.word	0xdedad699
+  39dde4:	d6bad6ba 	.word	0xd6bad6ba
+  39dde8:	0000ffff 	.word	0x0000ffff
+  39ddec:	ce387bce 	.word	0xce387bce
+  39ddf0:	e71be71b 	.word	0xe71be71b
+  39ddf4:	e6fbd699 	.word	0xe6fbd699
+  39ddf8:	debae6fb 	.word	0xdebae6fb
+  39ddfc:	d679ce38 	.word	0xd679ce38
+  39de00:	debadeba 	.word	0xdebadeba
+  39de04:	dedadeba 	.word	0xdedadeba
+  39de08:	0000ffff 	.word	0x0000ffff
+  39de0c:	ce797bce 	.word	0xce797bce
+  39de10:	dedad69a 	.word	0xdedad69a
+  39de14:	d678deba 	.word	0xd678deba
+  39de18:	de99deba 	.word	0xde99deba
+  39de1c:	ad75ad55 	.word	0xad75ad55
+  39de20:	d699bdd6 	.word	0xd699bdd6
+  39de24:	d6badeda 	.word	0xd6badeda
+  39de28:	0000ffff 	.word	0x0000ffff
+  39de2c:	bdd67bce 	.word	0xbdd67bce
+  39de30:	e71bd679 	.word	0xe71bd679
+  39de34:	debad679 	.word	0xdebad679
+  39de38:	de9ad699 	.word	0xde9ad699
+  39de3c:	c5f7d699 	.word	0xc5f7d699
+  39de40:	d699ce58 	.word	0xd699ce58
+  39de44:	d69ad69a 	.word	0xd69ad69a
+  39de48:	0000ffff 	.word	0x0000ffff
+  39de4c:	c6177bce 	.word	0xc6177bce
+  39de50:	ce59c617 	.word	0xce59c617
+  39de54:	debadeba 	.word	0xdebadeba
+  39de58:	debade9a 	.word	0xdebade9a
+  39de5c:	7bcf7bcf 	.word	0x7bcf7bcf
+  39de60:	7bce7bcf 	.word	0x7bce7bcf
+  39de64:	7bce7bce 	.word	0x7bce7bce
+  39de68:	0000b596 	.word	0x0000b596
+  39de6c:	7bce7bce 	.word	0x7bce7bce
+  39de70:	7bae7bae 	.word	0x7bae7bae
+  39de74:	7bae7bae 	.word	0x7bae7bae
+  39de78:	7bce7bce 	.word	0x7bce7bce
+  39de7c:	7bce7bae 	.word	0x7bce7bae
+  39de80:	7bcf7bce 	.word	0x7bcf7bce
+  39de84:	73ae7bcf 	.word	0x73ae7bcf
+  39de88:	0000b595 	.word	0x0000b595
+  39de8c:	7bce7bce 	.word	0x7bce7bce
+  39de90:	7bce7bce 	.word	0x7bce7bce
+  39de94:	7bae7bce 	.word	0x7bae7bce
+  39de98:	7bae7bae 	.word	0x7bae7bae
+	...
+
+0039dedc <InitUART>:
+  39dedc:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  39dee0:	e59f0178 	ldr	r0, [pc, #376]	; 39e060 <WaitForCycles+0x10>
+  39dee4:	e3a01001 	mov	r1, #1
+  39dee8:	e5801000 	str	r1, [r0]
+  39deec:	e59f0170 	ldr	r0, [pc, #368]	; 39e064 <WaitForCycles+0x14>
+  39def0:	e0211001 	eor	r1, r1, r1
+  39def4:	e5801000 	str	r1, [r0]
+  39def8:	e59f0168 	ldr	r0, [pc, #360]	; 39e068 <WaitForCycles+0x18>
+  39defc:	e0211001 	eor	r1, r1, r1
+  39df00:	e5801000 	str	r1, [r0]
+  39df04:	e59f0160 	ldr	r0, [pc, #352]	; 39e06c <WaitForCycles+0x1c>
+  39df08:	e3a01003 	mov	r1, #3
+  39df0c:	e5801000 	str	r1, [r0]
+  39df10:	e59f0158 	ldr	r0, [pc, #344]	; 39e070 <WaitForCycles+0x20>
+  39df14:	e0211001 	eor	r1, r1, r1
+  39df18:	e5801000 	str	r1, [r0]
+  39df1c:	e59f0140 	ldr	r0, [pc, #320]	; 39e064 <WaitForCycles+0x14>
+  39df20:	e0211001 	eor	r1, r1, r1
+  39df24:	e5801000 	str	r1, [r0]
+  39df28:	e59f0144 	ldr	r0, [pc, #324]	; 39e074 <WaitForCycles+0x24>
+  39df2c:	e3a010c6 	mov	r1, #198	; 0xc6
+  39df30:	e5801000 	str	r1, [r0]
+  39df34:	e59f013c 	ldr	r0, [pc, #316]	; 39e078 <WaitForCycles+0x28>
+  39df38:	e59f113c 	ldr	r1, [pc, #316]	; 39e07c <WaitForCycles+0x2c>
+  39df3c:	e5801000 	str	r1, [r0]
+  39df40:	e3a0000e 	mov	r0, #14
+  39df44:	e3a01002 	mov	r1, #2
+  39df48:	eb000052 	bl	39e098 <SetGpioFunction>
+  39df4c:	e3a0000f 	mov	r0, #15
+  39df50:	e3a01002 	mov	r1, #2
+  39df54:	eb00004f 	bl	39e098 <SetGpioFunction>
+  39df58:	e59f0120 	ldr	r0, [pc, #288]	; 39e080 <WaitForCycles+0x30>
+  39df5c:	e0211001 	eor	r1, r1, r1
+  39df60:	e5801000 	str	r1, [r0]
+  39df64:	e3a00096 	mov	r0, #150	; 0x96
+  39df68:	eb000038 	bl	39e050 <WaitForCycles>
+  39df6c:	e59f0110 	ldr	r0, [pc, #272]	; 39e084 <WaitForCycles+0x34>
+  39df70:	e3a01903 	mov	r1, #49152	; 0xc000
+  39df74:	e5801000 	str	r1, [r0]
+  39df78:	e3a00096 	mov	r0, #150	; 0x96
+  39df7c:	eb000033 	bl	39e050 <WaitForCycles>
+  39df80:	e59f00fc 	ldr	r0, [pc, #252]	; 39e084 <WaitForCycles+0x34>
+  39df84:	e0211001 	eor	r1, r1, r1
+  39df88:	e5801000 	str	r1, [r0]
+  39df8c:	e59f00d4 	ldr	r0, [pc, #212]	; 39e068 <WaitForCycles+0x18>
+  39df90:	e3a01003 	mov	r1, #3
+  39df94:	e5801000 	str	r1, [r0]
+  39df98:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+0039df9c <PutCharUART>:
+  39df9c:	e59f20e4 	ldr	r2, [pc, #228]	; 39e088 <WaitForCycles+0x38>
+
+0039dfa0 <putWaitLoop$>:
+  39dfa0:	e5921000 	ldr	r1, [r2]
+  39dfa4:	e3110020 	tst	r1, #32
+  39dfa8:	0afffffc 	beq	39dfa0 <putWaitLoop$>
+  39dfac:	e59f20d8 	ldr	r2, [pc, #216]	; 39e08c <WaitForCycles+0x3c>
+  39dfb0:	e5820000 	str	r0, [r2]
+  39dfb4:	e1a0f00e 	mov	pc, lr
+
+0039dfb8 <GetCharUART>:
+  39dfb8:	e59f20c8 	ldr	r2, [pc, #200]	; 39e088 <WaitForCycles+0x38>
+
+0039dfbc <getWaitLoop$>:
+  39dfbc:	e5921000 	ldr	r1, [r2]
+  39dfc0:	e3110001 	tst	r1, #1
+  39dfc4:	0afffffc 	beq	39dfbc <getWaitLoop$>
+  39dfc8:	e59f20bc 	ldr	r2, [pc, #188]	; 39e08c <WaitForCycles+0x3c>
+  39dfcc:	e5920000 	ldr	r0, [r2]
+  39dfd0:	e1a0f00e 	mov	pc, lr
+
+0039dfd4 <WriteStringUART>:
+  39dfd4:	e92d4030 	push	{r4, r5, lr}
+  39dfd8:	e1a04000 	mov	r4, r0
+  39dfdc:	e1a05001 	mov	r5, r1
+
+0039dfe0 <writeLoop$>:
+  39dfe0:	e3550000 	cmp	r5, #0
+  39dfe4:	da000004 	ble	39dffc <writeLoopEnd$>
+  39dfe8:	e5940000 	ldr	r0, [r4]
+  39dfec:	ebffffea 	bl	39df9c <PutCharUART>
+  39dff0:	e2844001 	add	r4, r4, #1
+  39dff4:	e2455001 	sub	r5, r5, #1
+  39dff8:	eafffff8 	b	39dfe0 <writeLoop$>
+
+0039dffc <writeLoopEnd$>:
+  39dffc:	e8bd8030 	pop	{r4, r5, pc}
+
+0039e000 <ReadLineUART>:
+  39e000:	e92d4070 	push	{r4, r5, r6, lr}
+  39e004:	e1a04000 	mov	r4, r0
+  39e008:	e1a05001 	mov	r5, r1
+  39e00c:	e3a06000 	mov	r6, #0
+
+0039e010 <readLoop$>:
+  39e010:	e1360005 	teq	r6, r5
+  39e014:	0a00000b 	beq	39e048 <readLoopEnd$>
+  39e018:	ebffffe6 	bl	39dfb8 <GetCharUART>
+  39e01c:	ebffffde 	bl	39df9c <PutCharUART>
+  39e020:	e5c40000 	strb	r0, [r4]
+  39e024:	e2866001 	add	r6, r6, #1
+  39e028:	e2844001 	add	r4, r4, #1
+  39e02c:	e330000d 	teq	r0, #13
+  39e030:	1afffff6 	bne	39e010 <readLoop$>
+  39e034:	e3a0000a 	mov	r0, #10
+  39e038:	ebffffd7 	bl	39df9c <PutCharUART>
+  39e03c:	e2444001 	sub	r4, r4, #1
+  39e040:	e3a00000 	mov	r0, #0
+  39e044:	e5c40000 	strb	r0, [r4]
+
+0039e048 <readLoopEnd$>:
+  39e048:	e2460001 	sub	r0, r6, #1
+  39e04c:	e8bd8070 	pop	{r4, r5, r6, pc}
+
+0039e050 <WaitForCycles>:
+  39e050:	e2400001 	sub	r0, r0, #1
+  39e054:	e3500000 	cmp	r0, #0
+  39e058:	aafffffc 	bge	39e050 <WaitForCycles>
+  39e05c:	e1a0f00e 	mov	pc, lr
+  39e060:	20215004 	.word	0x20215004
+  39e064:	20215044 	.word	0x20215044
+  39e068:	20215060 	.word	0x20215060
+  39e06c:	2021504c 	.word	0x2021504c
+  39e070:	20215050 	.word	0x20215050
+  39e074:	20215048 	.word	0x20215048
+  39e078:	20215068 	.word	0x20215068
+  39e07c:	0000010e 	.word	0x0000010e
+  39e080:	20200094 	.word	0x20200094
+  39e084:	20200098 	.word	0x20200098
+  39e088:	20215054 	.word	0x20215054
+  39e08c:	20215040 	.word	0x20215040
+
+0039e090 <GetGpioAddress>:
+  39e090:	e59f00cc 	ldr	r0, [pc, #204]	; 39e164 <GetGpio+0x44>
+  39e094:	e1a0f00e 	mov	pc, lr
+
+0039e098 <SetGpioFunction>:
+  39e098:	e3500035 	cmp	r0, #53	; 0x35
+  39e09c:	93510007 	cmpls	r1, #7
+  39e0a0:	81a0f00e 	movhi	pc, lr
+  39e0a4:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  39e0a8:	e1a02000 	mov	r2, r0
+  39e0ac:	ebfffff7 	bl	39e090 <GetGpioAddress>
+
+0039e0b0 <functionLoop$>:
+  39e0b0:	e3520009 	cmp	r2, #9
+  39e0b4:	8242200a 	subhi	r2, r2, #10
+  39e0b8:	82800004 	addhi	r0, r0, #4
+  39e0bc:	8afffffb 	bhi	39e0b0 <functionLoop$>
+  39e0c0:	e0822082 	add	r2, r2, r2, lsl #1
+  39e0c4:	e1a01211 	lsl	r1, r1, r2
+  39e0c8:	e3a03007 	mov	r3, #7
+  39e0cc:	e1a03213 	lsl	r3, r3, r2
+  39e0d0:	e5902000 	ldr	r2, [r0]
+  39e0d4:	e1c22003 	bic	r2, r2, r3
+  39e0d8:	e1811002 	orr	r1, r1, r2
+  39e0dc:	e5801000 	str	r1, [r0]
+  39e0e0:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+0039e0e4 <SetGpio>:
+  39e0e4:	e3500035 	cmp	r0, #53	; 0x35
+  39e0e8:	81a0f00e 	movhi	pc, lr
+  39e0ec:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+  39e0f0:	e1a02000 	mov	r2, r0
+  39e0f4:	ebffffe5 	bl	39e090 <GetGpioAddress>
+  39e0f8:	e1a032a2 	lsr	r3, r2, #5
+  39e0fc:	e1a03103 	lsl	r3, r3, #2
+  39e100:	e0800003 	add	r0, r0, r3
+  39e104:	e202201f 	and	r2, r2, #31
+  39e108:	e3a03001 	mov	r3, #1
+  39e10c:	e1a03213 	lsl	r3, r3, r2
+  39e110:	e3310000 	teq	r1, #0
+  39e114:	05803028 	streq	r3, [r0, #40]	; 0x28
+  39e118:	1580301c 	strne	r3, [r0, #28]
+  39e11c:	e49df004 	pop	{pc}		; (ldr pc, [sp], #4)
+
+0039e120 <GetGpio>:
+  39e120:	e3500035 	cmp	r0, #53	; 0x35
+  39e124:	81a0f00e 	movhi	pc, lr
+  39e128:	e92d4010 	push	{r4, lr}
+  39e12c:	e1a04000 	mov	r4, r0
+  39e130:	ebffffd6 	bl	39e090 <GetGpioAddress>
+  39e134:	e1a032a4 	lsr	r3, r4, #5
+  39e138:	e1a03103 	lsl	r3, r3, #2
+  39e13c:	e0800003 	add	r0, r0, r3
+  39e140:	e204401f 	and	r4, r4, #31
+  39e144:	e3a03001 	mov	r3, #1
+  39e148:	e1a03413 	lsl	r3, r3, r4
+  39e14c:	e5904034 	ldr	r4, [r0, #52]	; 0x34
+  39e150:	e0044003 	and	r4, r4, r3
+  39e154:	e3340000 	teq	r4, #0
+  39e158:	03a00000 	moveq	r0, #0
+  39e15c:	13a00001 	movne	r0, #1
+  39e160:	e8bd8010 	pop	{r4, pc}
+  39e164:	20200000 	.word	0x20200000
